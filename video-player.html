@@ -396,6 +396,28 @@
       box-shadow: 0 10px 25px rgba(255, 107, 107, 0.3);
     }
     
+    .facebook-group-btn {
+      background: linear-gradient(135deg, #1877F2 0%, #0D5FD9 100%);
+      color: white;
+      padding: 14px 28px;
+      border-radius: 10px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      margin: 10px 5px;
+    }
+    
+    .facebook-group-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(24, 119, 242, 0.3);
+    }
+    
     @media (max-width: 768px) {
       .video-wrapper iframe {
         height: 350px;
@@ -535,9 +557,17 @@
         <button onclick="prevVideo()" class="video-btn" id="prev-btn">
           <span>⬅️</span> 上一部影片
         </button>
-        <button onclick="window.open('https://www.youtube.com/@chday7919', '_blank')" class="personal-channel-btn" style="background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%);">
+        
+        <button onclick="window.open('https://www.facebook.com/groups/2076786986493869/', '_blank')" 
+                class="facebook-group-btn">
+          <span>👥</span> 加入AI社團
+        </button>
+        
+        <button onclick="window.open('https://www.youtube.com/@chday7919', '_blank')" 
+                class="personal-channel-btn">
           <span>👤</span> 我的頻道
         </button>
+        
         <button onclick="nextVideo()" class="video-btn" id="next-btn">
           下一部影片 <span>➡️</span>
         </button>
@@ -594,7 +624,7 @@
             用AI工具提升10倍工作效率的實用技巧
           </p>
           <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <span style="background: #e0e7ff; color: #6366f1; padding: 4px 12px; border-radius: 15page 2/3ff;">
+            <span style="background: #e0e7ff; color: #6366f1; padding: 4px 12px; border-radius: 15px; font-size: 0.8rem;">
               10部影片
             </span>
             <span style="background: #f3f4f6; color: #6b7280; padding: 4px 12px; border-radius: 15px; font-size: 0.8rem;">
@@ -621,7 +651,13 @@
         
         <div class="tip-item">
           <h4 style="color: #374151; margin-bottom: 10px;">提問互動</h4>
-          <p style="color: #6b7280; font-size: 0.9rem; margin: 0;">在Facebook社團提出問題，獲得解答</p>
+          <p style="color: #6b7280; font-size: 0.9rem; margin: 0;">
+            在
+            <a href="https://www.facebook.com/groups/2076786986493869/" target="_blank" style="color: #6366f1; text-decoration: underline;">
+              Facebook社團
+            </a>
+            提出問題，獲得解答
+          </p>
         </div>
         
         <div class="tip-item">
@@ -675,7 +711,7 @@
     <div style="display: flex; gap: 15px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap;">
       <a href="index.html" class="btn btn-sm">⬅️ 返回首頁</a>
       <a href="content-viewer.html" class="btn btn-sm btn-secondary">🧠 AI資源庫</a>
-      <a href="https://facebook.com/groups/ai-life-skills" target="_blank" class="btn btn-sm btn-secondary">👥 加入社團</a>
+      <a href="https://www.facebook.com/groups/2076786986493869/" target="_blank" class="btn btn-sm btn-secondary">👥 加入社團</a>
     </div>
     
     <div>
