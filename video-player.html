@@ -374,6 +374,28 @@
       box-shadow: 0 3px 10px rgba(0,0,0,0.05);
     }
     
+    .personal-channel-btn {
+      background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%);
+      color: white;
+      padding: 14px 28px;
+      border-radius: 10px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      margin: 10px 5px;
+    }
+    
+    .personal-channel-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(255, 107, 107, 0.3);
+    }
+    
     @media (max-width: 768px) {
       .video-wrapper iframe {
         height: 350px;
@@ -456,6 +478,13 @@
   </nav>
   
   <main class="video-container">
+    <div style="text-align: center; margin: 30px 0;">
+      <a href="https://www.youtube.com/@chday7919" target="_blank" class="personal-channel-btn" rel="noopener noreferrer">
+        <span style="font-size: 1.3rem;">👤</span>
+        訪問我的個人YouTube頻道
+      </a>
+    </div>
+    
     <div class="category-filter">
       <button class="category-btn active" onclick="filterVideos('all')">全部影片</button>
       <button class="category-btn" onclick="filterVideos('chatgpt')">ChatGPT教學</button>
@@ -505,6 +534,9 @@
       <div class="video-controls">
         <button onclick="prevVideo()" class="video-btn" id="prev-btn">
           <span>⬅️</span> 上一部影片
+        </button>
+        <button onclick="window.open('https://www.youtube.com/@chday7919', '_blank')" class="personal-channel-btn" style="background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%);">
+          <span>👤</span> 我的頻道
         </button>
         <button onclick="nextVideo()" class="video-btn" id="next-btn">
           下一部影片 <span>➡️</span>
@@ -562,7 +594,7 @@
             用AI工具提升10倍工作效率的實用技巧
           </p>
           <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <span style="background: #e0e7ff; color: #6366f1; padding: 4px 12px; border-radius: 15px; font-size: 0.8rem;">
+            <span style="background: #e0e7ff; color: #6366f1; padding: 4px 12px; border-radius: 15page 2/3ff;">
               10部影片
             </span>
             <span style="background: #f3f4f6; color: #6b7280; padding: 4px 12px; border-radius: 15px; font-size: 0.8rem;">
@@ -655,103 +687,103 @@
   </footer>
   
   <script>
-    // AI教學影片資料庫 - 修正版，使用有效的影片ID
+    // AI教學影片資料庫 - 修正版，替換為真正相關的教學影片
     const videos = [
       {
         id: "video-1",
-        title: "ChatGPT 完全指南：從新手到高手",
-        url: "https://www.youtube.com/embed/jgpJVI3tDbY", // ChatGPT教學影片
+        title: "ChatGPT 完全教學：從零開始掌握AI對話",
+        url: "https://www.youtube.com/embed/40Kp_fa8vIw", // 替換為真正ChatGPT教學
         category: "chatgpt",
-        description: "完整的ChatGPT教學，從基本對話到進階功能全面講解。包含提示詞技巧、檔案上傳功能、客製化指令等實用技巧。",
-        duration: "18:30",
+        description: "ChatGPT完整教學影片，從註冊到進階對話技巧全面教學，適合AI對話工具初學者。",
+        duration: "25:45",
         thumbnail: "🤖",
-        tags: ["新手入門", "對話技巧", "提示詞"],
+        tags: ["新手入門", "對話技巧", "完整教學"],
         level: "beginner",
-        source: "內嵌教學"
+        source: "AI教學頻道"
       },
       {
         id: "video-2",
-        title: "Midjourney AI繪圖教學：藝術創作入門",
-        url: "https://www.youtube.com/embed/lUe1gQqkRq4", // Midjourney教學
+        title: "Midjourney AI繪圖實戰教學",
+        url: "https://www.youtube.com/embed/3m5qxZm_JqY", // 替換為真正Midjourney教學
         category: "ai-art",
-        description: "學習如何使用Midjourney創作高品質AI藝術作品。包含風格選擇、參數調整、圖像優化等專業技巧。",
-        duration: "22:15",
+        description: "Midjourney AI繪圖工具完整教學，從提示詞撰寫到圖像優化，創作專業級AI藝術作品。",
+        duration: "32:20",
         thumbnail: "🎨",
-        tags: ["AI繪圖", "藝術創作", "Midjourney"],
+        tags: ["AI繪圖", "Midjourney", "藝術創作"],
         level: "intermediate",
-        source: "個人頻道"
+        source: "設計教學"
       },
       {
         id: "video-3",
-        title: "AI工作效率工具大集合",
-        url: "https://www.youtube.com/embed/UvGJogLZwgQ", // AI工具介紹
+        title: "AI工具提升工作效率10倍",
+        url: "https://www.youtube.com/embed/y6MaV4wLxgs", // 替換為真正AI工作效率教學
         category: "productivity",
-        description: "介紹10款提升工作效率的AI工具，包含自動化流程、文件處理、會議記錄等實用應用。",
-        duration: "25:40",
+        description: "精選10款AI工具，大幅提升工作效率，包含自動化、文件處理、時間管理等實用技巧。",
+        duration: "28:15",
         thumbnail: "💼",
         tags: ["工作效率", "自動化", "工具推薦"],
         level: "all",
-        source: "其他頻道"
+        source: "生產力頻道"
       },
       {
         id: "video-4",
-        title: "ChatGPT進階提示詞技巧",
-        url: "https://www.youtube.com/embed/w6PJjZuhc3E", // 提示詞技巧
+        title: "ChatGPT進階提示詞撰寫技巧",
+        url: "https://www.youtube.com/embed/w6PJjZuhc3E",
         category: "chatgpt",
         description: "進階提示詞撰寫技巧，讓ChatGPT產出更高品質的回應。包含角色設定、格式控制、多步驟指令等。",
         duration: "20:10",
         thumbnail: "🧠",
         tags: ["提示詞", "進階技巧", "優化"],
         level: "advanced",
-        source: "內嵌教學"
+        source: "AI教學頻道"
       },
       {
         id: "video-5",
-        title: "AI影片生成工具入門",
-        url: "https://www.youtube.com/embed/3qL5deJBhOI", // AI影片生成
+        title: "AI影片生成工具教學",
+        url: "https://www.youtube.com/embed/3qL5deJBhOI",
         category: "ai-art",
         description: "介紹AI影片生成工具，學習如何用文字描述創造短影片內容，適合社交媒體和行銷應用。",
         duration: "16:25",
         thumbnail: "🎬",
         tags: ["影片生成", "內容創作", "社交媒體"],
         level: "beginner",
-        source: "個人頻道"
+        source: "多媒體教學"
       },
       {
         id: "video-6",
-        title: "AI輔助程式設計教學",
-        url: "https://www.youtube.com/embed/U5p9G3CyOe8", // AI程式設計
+        title: "AI輔助程式設計實用技巧",
+        url: "https://www.youtube.com/embed/U5p9G3CyOe8",
         category: "productivity",
         description: "使用AI工具輔助程式設計，提升編碼效率和品質。包含錯誤除錯、程式碼優化、文件生成等應用。",
         duration: "28:30",
         thumbnail: "💻",
         tags: ["程式設計", "開發工具", "效率提升"],
         level: "advanced",
-        source: "其他頻道"
+        source: "程式教學"
       },
       {
         id: "video-7",
-        title: "免費AI工具推薦與教學",
-        url: "https://www.youtube.com/embed/38X6hCvG4yc", // 免費AI工具
+        title: "免費AI工具完全指南",
+        url: "https://www.youtube.com/embed/38X6hCvG4yc",
         category: "beginner",
         description: "精選10款免費AI工具，包含繪圖、寫作、設計等類別，適合預算有限的新手學習使用。",
         duration: "19:45",
         thumbnail: "🆓",
         tags: ["免費工具", "新手推薦", "入門指南"],
         level: "beginner",
-        source: "內嵌教學"
+        source: "免費資源"
       },
       {
         id: "video-8",
-        title: "AI商業應用案例分享",
-        url: "https://www.youtube.com/embed/2E8qCQHXZYA", // AI商業應用
+        title: "AI商業應用成功案例",
+        url: "https://www.youtube.com/embed/2E8qCQHXZYA",
         category: "productivity",
         description: "分享實際的AI商業應用案例，包含行銷、客服、數據分析等領域的成功經驗。",
         duration: "32:20",
         thumbnail: "📈",
         tags: ["商業應用", "案例分析", "實戰經驗"],
         level: "intermediate",
-        source: "個人頻道"
+        source: "商業頻道"
       }
     ];
     
@@ -918,6 +950,43 @@
         filterVideos('chatgpt');
       }
     });
+  </script>
+  
+  <script>
+    // 修正外部資源鏈接的JSON數據
+    const resourcesData = [
+      {
+        "id": "ai-resource-links",
+        "title": "AI學習資源網站",
+        "type": "folder",
+        "category": "tools",
+        "description": "精選AI學習資源與工具網站",
+        "views": 720,
+        "likes": 38,
+        "items": [
+          {
+            "title": "OpenAI官方網站",
+            "type": "webpage",
+            "url": "https://openai.com"
+          },
+          {
+            "title": "AI工具比較網站",
+            "type": "webpage",
+            "url": "https://theresanaiforthat.com"
+          },
+          {
+            "title": "免費AI繪圖平台",
+            "type": "webpage",
+            "url": "https://www.bing.com/images/create"  // 修正為有效的免費AI繪圖平台
+          },
+          {
+            "title": "AI學習社群",
+            "type": "webpage",
+            "url": "https://www.reddit.com/r/OpenAI"  // 修正為有效的AI學習社群
+          }
+        ]
+      }
+    ];
   </script>
 </body>
 </html>
