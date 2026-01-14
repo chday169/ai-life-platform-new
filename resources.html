@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🔗 AI推薦資源 | AI生活分享社團</title>
   <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    /* 资源页面样式 - 与之前代码一致 */
+    /* 資源頁面專用樣式 */
     .resources-container {
       max-width: 1200px;
       margin: 0 auto;
@@ -14,33 +15,780 @@
     }
     
     .resource-category {
-      margin: 40px 0;
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 25px;
+      margin: 30px 0;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      border: 1px solid var(--border-color);
     }
     
-    /* 其余样式保持一致 */
+    .category-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid var(--primary-light);
+    }
+    
+    .category-icon {
+      font-size: 1.8rem;
+      margin-right: 15px;
+      color: var(--primary-color);
+      background: var(--primary-light);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .category-title {
+      font-size: 1.5rem;
+      color: var(--text-color);
+      margin: 0;
+    }
+    
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    
+    .tool-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+      transition: transform 0.3s, box-shadow 0.3s;
+      border: 1px solid #eee;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .tool-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
+    
+    .tool-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    
+    .tool-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+      color: white;
+      font-size: 1.2rem;
+    }
+    
+    .tool-name {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--text-color);
+      margin: 0;
+    }
+    
+    .tool-description {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      flex-grow: 1;
+      margin-bottom: 15px;
+    }
+    
+    .tool-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+    
+    .tool-tag {
+      background: var(--light-bg);
+      color: var(--text-light);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+    }
+    
+    .tool-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--primary-color);
+      color: white;
+      padding: 10px 15px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background 0.3s;
+      margin-top: auto;
+    }
+    
+    .tool-link:hover {
+      background: var(--primary-dark);
+    }
+    
+    .tool-link i {
+      margin-right: 8px;
+    }
+    
+    .filter-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 20px 0 30px;
+      justify-content: center;
+    }
+    
+    .tool-category-btn {
+      background: var(--light-bg);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+    
+    .tool-category-btn.active {
+      background: var(--primary-color);
+      color: white;
+    }
+    
+    .tool-category-btn:hover:not(.active) {
+      background: #e0e0e0;
+    }
+    
+    .resources-hero {
+      text-align: center;
+      padding: 40px 20px;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      border-radius: 15px;
+      margin-bottom: 40px;
+    }
+    
+    .resources-hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      color: var(--text-color);
+    }
+    
+    .resources-hero p {
+      font-size: 1.2rem;
+      color: var(--text-light);
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    /* 響應式設計 */
+    @media (max-width: 768px) {
+      .tool-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .resources-hero h1 {
+        font-size: 2rem;
+      }
+      
+      .resource-category {
+        padding: 20px 15px;
+      }
+      
+      .filter-buttons {
+        justify-content: flex-start;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header class="page-header">
+  <!-- 導航欄 -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">AI生活分享社團</a>
+      <div class="nav-links">
+        <a href="index.html">首頁</a>
+        <a href="forum.html">討論區</a>
+        <a href="resources.html" class="active">AI資源</a>
+        <a href="content-viewer.html">學習內容</a>
+        <a href="video-player.html">影音教學</a>
+        <a href="about.html">關於我們</a>
+      </div>
+      <button class="menu-toggle" id="menuToggle">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <div class="resources-container">
+    <!-- 資源頁面英雄區域 -->
+    <section class="resources-hero">
       <h1>🔗 AI推薦資源</h1>
-      <p class="subtitle">精選AI工具、學習平台與實用資源</p>
-    </header>
+      <p class="subtitle">精選AI工具、學習平台與實用資源，助您快速掌握AI技術與應用</p>
+      <p>探索各種AI工具、學習資源和實用鏈接，定期更新最新AI技術動態</p>
+    </section>
     
-    <!-- 页面内容与之前代码完全一致 -->
-    <!-- 包含完整的AI工具和网站推荐 -->
+    <!-- 工具分類篩選按鈕 -->
+    <div class="filter-buttons">
+      <button class="tool-category-btn active" onclick="filterTools('all')">全部資源</button>
+      <button class="tool-category-btn" onclick="filterTools('chat')">AI對話</button>
+      <button class="tool-category-btn" onclick="filterTools('image')">圖像生成</button>
+      <button class="tool-category-btn" onclick="filterTools('video')">影音處理</button>
+      <button class="tool-category-btn" onclick="filterTools('productivity')">生產力工具</button>
+      <button class="tool-category-btn" onclick="filterTools('learning')">學習平台</button>
+      <button class="tool-category-btn" onclick="filterTools('local')">台灣資源</button>
+    </div>
     
+    <!-- AI工具推薦 -->
+    <div class="resource-category">
+      <div class="category-header">
+        <div class="category-icon">
+          <i class="fas fa-robot"></i>
+        </div>
+        <h2 class="category-title">AI工具推薦</h2>
+      </div>
+      <div class="tool-grid">
+        <!-- ChatGPT -->
+        <div class="tool-card" data-category="chat">
+          <div class="tool-header">
+            <div class="tool-icon">
+              <i class="fas fa-comment-dots"></i>
+            </div>
+            <h3 class="tool-name">ChatGPT</h3>
+          </div>
+          <p class="tool-description">OpenAI開發的強大對話AI，能夠回答問題、協助寫作、編程等各種任務。</p>
+          <div class="tool-tags">
+            <span class="tool-tag">對話AI</span>
+            <span class="tool-tag">寫作助手</span>
+            <span class="tool-tag">免費方案</span>
+          </div>
+          <a href="https://chat.openai.com" target="_blank" class="tool-link">
+            <i class="fas fa-external-link-alt"></i> 前往網站
+          </a>
+        </div>
+        
+        <!-- Midjourney -->
+        <div class="tool-card" data-category="image">
+          <div class="tool-header">
+            <div class="tool-icon">
+              <i class="fas fa-palette"></i>
+            </div>
+            <h3 class="tool-name">Midjourney</h3>
+          </div>
+          <p class="tool-description">強大的AI圖像生成工具，透過文字描述即可創造出高品質的藝術作品。</p>
+          <div class="tool-tags">
+            <span class="tool-tag">圖像生成</span>
+            <span class="tool-tag">藝術創作</span>
+            <span class="tool-tag">付費服務</span>
+          </div>
+          <a href="https://www.midjourney.com" target="_blank" class="tool-link">
+            <i class="fas fa-external-link-alt"></i> 前往網站
+          </a>
+        </div>
+        
+        <!-- GitHub Copilot -->
+        <div class="tool-card" data-category="productivity">
+          <div class="tool-header">
+            <div class="tool-icon">
+              <i class="fas fa-code"></i>
+            </div>
+            <h3 class="tool-name">GitHub Copilot</h3>
+          </div>
+          <p class="tool-description">AI程式碼助手，能夠自動完成代碼、提供建議，大幅提升開發效率。</p>
+          <div class="tool-tags">
+            <span class="tool-tag">程式開發</span>
+            <span class="tool-tag">生產力</span>
+            <span class="tool-tag">付費服務</span>
+          </div>
+          <a href="https://github.com/features/copilot" target="_blank" class="tool-link">
+            <i class="fas fa-external-link-alt"></i> 前往網站
+          </a>
+        </div>
+        
+        <!-- Runway ML -->
+        <div class="tool-card" data-category="video">
+          <div class="tool-header">
+            <div class="tool-icon">
+              <i class="fas fa-film"></i>
+            </div>
+            <h3 class="tool-name">Runway ML</h3>
+          </div>
+          <p class="tool-description">AI影音編輯工具，提供影片去背、風格轉換、動畫生成等多種功能。</p>
+          <div class="tool-tags">
+            <span class="tool-tag">影音編輯</span>
+            <span class="tool-tag">AI特效</span>
+            <span class="tool-tag">免費試用</span>
+          </div>
+          <a href="https://runwayml.com" target="_blank" class="tool-link">
+            <i class="fas fa-external-link-alt"></i> 前往網站
+          </a>
+        </div>
+        
+        <!-- Claude -->
+        <div class="tool-card" data-category="chat">
+          <div class="tool-header">
+            <div class="tool-icon">
+              <i class="fas fa-brain"></i>
+            </div>
+            <h3 class="tool-name">Claude</h3>
+          </div>
+          <p class="tool-description">Anthropic開發的AI助手，專注於安全、無害且有益的對話體驗。</p>
+          <div class="tool-tags">
+            <span class="tool-tag">對話AI</span>
+            <span class="tool-tag">安全優先</span>
+            <span class="tool-tag">免費方案</span>
+          </div>
+          <a href="https://claude.ai" target="_blank" class="tool-link">
+            <i class="fas fa-external-link-alt"></i> 前往網站
+          </a>
+        </div>
+        
+        <!-- DALL-E -->
+        <div class="tool-card" data-category="image">
+          <div class="tool-header">
+            <div class="tool-icon">
+              <i class="fas fa-image"></i>
+            </div>
+            <h3 class="tool-name">DALL-E</h3>
+          </div>
+          <p class="tool-description">OpenAI的圖像生成模型，可以從文字描述創建高質量、多樣化的圖像。</p>
+          <div class="tool-tags">
+            <span class="tool-tag">圖像生成</span>
+            <span class="tool-tag">OpenAI</span>
+            <span class="tool-tag">付費服務</span>
+          </div>
+          <a href="https://openai.com/dall-e-2" target="_blank" class="tool-link">
+            <i class="fas fa-external-link-alt"></i> 前往網站
+          </a>
+        </div>
+        
+        <!-- Notion AI -->
+        <div class="tool-card" data-category="productivity">
+          <div class="tool-header">
+            <div class="tool-icon">
+              <i class="fas fa-sticky-note"></i>
+            </div>
+            <h3 class="tool-name">Notion AI</h3>
+          </div>
+          <p class="tool-description">整合AI功能的筆記工具，可以協助寫作、總結、翻譯和創意發想。</p>
+          <div class="tool-tags">
+            <span class="tool-tag">筆記工具</span>
+            <span class="tool-tag">生產力</span>
+            <span class="tool-tag">付費服務</span>
+          </div>
+          <a href="https://www.notion.so/product/ai" target="_blank" class="tool-link">
+            <i class="fas fa-external-link-alt"></i> 前往網站
+          </a>
+        </div>
+        
+        <!-- ElevenLabs -->
+        <div class="tool-card" data-category="video">
+          <div class="tool-header">
+            <div class="tool-icon">
+              <i class="fas fa-microphone"></i>
+            </div>
+            <h3 class="tool-name">ElevenLabs</h3>
+          </div>
+          <p class="tool-description">最先進的語音AI工具，可以生成自然的人聲，支持多種語言和語調。</p>
+          <div class="tool-tags">
+            <span class="tool-tag">語音合成</span>
+            <span class="tool-tag">AI配音</span>
+            <span class="tool-tag">免費方案</span>
+          </div>
+          <a href="https://elevenlabs.io" target="_blank" class="tool-link">
+            <i class="fas fa-external-link-alt"></i> 前往網站
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- AI學習平台 -->
+    <div class="resource-category">
+      <div class="category-header">
+        <div class="category-icon">
+          <i class="fas fa-graduation-cap"></i>
+        </div>
+        <h2 class="category-title">AI學習平台</h2>
+      </div>
+      <div class="tool-grid">
+        <!-- Coursera -->
+        <div class="tool-card" data-category="learning">
+          <div class="tool-header">
+            <div class="tool-icon">
+              <i class="fas fa-university"></i>
+            </div>
+            <h3 class="tool-name">Coursera</h3>
+          </div>
+          <p class="tool-description">提供多門AI相關課程，包括吳恩達的機器學習專項課程等知名課程。</p>
+          <div class="tool-tags">
+            <span class="tool-tag">在線學習</span>
+            <span class="tool-tag">大學課程</span>
+            <span class="tool-tag">免費審核</span>
+          </div>
+          <a href="https://www.coursera.org" target="_blank" class="tool-link">
+            <i class="fas fa-external-link-alt"></i> 前往網站
+          </a>
+        </div>
+        
+        <!-- DeepLearning.AI -->
+        <div class="tool-card" data-category="learning">
+          <div class="tool-header">
+            <div class="tool-icon">
+              <i class="fas fa-laptop-code"></i>
+            </div>
+            <h3 class="tool-name">DeepLearning.AI</h3>
+          </div>
+          <p class="tool-description">吳恩達創立的深度學習教育平台，提供專業的AI課程和實踐項目。</p>
+          <div class="tool-tags">
+            <span class="tool-tag">深度學習</span>
+            <span class="tool-tag">專業課程</span>
+            <span class="tool-tag">實踐項目</span>
+          </div>
+          <a href="https://www.deeplearning.ai" target="_blank" class="tool-link">
+            <i class="fas fa-external-link-alt"></i> 前往網站
+          </a>
+        </div>
+        
+        <!-- Hugging Face -->
+        <div class="tool-card" data-category="learning">
+          <div class="tool-header">
+            <div class="tool-icon">
+              <i class="fas fa-hands-helping"></i>
+            </div>
+            <h3 class="tool-name">Hugging Face</h3>
+          </div>
+          <p class="tool-description">AI模型共享平台，提供數千種預訓練模型和豐富的學習資源。</p>
+          <div class="tool-tags">
+            <span class="tool-tag">開源模型</span>
+            <span class="tool-tag">AI社區</span>
+            <span class="tool-tag">免費資源</span>
+          </div>
+          <a href="https://huggingface.co" target="_blank" class="tool-link">
+            <i class="fas fa-external-link-alt"></i> 前往網站
+          </a>
+        </div>
+        
+        <!-- Kaggle -->
+        <div class="tool-card" data-category="learning">
+          <div class="tool-header">
+            <div class="tool-icon">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <h3 class="tool-name">Kaggle</h3>
+          </div>
+          <p class="tool-description">數據科學競賽平台，提供免費課程、數據集和Notebook環境。</p>
+          <div class="tool-tags">
+            <span class="tool-tag">數據科學</span>
+            <span class="tool-tag">競賽平台</span>
+            <span class="tool-tag">免費學習</span>
+          </div>
+          <a href="https://www.kaggle.com" target="_blank" class="tool-link">
+            <i class="fas fa-external-link-alt"></i> 前往網站
+          </a>
+        </div>
+        
+        <!-- Fast.ai -->
+        <div class="tool-card" data-category="learning">
+          <div class="tool-header">
+            <div class="tool-icon">
+              <i class="fas fa-bolt"></i>
+            </div>
+            <h3 class="tool-name">Fast.ai</h3>
+          </div>
+          <p class="tool-description">提供免費的深度學習課程，專注於實用性和可訪問性。</p>
+          <div class="tool-tags">
+            <span class="tool-tag">深度學習</span>
+            <span class="tool-tag">免費課程</span>
+            <span class="tool-tag">實用導向</span>
+          </div>
+          <a href="https://www.fast.ai" target="_blank" class="tool-link">
+            <i class="fas fa-external-link-alt"></i> 前往網站
+          </a>
+        </div>
+        
+        <!-- 台灣AI學校 -->
+        <div class="tool-card" data-category="learning local">
+          <div class="tool-header">
+            <div class="tool-icon">
+              <i class="fas fa-school"></i>
+            </div>
+            <h3 class="tool-name">台灣AI學校</h3>
+          </div>
+          <p class="tool-description">台灣人工智慧學校，提供專業AI培訓課程和產業實務經驗。</p>
+          <div class="tool-tags">
+            <span class="tool-tag">台灣資源</span>
+            <span class="tool-tag">專業培訓</span>
+            <span class="tool-tag">產業導向</span>
+          </div>
+          <a href="https://aiacademy.tw" target="_blank" class="tool-link">
+            <i class="fas fa-external-link-alt"></i> 前往網站
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 開發者資源 -->
+    <div class="resource-category">
+      <div class="category-header">
+        <div class="category-icon">
+          <i class="fas fa-tools"></i>
+        </div>
+        <h2 class="category-title">開發者資源</h2>
+      </div>
+      <div class="tool-grid">
+        <!-- Google Colab -->
+        <div class="tool-card" data-category="productivity">
+          <div class="tool-header">
+            <div class="tool-icon">
+              <i class="fas fa-cloud"></i>
+            </div>
+            <h3 class="tool-name">Google Colab</h3>
+          </div>
+          <p class="tool-description">免費的雲端Jupyter Notebook環境，支援GPU加速，適合AI開發和實驗。</p>
+          <div class="tool-tags">
+            <span class="tool-tag">雲端開發</span>
+            <span class="tool-tag">免費GPU</span>
+            <span class="tool-tag">Python環境</span>
+          </div>
+          <a href="https://colab.research.google.com" target="_blank" class="tool-link">
+            <i class="fas fa-external-link-alt"></i> 前往網站
+          </a>
+        </div>
+        
+        <!-- GitHub -->
+        <div class="tool-card" data-category="productivity">
+          <div class="tool-header">
+            <div class="tool-icon">
+              <i class="fab fa-github"></i>
+            </div>
+            <h3 class="tool-name">GitHub</h3>
+          </div>
+          <p class="tool-description">全球最大的程式碼託管平台，包含無數AI開源專案和學習資源。</p>
+          <div class="tool-tags">
+            <span class="tool-tag">開源專案</span>
+            <span class="tool-tag">程式碼託管</span>
+            <span class="tool-tag">協作開發</span>
+          </div>
+          <a href="https://github.com" target="_blank" class="tool-link">
+            <i class="fas fa-external-link-alt"></i> 前往網站
+          </a>
+        </div>
+        
+        <!-- Streamlit -->
+        <div class="tool-card" data-category="productivity">
+          <div class="tool-header">
+            <div class="tool-icon">
+              <i class="fas fa-chart-bar"></i>
+            </div>
+            <h3 class="tool-name">Streamlit</h3>
+          </div>
+          <p class="tool-description">快速創建AI應用的Python框架，輕鬆將模型轉換為互動式網頁應用。</p>
+          <div class="tool-tags">
+            <span class="tool-tag">網頁應用</span>
+            <span class="tool-tag">Python框架</span>
+            <span class="tool-tag">快速開發</span>
+          </div>
+          <a href="https://streamlit.io" target="_blank" class="tool-link">
+            <i class="fas fa-external-link-alt"></i> 前往網站
+          </a>
+        </div>
+        
+        <!-- PyTorch -->
+        <div class="tool-card" data-category="learning">
+          <div class="tool-header">
+            <div class="tool-icon">
+              <i class="fas fa-fire"></i>
+            </div>
+            <h3 class="tool-name">PyTorch</h3>
+          </div>
+          <p class="tool-description">Meta開發的深度學習框架，提供靈活的張量計算和深度神經網絡。</p>
+          <div class="tool-tags">
+            <span class="tool-tag">深度學習</span>
+            <span class="tool-tag">開源框架</span>
+            <span class="tool-tag">研究導向</span>
+          </div>
+          <a href="https://pytorch.org" target="_blank" class="tool-link">
+            <i class="fas fa-external-link-alt"></i> 前往網站
+          </a>
+        </div>
+        
+        <!-- TensorFlow -->
+        <div class="tool-card" data-category="learning">
+          <div class="tool-header">
+            <div class="tool-icon">
+              <i class="fas fa-project-diagram"></i>
+            </div>
+            <h3 class="tool-name">TensorFlow</h3>
+          </div>
+          <p class="tool-description">Google開發的開源機器學習框架，廣泛用於研究和生產環境。</p>
+          <div class="tool-tags">
+            <span class="tool-tag">機器學習</span>
+            <span class="tool-tag">Google</span>
+            <span class="tool-tag">生產部署</span>
+          </div>
+          <a href="https://www.tensorflow.org" target="_blank" class="tool-link">
+            <i class="fas fa-external-link-alt"></i> 前往網站
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 台灣本地資源 -->
+    <div class="resource-category">
+      <div class="category-header">
+        <div class="category-icon">
+          <i class="fas fa-map-marker-alt"></i>
+        </div>
+        <h2 class="category-title">台灣本地資源</h2>
+      </div>
+      <div class="tool-grid">
+        <!-- 政府開放資料平台 -->
+        <div class="tool-card" data-category="local">
+          <div class="tool-header">
+            <div class="tool-icon">
+              <i class="fas fa-database"></i>
+            </div>
+            <h3 class="tool-name">政府開放資料平台</h3>
+          </div>
+          <p class="tool-description">台灣政府開放資料平台，提供豐富的公共數據集，適合AI模型訓練。</p>
+          <div class="tool-tags">
+            <span class="tool-tag">台灣資源</span>
+            <span class="tool-tag">開放資料</span>
+            <span class="tool-tag">免費數據</span>
+          </div>
+          <a href="https://data.gov.tw" target="_blank" class="tool-link">
+            <i class="fas fa-external-link-alt"></i> 前往網站
+          </a>
+        </div>
+        
+        <!-- 台灣人工智慧實驗室 -->
+        <div class="tool-card" data-category="local">
+          <div class="tool-header">
+            <div class="tool-icon">
+              <i class="fas fa-flask"></i>
+            </div>
+            <h3 class="tool-name">台灣人工智慧實驗室</h3>
+          </div>
+          <p class="tool-description">專注於AI技術研發與應用的台灣實驗室，提供技術分享和資源。</p>
+          <div class="tool-tags">
+            <span class="tool-tag">台灣資源</span>
+            <span class="tool-tag">技術研發</span>
+            <span class="tool-tag">AI應用</span>
+          </div>
+          <a href="https://ailab.tw" target="_blank" class="tool-link">
+            <i class="fas fa-external-link-alt"></i> 前往網站
+          </a>
+        </div>
+        
+        <!-- 科技部AI創新研究中心 -->
+        <div class="tool-card" data-category="local">
+          <div class="tool-header">
+            <div class="tool-icon">
+              <i class="fas fa-microscope"></i>
+            </div>
+            <h3 class="tool-name">科技部AI創新研究中心</h3>
+          </div>
+          <p class="tool-description">台灣科技部支持的AI研究機構，推動AI學術研究與產業合作。</p>
+          <div class="tool-tags">
+            <span class="tool-tag">台灣資源</span>
+            <span class="tool-tag">學術研究</span>
+            <span class="tool-tag">政府支持</span>
+          </div>
+          <a href="https://www.most.gov.tw" target="_blank" class="tool-link">
+            <i class="fas fa-external-link-alt"></i> 前往網站
+          </a>
+        </div>
+        
+        <!-- 工業技術研究院 -->
+        <div class="tool-card" data-category="local">
+          <div class="tool-header">
+            <div class="tool-icon">
+              <i class="fas fa-industry"></i>
+            </div>
+            <h3 class="tool-name">工業技術研究院</h3>
+          </div>
+          <p class="tool-description">台灣最大的產業技術研發機構，提供AI技術轉移和產業應用服務。</p>
+          <div class="tool-tags">
+            <span class="tool-tag">台灣資源</span>
+            <span class="tool-tag">產業研發</span>
+            <span class="tool-tag">技術轉移</span>
+          </div>
+          <a href="https://www.itri.org.tw" target="_blank" class="tool-link">
+            <i class="fas fa-external-link-alt"></i> 前往網站
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
-  
+
+  <!-- 頁腳 -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>AI生活分享社團</h3>
+        <p>探索AI技術，分享應用經驗，共同學習成長</p>
+      </div>
+      <div class="footer-section">
+        <h3>快速連結</h3>
+        <a href="index.html">首頁</a>
+        <a href="forum.html">討論區</a>
+        <a href="resources.html">AI資源</a>
+        <a href="about.html">關於我們</a>
+      </div>
+      <div class="footer-section">
+        <h3>聯繫我們</h3>
+        <p>Email: contact@ai-life-club.tw</p>
+        <p>© 2023 AI生活分享社團 版權所有</p>
+      </div>
+    </div>
+  </footer>
+
   <script>
     // 工具過濾功能
     function filterTools(category) {
       const buttons = document.querySelectorAll('.tool-category-btn');
-      buttons.forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
+      buttons.forEach(btn => {
+        if (btn.textContent.includes(category === 'all' ? '全部' : 
+            category === 'chat' ? '對話' : 
+            category === 'image' ? '圖像' : 
+            category === 'video' ? '影音' : 
+            category === 'productivity' ? '生產力' : 
+            category === 'learning' ? '學習' : 
+            category === 'local' ? '台灣' : '')) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+      
+      const tools = document.querySelectorAll('.tool-card');
+      tools.forEach(tool => {
+        if (category === 'all' || tool.getAttribute('data-category').includes(category)) {
+          tool.style.display = 'flex';
+        } else {
+          tool.style.display = 'none';
+        }
+      });
       
       console.log(`篩選類別: ${category}`);
     }
+    
+    // 導航欄漢堡菜單功能
+    document.getElementById('menuToggle').addEventListener('click', function() {
+      const navLinks = document.querySelector('.nav-links');
+      navLinks.classList.toggle('show');
+    });
     
     // 記錄頁面訪問
     document.addEventListener('DOMContentLoaded', function() {
@@ -53,6 +801,16 @@
       count++;
       localStorage.setItem(key, count.toString());
     }
+    
+    // 點擊分類按鈕時更新活動狀態
+    document.querySelectorAll('.tool-category-btn').forEach(button => {
+      button.addEventListener('click', function() {
+        document.querySelectorAll('.tool-category-btn').forEach(btn => {
+          btn.classList.remove('active');
+        });
+        this.classList.add('active');
+      });
+    });
   </script>
 </body>
 </html>

@@ -5,51 +5,662 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ℹ️ 關於我們 | AI生活分享社團</title>
   <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    /* 关于页面样式 - 与之前提供的代码一致 */
+    /* 关于页面样式 */
     .about-container {
-      max-width: 900px;
+      max-width: 1200px;
       margin: 0 auto;
       padding: 20px;
     }
     
-    .profile-section {
+    .about-hero {
       text-align: center;
-      margin: 40px 0;
+      padding: 60px 20px;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      border-radius: 15px;
+      margin-bottom: 40px;
     }
     
-    .profile-img {
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 5px solid #6366f1;
+    .about-hero h1 {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      color: var(--text-color);
+    }
+    
+    .about-hero p {
+      font-size: 1.3rem;
+      color: var(--text-light);
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .mission-section {
+      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+      color: white;
+      padding: 50px 30px;
+      border-radius: 15px;
+      margin: 50px 0;
+      text-align: center;
+    }
+    
+    .mission-section h2 {
+      font-size: 2.5rem;
       margin-bottom: 20px;
-      background: linear-gradient(135deg, #e0e7ff, #f0f9ff);
+    }
+    
+    .mission-section p {
+      font-size: 1.2rem;
+      max-width: 900px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+    
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin: 50px 0;
+    }
+    
+    .value-card {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      text-align: center;
+      transition: transform 0.3s;
+      border: 1px solid #eee;
+    }
+    
+    .value-card:hover {
+      transform: translateY(-10px);
+    }
+    
+    .value-icon {
+      font-size: 2.5rem;
+      color: var(--primary-color);
+      margin-bottom: 20px;
+    }
+    
+    .value-card h3 {
+      color: var(--text-color);
+      margin-bottom: 15px;
+    }
+    
+    .value-card p {
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+    
+    .team-section {
+      margin: 60px 0;
+    }
+    
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    
+    .team-member {
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      text-align: center;
+      transition: transform 0.3s;
+      border: 1px solid #eee;
+    }
+    
+    .team-member:hover {
+      transform: translateY(-5px);
+    }
+    
+    .member-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      background: linear-gradient(135deg, #e0e7ff 0%, #ede9fe 100%);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 4rem;
-      color: #6366f1;
-      margin: 0 auto 20px auto;
-      box-shadow: 0 10px 25px rgba(99, 102, 241, 0.2);
+      font-size: 2.5rem;
+      color: var(--primary-color);
+      border: 4px solid var(--primary-light);
     }
     
-    /* 其余样式与之前一致 */
+    .member-name {
+      font-size: 1.3rem;
+      color: var(--text-color);
+      margin-bottom: 5px;
+    }
+    
+    .member-role {
+      color: var(--primary-color);
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+    
+    .member-bio {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    
+    .history-section {
+      background: #f8fafc;
+      padding: 50px 30px;
+      border-radius: 15px;
+      margin: 50px 0;
+    }
+    
+    .timeline {
+      position: relative;
+      max-width: 800px;
+      margin: 40px auto 0;
+    }
+    
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: var(--primary-color);
+      transform: translateX(-50%);
+    }
+    
+    .timeline-item {
+      position: relative;
+      margin-bottom: 50px;
+      width: 50%;
+      padding-right: 40px;
+    }
+    
+    .timeline-item:nth-child(even) {
+      margin-left: 50%;
+      padding-right: 0;
+      padding-left: 40px;
+    }
+    
+    .timeline-content {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+      position: relative;
+    }
+    
+    .timeline-year {
+      position: absolute;
+      top: 20px;
+      right: -85px;
+      background: var(--primary-color);
+      color: white;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+    
+    .timeline-item:nth-child(even) .timeline-year {
+      right: auto;
+      left: -85px;
+    }
+    
+    .timeline-dot {
+      position: absolute;
+      right: -10px;
+      top: 30px;
+      width: 20px;
+      height: 20px;
+      background: var(--primary-color);
+      border-radius: 50%;
+      border: 4px solid white;
+      box-shadow: 0 0 0 3px var(--primary-light);
+    }
+    
+    .timeline-item:nth-child(even) .timeline-dot {
+      right: auto;
+      left: -10px;
+    }
+    
+    .stats-section {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      margin: 60px 0;
+      gap: 30px;
+    }
+    
+    .stat-box {
+      text-align: center;
+      flex: 1;
+      min-width: 200px;
+    }
+    
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 10px;
+    }
+    
+    .stat-label {
+      color: var(--text-color);
+      font-size: 1.1rem;
+    }
+    
+    .contact-section {
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      padding: 50px 30px;
+      border-radius: 15px;
+      margin: 50px 0;
+      text-align: center;
+    }
+    
+    .contact-options {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-top: 40px;
+    }
+    
+    .contact-card {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      text-align: center;
+      min-width: 200px;
+    }
+    
+    .contact-icon {
+      font-size: 2rem;
+      color: var(--primary-color);
+      margin-bottom: 20px;
+    }
+    
+    .contact-card h4 {
+      color: var(--text-color);
+      margin-bottom: 10px;
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .section-header h2 {
+      font-size: 2.5rem;
+      color: var(--text-color);
+      margin-bottom: 15px;
+    }
+    
+    .section-header p {
+      color: var(--text-light);
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+    }
+    
+    /* 響應式設計 */
+    @media (max-width: 768px) {
+      .timeline::before {
+        left: 30px;
+      }
+      
+      .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 0;
+      }
+      
+      .timeline-item:nth-child(even) {
+        margin-left: 0;
+        padding-left: 70px;
+      }
+      
+      .timeline-year {
+        left: -50px;
+        right: auto;
+      }
+      
+      .timeline-dot {
+        left: 21px;
+        right: auto;
+      }
+      
+      .about-hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .mission-section h2 {
+        font-size: 2rem;
+      }
+      
+      .values-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .stats-section {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
   </style>
 </head>
-<body class="container">
-  <header class="page-header">
-    <h1>ℹ️ 關於我們</h1>
-    <p class="subtitle">AI生活分享社團的使命與願景</p>
-  </header>
-  
-  <!-- 页面内容与之前代码完全一致 -->
-  <!-- ... -->
-  
+<body>
+  <!-- 導航欄 -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">AI生活分享社團</a>
+      <div class="nav-links">
+        <a href="index.html">首頁</a>
+        <a href="forum.html">討論區</a>
+        <a href="resources.html">AI資源</a>
+        <a href="content-viewer.html">學習內容</a>
+        <a href="video-player.html">影音教學</a>
+        <a href="about.html" class="active">關於我們</a>
+      </div>
+      <button class="menu-toggle" id="menuToggle">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <div class="about-container">
+    <!-- 關於我們英雄區域 -->
+    <section class="about-hero">
+      <h1>ℹ️ 關於我們</h1>
+      <p class="subtitle">AI生活分享社團的使命與願景</p>
+      <p>我們是一群熱愛AI技術的實踐者，致力於推廣AI在生活中的應用與普及</p>
+    </section>
+    
+    <!-- 使命宣言 -->
+    <section class="mission-section">
+      <h2>我們的使命</h2>
+      <p>「讓AI技術不再是專家的專利，而是每個人都能掌握的生活技能。我們致力於降低AI學習門檻，提供實用的AI工具資源，建立互助的學習社群，讓AI真正成為改善日常生活的強大助力。」</p>
+    </section>
+    
+    <!-- 核心價值 -->
+    <section class="team-section">
+      <div class="section-header">
+        <h2>核心價值</h2>
+        <p>驅動我們前進的信念與原則</p>
+      </div>
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="value-icon">
+            <i class="fas fa-graduation-cap"></i>
+          </div>
+          <h3>普及教育</h3>
+          <p>我們相信AI知識應該普及化，無論年齡、背景或技術水平，每個人都應該有機會學習和應用AI技術。</p>
+        </div>
+        
+        <div class="value-card">
+          <div class="value-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <h3>社群共創</h3>
+          <p>透過社群的力量，我們共同分享、學習、成長。每個人的經驗都是寶貴的學習資源。</p>
+        </div>
+        
+        <div class="value-card">
+          <div class="value-icon">
+            <i class="fas fa-lightbulb"></i>
+          </div>
+          <h3>實踐導向</h3>
+          <p>我們注重實際應用，提供可立即上手的工具和案例，讓學習者能夠快速看到成果。</p>
+        </div>
+        
+        <div class="value-card">
+          <div class="value-icon">
+            <i class="fas fa-globe-asia"></i>
+          </div>
+          <h3>在地化支持</h3>
+          <p>特別關注台灣使用者的需求，提供繁體中文資源和本地AI發展資訊。</p>
+        </div>
+        
+        <div class="value-card">
+          <div class="value-icon">
+            <i class="fas fa-handshake"></i>
+          </div>
+          <h3>開放共享</h3>
+          <p>堅持開放共享的理念，所有資源盡可能免費提供，促進知識的自由流通。</p>
+        </div>
+        
+        <div class="value-card">
+          <div class="value-icon">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <h3>持續創新</h3>
+          <p>AI技術日新月異，我們持續更新內容，追蹤最新發展，確保社群的知識始終走在時代前沿。</p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 團隊介紹 -->
+    <section class="team-section">
+      <div class="section-header">
+        <h2>核心團隊</h2>
+        <p>認識我們的創始團隊成員</p>
+      </div>
+      <div class="team-grid">
+        <div class="team-member">
+          <div class="member-avatar">
+            <i class="fas fa-user-tie"></i>
+          </div>
+          <h3 class="member-name">陳明哲</h3>
+          <div class="member-role">創辦人 & AI技術顧問</div>
+          <p class="member-bio">擁有10年AI領域經驗，曾在多家科技公司擔任AI產品經理，專注於AI技術的商業應用與普及化。</p>
+        </div>
+        
+        <div class="team-member">
+          <div class="member-avatar">
+            <i class="fas fa-user-graduate"></i>
+          </div>
+          <h3 class="member-name">林曉雯</h3>
+          <div class="member-role">教育總監</div>
+          <p class="member-bio">教育科技專家，設計多門AI入門課程，擅長將複雜的技術概念轉化為容易理解的教學內容。</p>
+        </div>
+        
+        <div class="team-member">
+          <div class="member-avatar">
+            <i class="fas fa-code"></i>
+          </div>
+          <h3 class="member-name">張志豪</h3>
+          <div class="member-role">技術總監</div>
+          <p class="member-bio">資深全端工程師，專注於AI工具開發與平台建設，負責技術架構與系統維護。</p>
+        </div>
+        
+        <div class="team-member">
+          <div class="member-avatar">
+            <i class="fas fa-palette"></i>
+          </div>
+          <h3 class="member-name">王雅婷</h3>
+          <div class="member-role">內容設計師</div>
+          <p class="member-bio">創意內容專家，負責視覺設計與多媒體內容製作，讓AI學習過程更加生動有趣。</p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 發展歷程 -->
+    <section class="history-section">
+      <div class="section-header">
+        <h2>發展歷程</h2>
+        <p>我們的成長故事與重要里程碑</p>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <h3>社團成立</h3>
+            <p>由幾位AI愛好者在台北發起，最初是一個小型線下聚會，分享AI工具的實用技巧。</p>
+            <div class="timeline-year">2021.03</div>
+            <div class="timeline-dot"></div>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <h3>線上平台建立</h3>
+            <p>建立第一個線上論壇，開始提供AI工具評測與教學內容，會員突破500人。</p>
+            <div class="timeline-year">2021.09</div>
+            <div class="timeline-dot"></div>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <h3>AI資源庫上線</h3>
+            <p>推出完整的AI資源庫，收錄超過100種AI工具的分類評測與使用指南。</p>
+            <div class="timeline-year">2022.04</div>
+            <div class="timeline-dot"></div>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <h3>繁體中文AI教學計畫</h3>
+            <p>啟動「台灣AI普及計畫」，製作系列繁體中文教學內容，獲得教育部門支持。</p>
+            <div class="timeline-year">2022.11</div>
+            <div class="timeline-dot"></div>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <h3>社群擴大</h3>
+            <p>會員突破10,000人，在台北、台中、高雄設立分會，舉辦多場大型AI工作坊。</p>
+            <div class="timeline-year">2023.06</div>
+            <div class="timeline-dot"></div>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <h3>AI生活平台正式上線</h3>
+            <p>整合所有資源，推出完整的AI生活平台，提供一站式AI學習與應用解決方案。</p>
+            <div class="timeline-year">2023.10</div>
+            <div class="timeline-dot"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 統計數據 -->
+    <section class="stats-section">
+      <div class="stat-box">
+        <div class="stat-number">15,000+</div>
+        <div class="stat-label">社群成員</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">200+</div>
+        <div class="stat-label">AI工具評測</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">50+</div>
+        <div class="stat-label">線下活動</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">100%</div>
+        <div class="stat-label">免費資源</div>
+      </div>
+    </section>
+    
+    <!-- 聯繫我們 -->
+    <section class="contact-section">
+      <div class="section-header">
+        <h2>聯繫我們</h2>
+        <p>歡迎與我們交流合作，一起推動AI在台灣的普及與發展</p>
+      </div>
+      <div class="contact-options">
+        <div class="contact-card">
+          <div class="contact-icon">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <h4>電子郵件</h4>
+          <p>contact@ai-life-club.tw</p>
+        </div>
+        
+        <div class="contact-card">
+          <div class="contact-icon">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <h4>台北辦公室</h4>
+          <p>台北市信義區基隆路一段</p>
+        </div>
+        
+        <div class="contact-card">
+          <div class="contact-icon">
+            <i class="fas fa-calendar-alt"></i>
+          </div>
+          <h4>活動訊息</h4>
+          <p>每月定期舉辦AI工作坊</p>
+        </div>
+        
+        <div class="contact-card">
+          <div class="contact-icon">
+            <i class="fab fa-facebook"></i>
+          </div>
+          <h4>Facebook社群</h4>
+          <p>AI生活分享社團</p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 加入我們 -->
+    <section class="mission-section" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+      <h2>加入我們的使命</h2>
+      <p>無論您是AI專家、學習者，還是對AI感興趣的朋友，都歡迎加入我們的行列，一起探索AI技術如何改善生活、創造價值。</p>
+      <div style="margin-top: 30px;">
+        <a href="forum.html" class="tool-link" style="background: white; color: #059669; padding: 15px 30px; font-size: 1.1rem;">
+          <i class="fas fa-user-plus"></i> 立即加入社群
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <!-- 頁腳 -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>AI生活分享社團</h3>
+        <p>探索AI技術，分享應用經驗，共同學習成長</p>
+      </div>
+      <div class="footer-section">
+        <h3>快速連結</h3>
+        <a href="index.html">首頁</a>
+        <a href="forum.html">討論區</a>
+        <a href="resources.html">AI資源</a>
+        <a href="about.html">關於我們</a>
+      </div>
+      <div class="footer-section">
+        <h3>聯繫我們</h3>
+        <p>Email: contact@ai-life-club.tw</p>
+        <p>© 2023 AI生活分享社團 版權所有</p>
+      </div>
+    </div>
+  </footer>
+
   <script>
+    // 記錄頁面訪問
     document.addEventListener('DOMContentLoaded', function() {
       recordPageView('about');
+      
+      // 導航欄漢堡菜單功能
+      document.getElementById('menuToggle').addEventListener('click', function() {
+        const navLinks = document.querySelector('.nav-links');
+        navLinks.classList.toggle('show');
+      });
     });
     
     function recordPageView(page) {
@@ -58,6 +669,24 @@
       count++;
       localStorage.setItem(key, count.toString());
     }
+    
+    // 平滑滾動到錨點
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
   </script>
 </body>
 </html>
