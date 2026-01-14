@@ -1,1028 +1,632 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🎥 AI教學影片 | AI生活分享社團</title>
-  <link rel="stylesheet" href="assets/style.css">
-  <style>
-    .video-container {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    
-    .ai-video-header {
-      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-      color: white;
-      padding: 25px;
-      border-radius: 15px;
-      margin-bottom: 30px;
-      text-align: center;
-      box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
-    }
-    
-    .video-player-section {
-      background: white;
-      border-radius: 15px;
-      padding: 30px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-      margin-bottom: 30px;
-      border: 1px solid #e0e7ff;
-    }
-    
-    .video-title {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #374151;
-      margin-bottom: 20px;
-      padding-bottom: 15px;
-      border-bottom: 2px solid #e0e7ff;
-    }
-    
-    .video-wrapper {
-      position: relative;
-      width: 100%;
-      max-width: 800px;
-      margin: 0 auto 25px auto;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    }
-    
-    .video-wrapper iframe {
-      width: 100%;
-      height: 450px;
-      border: none;
-      display: block;
-    }
-    
-    .video-controls {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 20px;
-      margin: 30px 0;
-      flex-wrap: wrap;
-    }
-    
-    .video-btn {
-      padding: 14px 28px;
-      font-size: 1.1rem;
-      background: #6366f1;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 600;
-    }
-    
-    .video-btn:hover {
-      background: #4f46e5;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
-    }
-    
-    .video-btn:disabled {
-      background: #9ca3af;
-      cursor: not-allowed;
-      transform: none;
-      box-shadow: none;
-    }
-    
-    .video-info {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin: 25px 0;
-      padding: 25px;
-      background: #f9fafb;
-      border-radius: 12px;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-    
-    .video-counter {
-      font-weight: 700;
-      color: #374151;
-      font-size: 1.2rem;
-    }
-    
-    .video-category {
-      background: #e0e7ff;
-      color: #6366f1;
-      padding: 8px 18px;
-      border-radius: 20px;
-      font-size: 0.9rem;
-      font-weight: 600;
-    }
-    
-    .video-description {
-      text-align: left;
-      color: #4b5563;
-      line-height: 1.7;
-      margin: 25px 0;
-      padding: 25px;
-      background: #f9fafb;
-      border-radius: 12px;
-      border-left: 4px solid #6366f1;
-    }
-    
-    .video-playlist {
-      background: white;
-      border-radius: 15px;
-      padding: 30px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-      margin-bottom: 30px;
-      border: 1px solid #e0e7ff;
-    }
-    
-    .playlist-title {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: #374151;
-      margin-bottom: 25px;
-      text-align: center;
-    }
-    
-    .playlist-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 20px;
-    }
-    
-    .playlist-item {
-      background: #f9fafb;
-      border: 2px solid #e0e7ff;
-      border-radius: 12px;
-      padding: 20px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-    
-    .playlist-item:hover {
-      background: #e0e7ff;
-      border-color: #6366f1;
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(99, 102, 241, 0.1);
-    }
-    
-    .playlist-item.active {
-      background: #6366f1;
-      color: white;
-      border-color: #6366f1;
-    }
-    
-    .playlist-item.coming-soon {
-      opacity: 0.7;
-      cursor: not-allowed;
-      background: #f3f4f6;
-    }
-    
-    .playlist-item.coming-soon:hover {
-      transform: none;
-      background: #f3f4f6;
-      border-color: #e0e7ff;
-    }
-    
-    .playlist-thumbnail {
-      width: 120px;
-      height: 80px;
-      background: #e0e7ff;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      flex-shrink: 0;
-      color: #6366f1;
-    }
-    
-    .playlist-info {
-      flex: 1;
-    }
-    
-    .playlist-video-title {
-      font-weight: 700;
-      margin-bottom: 8px;
-      font-size: 1rem;
-      color: #374151;
-    }
-    
-    .playlist-video-duration {
-      font-size: 0.85rem;
-      color: #6b7280;
-      margin-bottom: 5px;
-    }
-    
-    .playlist-video-desc {
-      font-size: 0.85rem;
-      color: #6b7280;
-      line-height: 1.4;
-    }
-    
-    .coming-soon-badge {
-      font-size: 0.75rem;
-      color: #6b7280;
-      font-style: italic;
-      margin-left: 8px;
-    }
-    
-    .category-filter {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      margin: 30px 0;
-      flex-wrap: wrap;
-    }
-    
-    .category-btn {
-      padding: 10px 20px;
-      background: #f3f4f6;
-      border: 2px solid #e5e7eb;
-      border-radius: 25px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: #4b5563;
-    }
-    
-    .category-btn.active {
-      background: #6366f1;
-      color: white;
-      border-color: #6366f1;
-    }
-    
-    .subscribe-section {
-      text-align: center;
-      margin: 50px 0;
-      padding: 40px;
-      background: linear-gradient(135deg, #e0e7ff, #f0f9ff);
-      border-radius: 20px;
-      border: 1px solid #dbeafe;
-    }
-    
-    .channel-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      margin-top: 25px;
-      padding: 16px 32px;
-      background: #ff0000;
-      color: white;
-      text-decoration: none;
-      border-radius: 12px;
-      font-weight: 700;
-      transition: all 0.3s ease;
-    }
-    
-    .channel-link:hover {
-      background: #cc0000;
-      transform: translateY(-3px);
-      box-shadow: 0 12px 25px rgba(204,0,0,0.2);
-    }
-    
-    .ai-learning-series {
-      margin: 40px 0;
-      padding: 30px;
-      background: white;
-      border-radius: 15px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-      border: 1px solid #e0e7ff;
-    }
-    
-    .series-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 25px;
-      margin-top: 25px;
-    }
-    
-    .series-card {
-      background: #f9fafb;
-      border-radius: 12px;
-      padding: 25px;
-      border: 2px solid #e0e7ff;
-      transition: all 0.3s ease;
-    }
-    
-    .series-card:hover {
-      border-color: #6366f1;
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(99, 102, 241, 0.1);
-    }
-    
-    .series-card h4 {
-      color: #6366f1;
-      margin-bottom: 15px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    
-    .video-stats {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-      margin: 30px 0;
-    }
-    
-    .stat-card {
-      background: white;
-      padding: 25px;
-      border-radius: 12px;
-      text-align: center;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-      border: 1px solid #e0e7ff;
-    }
-    
-    .stat-number {
-      font-size: 2.2rem;
-      font-weight: bold;
-      color: #6366f1;
-      margin-bottom: 10px;
-    }
-    
-    .ai-video-tips {
-      margin: 40px 0;
-      padding: 30px;
-      background: linear-gradient(135deg, #f0f9ff, #f8f9fa);
-      border-radius: 15px;
-      border: 1px solid #dbeafe;
-    }
-    
-    .tips-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      margin-top: 25px;
-    }
-    
-    .tip-item {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      border-left: 4px solid #6366f1;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-    }
-    
-    .personal-channel-btn {
-      background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%);
-      color: white;
-      padding: 14px 28px;
-      border-radius: 10px;
-      font-weight: 600;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      transition: all 0.3s ease;
-      border: none;
-      cursor: pointer;
-      font-size: 1rem;
-      margin: 10px 5px;
-    }
-    
-    .personal-channel-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(255, 107, 107, 0.3);
-    }
-    
-    .facebook-group-btn {
-      background: linear-gradient(135deg, #1877F2 0%, #0D5FD9 100%);
-      color: white;
-      padding: 14px 28px;
-      border-radius: 10px;
-      font-weight: 600;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      transition: all 0.3s ease;
-      border: none;
-      cursor: pointer;
-      font-size: 1rem;
-      margin: 10px 5px;
-    }
-    
-    .facebook-group-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(24, 119, 242, 0.3);
-    }
-    
-    @media (max-width: 768px) {
-      .video-wrapper iframe {
-        height: 350px;
-      }
-      
-      .video-controls {
-        flex-direction: column;
-      }
-      
-      .video-btn {
-        width: 100%;
-        justify-content: center;
-      }
-      
-      .video-info {
-        flex-direction: column;
-        text-align: center;
-      }
-      
-      .playlist-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .playlist-item {
-        flex-direction: column;
-        text-align: center;
-      }
-      
-      .playlist-thumbnail {
-        width: 100%;
-        height: 150px;
-      }
-      
-      .category-filter {
-        flex-direction: column;
-      }
-      
-      .category-btn {
-        width: 100%;
-        text-align: center;
-      }
-    }
-    
-    @media (max-width: 480px) {
-      .video-wrapper iframe {
-        height: 250px;
-      }
-      
-      .video-title {
-        font-size: 1.3rem;
-      }
-      
-      .ai-video-header {
-        padding: 20px 15px;
-      }
-      
-      .subscribe-section {
-        padding: 25px 15px;
-      }
-      
-      .series-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎥 AI教學影片 | AI生活分享社團</title>
+    <style>
+        /* ===== 全局基礎樣式 ===== */
+        * {
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+        }
+        body {
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* ===== 頁面標題 ===== */
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #e0e7ff;
+        }
+        .page-header h1 {
+            color: #4f46e5;
+            margin-bottom: 10px;
+            font-size: 2.8rem;
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            color: #6b7280;
+        }
+
+        /* ===== 頂部按鈕區（YouTube & Facebook） ===== */
+        .top-button-row {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+        .channel-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 32px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        .channel-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        }
+        .youtube-btn {
+            background: linear-gradient(135deg, #FF0000, #CC0000);
+        }
+        .facebook-btn {
+            background: linear-gradient(135deg, #1877F2, #0D5FD9);
+        }
+
+        /* ===== 影片播放器主區域 ===== */
+        .video-player-section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e0e7ff;
+        }
+        .section-title {
+            color: #374151;
+            font-size: 1.8rem;
+            margin-top: 0;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e0e7ff;
+        }
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 比例 */
+            height: 0;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* ===== 影片資訊與控制 ===== */
+        .video-info-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #f9fafb;
+            border-radius: 12px;
+        }
+        .video-counter {
+            font-weight: 700;
+            color: #4f46e5;
+            font-size: 1.3rem;
+        }
+        .video-category {
+            background: #e0e7ff;
+            color: #4f46e5;
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .video-description {
+            padding: 25px;
+            background: #f9fafb;
+            border-radius: 12px;
+            border-left: 5px solid #4f46e5;
+            margin-bottom: 30px;
+        }
+
+        /* ===== 控制按鈕 ===== */
+        .video-controls {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        .control-btn {
+            padding: 14px 28px;
+            font-size: 1.1rem;
+            background: #4f46e5;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+        .control-btn:hover:not(:disabled) {
+            background: #4338ca;
+            transform: translateY(-2px);
+            box-shadow: 0 7px 20px rgba(79, 70, 229, 0.3);
+        }
+        .control-btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        /* ===== 分類篩選 ===== */
+        .category-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 40px 0;
+        }
+        .category-btn {
+            padding: 12px 24px;
+            background: #f3f4f6;
+            border: 2px solid #e5e7eb;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: #4b5563;
+        }
+        .category-btn:hover,
+        .category-btn.active {
+            background: #4f46e5;
+            color: white;
+            border-color: #4f46e5;
+        }
+
+        /* ===== 播放清單 ===== */
+        .playlist-section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        .playlist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+        .playlist-item {
+            background: #f9fafb;
+            border: 2px solid #e0e7ff;
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+        .playlist-item:hover {
+            background: #e0e7ff;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(79, 70, 229, 0.1);
+        }
+        .playlist-item.active {
+            background: #4f46e5;
+            color: white;
+            border-color: #4f46e5;
+        }
+        .playlist-item.active .playlist-thumbnail {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        .playlist-thumbnail {
+            width: 80px;
+            height: 60px;
+            background: #e0e7ff;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+        .playlist-info {
+            flex: 1;
+        }
+        .playlist-video-title {
+            font-weight: 700;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+        .playlist-video-duration {
+            font-size: 0.9rem;
+            color: #6b7280;
+            margin-bottom: 8px;
+        }
+        .playlist-item.active .playlist-video-duration {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* ===== 頁腳 ===== */
+        .page-footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid #e5e7eb;
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        /* ===== 響應式設計 ===== */
+        @media (max-width: 768px) {
+            .page-header h1 { font-size: 2.2rem; }
+            .playlist-grid { grid-template-columns: 1fr; }
+            .video-controls, .category-filter { flex-direction: column; align-items: center; }
+            .control-btn, .category-btn { width: 100%; max-width: 300px; justify-content: center; }
+            .top-button-row { flex-direction: column; align-items: center; }
+            .channel-btn { width: 100%; max-width: 300px; justify-content: center; }
+        }
+    </style>
 </head>
-<body class="container">
-  <header class="page-header">
-    <h1>🎥 AI教學影片</h1>
-    <p class="subtitle">視覺化學習AI工具應用與技巧</p>
-  </header>
-  
-  <div class="ai-video-header">
-    <h2>🚀 視覺化AI學習體驗</h2>
-    <p>透過影片教學快速掌握AI工具的實際操作與應用技巧</p>
-  </div>
-  
-  <nav class="breadcrumb">
-    <a href="index.html">首頁</a> &gt; <span>AI教學影片</span>
-  </nav>
-  
-  <main class="video-container">
-    <div style="text-align: center; margin: 30px 0;">
-      <a href="https://www.youtube.com/@chday7919" target="_blank" class="personal-channel-btn" rel="noopener noreferrer">
-        <span style="font-size: 1.3rem;">👤</span>
-        訪問我的個人YouTube頻道
-      </a>
-    </div>
-    
-    <div class="category-filter">
-      <button class="category-btn active" onclick="filterVideos('all')">全部影片</button>
-      <button class="category-btn" onclick="filterVideos('chatgpt')">ChatGPT教學</button>
-      <button class="category-btn" onclick="filterVideos('ai-art')">AI繪圖</button>
-      <button class="category-btn" onclick="filterVideos('productivity')">工作效率</button>
-      <button class="category-btn" onclick="filterVideos('beginner')">新手入門</button>
-    </div>
-    
-    <div class="video-stats">
-      <div class="stat-card">
-        <div class="stat-number">50+</div>
-        <div class="stat-label">教學影片</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number">10+</div>
-        <div class="stat-label">小時內容</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number">100%</div>
-        <div class="stat-label">實用內容</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number">24/7</div>
-        <div class="stat-label">隨時觀看</div>
-      </div>
-    </div>
-    
-    <section class="video-player-section">
-      <div class="video-title" id="video-title">載入中...</div>
-      
-      <div class="video-wrapper">
-        <iframe id="video-player" width="560" height="315" src="" 
-                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen title="AI教學影片">
-        </iframe>
-      </div>
-      
-      <div class="video-info">
-        <div class="video-counter" id="video-counter">影片 1 / 8</div>
-        <div class="video-category" id="video-category">AI工具教學</div>
-      </div>
-      
-      <div class="video-description" id="video-description">
-        影片說明載入中...
-      </div>
-      
-      <div class="video-controls">
-        <button onclick="prevVideo()" class="video-btn" id="prev-btn">
-          <span>⬅️</span> 上一部影片
-        </button>
-        
-        <button onclick="window.open('https://www.facebook.com/groups/2076786986493869/', '_blank')" 
-                class="facebook-group-btn">
-          <span>👥</span> 加入AI社團
-        </button>
-        
-        <button onclick="window.open('https://www.youtube.com/@chday7919', '_blank')" 
-                class="personal-channel-btn">
-          <span>👤</span> 我的頻道
-        </button>
-        
-        <button onclick="nextVideo()" class="video-btn" id="next-btn">
-          下一部影片 <span>➡️</span>
-        </button>
-        <button onclick="toggleAutoplay()" class="video-btn" id="autoplay-btn">
-          <span>🔄</span> 自動播放: 關閉
-        </button>
-      </div>
-    </section>
-    
-    <section class="video-playlist">
-      <h3 class="playlist-title">📋 AI教學影片清單</h3>
-      <div class="playlist-grid" id="playlist-grid">
-        <!-- 播放清單項目會由 JavaScript 動態生成 -->
-      </div>
-    </section>
-    
-    <section class="ai-learning-series">
-      <h3 style="color: #6366f1; text-align: center; margin-bottom: 30px;">🎯 推薦學習系列</h3>
-      
-      <div class="series-grid">
-        <div class="series-card">
-          <h4><span>🤖</span> ChatGPT 完全指南</h4>
-          <p style="color: #6b7280; line-height: 1.6; margin-bottom: 15px;">
-            從基礎對話到進階技巧，掌握ChatGPT的所有功能
-          </p>
-          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <span style="background: #e0e7ff; color: #6366f1; padding: 4px 12px; border-radius: 15px; font-size: 0.8rem;">
-              8部影片
-            </span>
-            <span style="background: #f3f4f6; color: #6b7280; padding: 4px 12px; border-radius: 15px; font-size: 0.8rem;">
-              新手入門
-            </span>
-          </div>
+<body>
+    <div class="container">
+        <!-- 頁面標題 -->
+        <header class="page-header">
+            <h1>🎥 AI教學影片</h1>
+            <p class="subtitle">視覺化學習AI工具應用與技巧，快速掌握AI實戰技能</p>
+        </header>
+
+        <!-- 頂部頻道與社團按鈕 -->
+        <div class="top-button-row">
+            <button onclick="window.open('https://www.youtube.com/@chday7919', '_blank')" class="channel-btn youtube-btn">
+                <span style="font-size:1.3rem;">▶️</span> 訪問我的YouTube頻道
+            </button>
+            <button onclick="window.open('https://www.facebook.com/groups/2076786986493869/', '_blank')" class="channel-btn facebook-btn">
+                <span style="font-size:1.3rem;">👥</span> 加入Facebook討論社團
+            </button>
         </div>
-        
-        <div class="series-card">
-          <h4><span>🎨</span> AI繪圖大師班</h4>
-          <p style="color: #6b7280; line-height: 1.6; margin-bottom: 15px;">
-            Midjourney、Stable Diffusion等AI繪圖工具完整教學
-          </p>
-          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <span style="background: #e0e7ff; color: #6366f1; padding: 4px 12px; border-radius: 15px; font-size: 0.8rem;">
-              12部影片
-            </span>
-            <span style="background: #f3f4f6; color: #6b7280; padding: 4px 12px; border-radius: 15px; font-size: 0.8rem;">
-              創意設計
-            </span>
-          </div>
+
+        <!-- 影片分類篩選 -->
+        <div class="category-filter" id="category-filter">
+            <button class="category-btn active" onclick="filterVideos('all')">全部影片</button>
+            <button class="category-btn" onclick="filterVideos('chatgpt')">ChatGPT教學</button>
+            <button class="category-btn" onclick="filterVideos('ai-art')">AI繪圖</button>
+            <button class="category-btn" onclick="filterVideos('productivity')">工作效率</button>
+            <button class="category-btn" onclick="filterVideos('beginner')">新手入門</button>
         </div>
-        
-        <div class="series-card">
-          <h4><span>💼</span> AI工作效率革命</h4>
-          <p style="color: #6b7280; line-height: 1.6; margin-bottom: 15px;">
-            用AI工具提升10倍工作效率的實用技巧
-          </p>
-          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <span style="background: #e0e7ff; color: #6366f1; padding: 4px 12px; border-radius: 15px; font-size: 0.8rem;">
-              10部影片
-            </span>
-            <span style="background: #f3f4f6; color: #6b7280; padding: 4px 12px; border-radius: 15px; font-size: 0.8rem;">
-              職場應用
-            </span>
-          </div>
-        </div>
-      </div>
-    </section>
-    
-    <section class="ai-video-tips">
-      <h3 style="color: #6366f1; text-align: center; margin-bottom: 25px;">💡 觀看建議</h3>
-      
-      <div class="tips-grid">
-        <div class="tip-item">
-          <h4 style="color: #374151; margin-bottom: 10px;">邊看邊實作</h4>
-          <p style="color: #6b7280; font-size: 0.9rem; margin: 0;">跟著影片實際操作AI工具，學習效果最佳</p>
-        </div>
-        
-        <div class="tip-item">
-          <h4 style="color: #374151; margin-bottom: 10px;">筆記重點</h4>
-          <p style="color: #6b7280; font-size: 0.9rem; margin: 0;">記錄重要的提示詞和操作步驟</p>
-        </div>
-        
-        <div class="tip-item">
-          <h4 style="color: #374151; margin-bottom: 10px;">提問互動</h4>
-          <p style="color: #6b7280; font-size: 0.9rem; margin: 0;">
-            在
-            <a href="https://www.facebook.com/groups/2076786986493869/" target="_blank" style="color: #6366f1; text-decoration: underline;">
-              Facebook社團
-            </a>
-            提出問題，獲得解答
-          </p>
-        </div>
-        
-        <div class="tip-item">
-          <h4 style="color: #374151; margin-bottom: 10px;">循序漸進</h4>
-          <p style="color: #6b7280; font-size: 0.9rem; margin: 0;">從基礎影片開始，逐步學習進階技巧</p>
-        </div>
-      </div>
-    </section>
-    
-    <section class="subscribe-section">
-      <h3 style="color: #6366f1; margin-bottom: 15px;">📺 更多AI教學影片</h3>
-      <p style="color: #6b7280; max-width: 600px; margin: 0 auto 25px auto;">
-        歡迎前往我們的YouTube頻道觀看所有教學影片，包含完整的學習系列和最新AI工具評測！
-      </p>
-      <a href="https://www.youtube.com/@chday7919" target="_blank" class="channel-link" rel="noopener noreferrer">
-        <span style="font-size: 1.3rem;">🎬</span>
-        前往 AI生活分享 YouTube 頻道
-      </a>
-      <div style="margin-top: 20px;">
-        <p style="font-size: 0.9rem; color: #6b7280;">
-          頻道內有完整的教學播放清單，持續更新最新內容！
-        </p>
-      </div>
-    </section>
-    
-    <section class="subscribe-section">
-      <div class="subscribe-box">
-        <h3 style="color: #6366f1; margin-bottom: 15px;">📢 訂閱頻道獲得更新</h3>
-        <p style="color: #6b7280; margin-bottom: 25px;">喜歡我們的AI教學影片嗎？訂閱YouTube頻道，獲得最新影片通知！</p>
-        <a href="https://www.youtube.com/@chday7919?sub_confirmation=1" target="_blank" 
-           class="channel-link" rel="noopener noreferrer">
-          <span style="font-size: 1.3rem;">✅</span>
-          訂閱 AI生活分享 頻道
-        </a>
-        <p style="margin-top: 15px; font-size: 0.9rem; color: #6b7280;">
-          訂閱後即可第一時間收到新影片通知！
-        </p>
-      </div>
-    </section>
-    
-    <section style="margin: 40px 0; text-align: center;">
-      <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-        <a href="content-viewer.html" class="btn" style="background: #6366f1; color: white;">🧠 AI資源庫</a>
-        <a href="resources.html" class="btn btn-secondary">🔗 更多AI工具</a>
-        <a href="index.html" class="btn btn-secondary">🏠 返回首頁</a>
-      </div>
-    </section>
-  </main>
-  
-  <footer style="text-align: center; margin-top: 40px; padding-top: 30px; border-top: 1px solid #e5e7eb;">
-    <div style="display: flex; gap: 15px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap;">
-      <a href="index.html" class="btn btn-sm">⬅️ 返回首頁</a>
-      <a href="content-viewer.html" class="btn btn-sm btn-secondary">🧠 AI資源庫</a>
-      <a href="https://www.facebook.com/groups/2076786986493869/" target="_blank" class="btn btn-sm btn-secondary">👥 加入社團</a>
-    </div>
-    
-    <div>
-      <p>&copy; 2024 AI生活分享社團 | AI Skills for Everyday Life</p>
-      <p style="font-size: 0.9rem; color: #6b7280; margin-top: 10px;">
-        📊 影片頁面瀏覽次數: <span id="views_video">0</span>
-      </p>
-    </div>
-  </footer>
-  
-  <script>
-    // AI教學影片資料庫 - 修正版，替換為真正相關的教學影片
-    const videos = [
-      {
-        id: "video-1",
-        title: "ChatGPT 完全教學：從零開始掌握AI對話",
-        url: "https://www.youtube.com/embed/40Kp_fa8vIw", // 替換為真正ChatGPT教學
-        category: "chatgpt",
-        description: "ChatGPT完整教學影片，從註冊到進階對話技巧全面教學，適合AI對話工具初學者。",
-        duration: "25:45",
-        thumbnail: "🤖",
-        tags: ["新手入門", "對話技巧", "完整教學"],
-        level: "beginner",
-        source: "AI教學頻道"
-      },
-      {
-        id: "video-2",
-        title: "Midjourney AI繪圖實戰教學",
-        url: "https://www.youtube.com/embed/3m5qxZm_JqY", // 替換為真正Midjourney教學
-        category: "ai-art",
-        description: "Midjourney AI繪圖工具完整教學，從提示詞撰寫到圖像優化，創作專業級AI藝術作品。",
-        duration: "32:20",
-        thumbnail: "🎨",
-        tags: ["AI繪圖", "Midjourney", "藝術創作"],
-        level: "intermediate",
-        source: "設計教學"
-      },
-      {
-        id: "video-3",
-        title: "AI工具提升工作效率10倍",
-        url: "https://www.youtube.com/embed/y6MaV4wLxgs", // 替換為真正AI工作效率教學
-        category: "productivity",
-        description: "精選10款AI工具，大幅提升工作效率，包含自動化、文件處理、時間管理等實用技巧。",
-        duration: "28:15",
-        thumbnail: "💼",
-        tags: ["工作效率", "自動化", "工具推薦"],
-        level: "all",
-        source: "生產力頻道"
-      },
-      {
-        id: "video-4",
-        title: "ChatGPT進階提示詞撰寫技巧",
-        url: "https://www.youtube.com/embed/w6PJjZuhc3E",
-        category: "chatgpt",
-        description: "進階提示詞撰寫技巧，讓ChatGPT產出更高品質的回應。包含角色設定、格式控制、多步驟指令等。",
-        duration: "20:10",
-        thumbnail: "🧠",
-        tags: ["提示詞", "進階技巧", "優化"],
-        level: "advanced",
-        source: "AI教學頻道"
-      },
-      {
-        id: "video-5",
-        title: "AI影片生成工具教學",
-        url: "https://www.youtube.com/embed/3qL5deJBhOI",
-        category: "ai-art",
-        description: "介紹AI影片生成工具，學習如何用文字描述創造短影片內容，適合社交媒體和行銷應用。",
-        duration: "16:25",
-        thumbnail: "🎬",
-        tags: ["影片生成", "內容創作", "社交媒體"],
-        level: "beginner",
-        source: "多媒體教學"
-      },
-      {
-        id: "video-6",
-        title: "AI輔助程式設計實用技巧",
-        url: "https://www.youtube.com/embed/U5p9G3CyOe8",
-        category: "productivity",
-        description: "使用AI工具輔助程式設計，提升編碼效率和品質。包含錯誤除錯、程式碼優化、文件生成等應用。",
-        duration: "28:30",
-        thumbnail: "💻",
-        tags: ["程式設計", "開發工具", "效率提升"],
-        level: "advanced",
-        source: "程式教學"
-      },
-      {
-        id: "video-7",
-        title: "免費AI工具完全指南",
-        url: "https://www.youtube.com/embed/38X6hCvG4yc",
-        category: "beginner",
-        description: "精選10款免費AI工具，包含繪圖、寫作、設計等類別，適合預算有限的新手學習使用。",
-        duration: "19:45",
-        thumbnail: "🆓",
-        tags: ["免費工具", "新手推薦", "入門指南"],
-        level: "beginner",
-        source: "免費資源"
-      },
-      {
-        id: "video-8",
-        title: "AI商業應用成功案例",
-        url: "https://www.youtube.com/embed/2E8qCQHXZYA",
-        category: "productivity",
-        description: "分享實際的AI商業應用案例，包含行銷、客服、數據分析等領域的成功經驗。",
-        duration: "32:20",
-        thumbnail: "📈",
-        tags: ["商業應用", "案例分析", "實戰經驗"],
-        level: "intermediate",
-        source: "商業頻道"
-      }
-    ];
-    
-    let currentIndex = 0;
-    let filteredVideos = [];
-    let autoplay = false;
-    
-    // 初始化
-    document.addEventListener('DOMContentLoaded', function() {
-      filterVideos('all');
-      
-      // 載入瀏覽次數
-      const views = localStorage.getItem('views_video') || '0';
-      document.getElementById('views_video').textContent = views;
-      
-      // 記錄頁面訪問
-      recordPageView('video');
-    });
-    
-    function loadVideo(index) {
-      if (index < 0 || index >= filteredVideos.length) return;
-      
-      currentIndex = index;
-      const video = filteredVideos[index];
-      
-      document.getElementById("video-title").textContent = video.title;
-      document.getElementById("video-player").src = video.url + (autoplay ? "?autoplay=1" : "");
-      document.getElementById("video-description").textContent = video.description;
-      document.getElementById("video-counter").textContent = `影片 ${index + 1} / ${filteredVideos.length}`;
-      document.getElementById("video-category").textContent = getCategoryName(video.category) + ` (${video.source})`;
-      
-      updatePlaylist();
-      updateControls();
-    }
-    
-    function getCategoryName(category) {
-      const categories = {
-        'all': '全部影片',
-        'chatgpt': 'ChatGPT教學',
-        'ai-art': 'AI繪圖',
-        'productivity': '工作效率',
-        'beginner': '新手入門'
-      };
-      return categories[category] || category;
-    }
-    
-    function prevVideo() {
-      if (currentIndex > 0) {
-        currentIndex--;
-        loadVideo(currentIndex);
-      }
-    }
-    
-    function nextVideo() {
-      if (currentIndex < filteredVideos.length - 1) {
-        currentIndex++;
-        loadVideo(currentIndex);
-      }
-    }
-    
-    function filterVideos(category) {
-      // 更新按鈕狀態
-      document.querySelectorAll('.category-btn').forEach(btn => {
-        btn.classList.remove('active');
-      });
-      event.target.classList.add('active');
-      
-      if (category === 'all') {
-        filteredVideos = [...videos];
-      } else {
-        filteredVideos = videos.filter(video => video.category === category);
-      }
-      
-      currentIndex = 0;
-      if (filteredVideos.length > 0) {
-        loadVideo(currentIndex);
-      } else {
-        showNoVideosMessage();
-      }
-    }
-    
-    function showNoVideosMessage() {
-      document.getElementById("video-title").textContent = "暫無可用影片";
-      document.getElementById("video-player").src = "";
-      document.getElementById("video-description").textContent = "此分類目前沒有可播放的影片，請選擇其他分類或稍後再來。";
-      document.getElementById("video-counter").textContent = `影片 0 / 0`;
-      document.getElementById("video-category").textContent = "無影片";
-      
-      updatePlaylist();
-      updateControls();
-    }
-    
-    function updatePlaylist() {
-      const playlistGrid = document.getElementById('playlist-grid');
-      playlistGrid.innerHTML = '';
-      
-      filteredVideos.forEach((video, index) => {
-        const item = document.createElement('div');
-        
-        item.className = `playlist-item ${index === currentIndex ? 'active' : ''}`;
-        item.onclick = () => loadVideo(index);
-        
-        item.innerHTML = `
-          <div class="playlist-thumbnail">${video.thumbnail}</div>
-          <div class="playlist-info">
-            <div class="playlist-video-title">
-              ${video.title}
-              <span style="font-size:0.7rem; color:#8b5cf6; background:#f3f4f6; padding:2px 6px; border-radius:10px; margin-left:5px;">${video.source}</span>
+
+        <!-- 主影片播放器區塊 -->
+        <section class="video-player-section">
+            <h2 class="section-title" id="video-title">載入中...</h2>
+            <div class="video-wrapper">
+                <iframe id="video-player" src="" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                </iframe>
             </div>
-            <div class="playlist-video-duration">${video.duration} • ${getCategoryName(video.category)}</div>
-            <div class="playlist-video-desc">${video.description.substring(0, 80)}...</div>
-            <div style="display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap;">
-              ${video.tags.map(tag => `<span style="background: #e0e7ff; color: #6366f1; padding: 3px 10px; border-radius: 12px; font-size: 0.75rem;">${tag}</span>`).join('')}
+
+            <div class="video-info-bar">
+                <div class="video-counter" id="video-counter">影片 1 / 8</div>
+                <div class="video-category" id="video-category">AI工具教學</div>
             </div>
-          </div>
-        `;
-        
-        playlistGrid.appendChild(item);
-      });
-    }
-    
-    function updateControls() {
-      const prevBtn = document.getElementById('prev-btn');
-      const nextBtn = document.getElementById('next-btn');
-      
-      if (prevBtn && nextBtn) {
-        prevBtn.disabled = currentIndex === 0 || filteredVideos.length === 0;
-        nextBtn.disabled = currentIndex === filteredVideos.length - 1 || filteredVideos.length === 0;
-      }
-    }
-    
-    function toggleAutoplay() {
-      autoplay = !autoplay;
-      const btn = document.getElementById('autoplay-btn');
-      btn.innerHTML = `<span>🔄</span> 自動播放: ${autoplay ? '開啟' : '關閉'}`;
-      
-      // 如果開啟自動播放，重新載入影片
-      if (autoplay && filteredVideos[currentIndex]) {
-        document.getElementById("video-player").src = filteredVideos[currentIndex].url + "?autoplay=1";
-      }
-    }
-    
-    function recordPageView(page) {
-      const key = `views_${page}`;
-      let count = parseInt(localStorage.getItem(key) || '0');
-      count++;
-      localStorage.setItem(key, count.toString());
-    }
-    
-    // 鍵盤快捷鍵支持
-    document.addEventListener('keydown', function(event) {
-      if (event.key === 'ArrowLeft') {
-        prevVideo();
-      } else if (event.key === 'ArrowRight') {
-        nextVideo();
-      } else if (event.key === ' ' || event.key === 'Spacebar') {
-        event.preventDefault();
-        toggleAutoplay();
-      } else if (event.key === 'a' || event.key === 'A') {
-        event.preventDefault();
-        filterVideos('all');
-      } else if (event.key === 'c' || event.key === 'C') {
-        event.preventDefault();
-        filterVideos('chatgpt');
-      }
-    });
-  </script>
-  
-  <script>
-    // 修正外部資源鏈接的JSON數據
-    const resourcesData = [
-      {
-        "id": "ai-resource-links",
-        "title": "AI學習資源網站",
-        "type": "folder",
-        "category": "tools",
-        "description": "精選AI學習資源與工具網站",
-        "views": 720,
-        "likes": 38,
-        "items": [
-          {
-            "title": "OpenAI官方網站",
-            "type": "webpage",
-            "url": "https://openai.com"
-          },
-          {
-            "title": "AI工具比較網站",
-            "type": "webpage",
-            "url": "https://theresanaiforthat.com"
-          },
-          {
-            "title": "免費AI繪圖平台",
-            "type": "webpage",
-            "url": "https://www.bing.com/images/create"  // 修正為有效的免費AI繪圖平台
-          },
-          {
-            "title": "AI學習社群",
-            "type": "webpage",
-            "url": "https://www.reddit.com/r/OpenAI"  // 修正為有效的AI學習社群
-          }
-        ]
-      }
-    ];
-  </script>
+
+            <div class="video-description" id="video-description">
+                影片說明載入中...
+            </div>
+
+            <!-- 影片控制按鈕 -->
+            <div class="video-controls">
+                <button onclick="prevVideo()" class="control-btn" id="prev-btn">
+                    <span>◀️</span> 上一部
+                </button>
+                <button onclick="nextVideo()" class="control-btn" id="next-btn">
+                    下一部 <span>▶️</span>
+                </button>
+                <button onclick="toggleAutoplay()" class="control-btn" id="autoplay-btn">
+                    <span>🔄</span> 自動播放：關閉
+                </button>
+            </div>
+        </section>
+
+        <!-- 影片播放清單 -->
+        <section class="playlist-section">
+            <h2 class="section-title">📋 AI教學影片清單</h2>
+            <div class="playlist-grid" id="playlist-grid">
+                <!-- 播放清單會由JavaScript動態生成 -->
+            </div>
+        </section>
+
+        <!-- 頁腳 -->
+        <footer class="page-footer">
+            <p>© 2024 AI生活分享社團 • 本頁面僅供教學使用</p>
+            <p>影片頁面瀏覽次數: <span id="views_video">0</span></p>
+        </footer>
+    </div>
+
+    <script>
+        // ===== AI教學影片資料庫 =====
+        // 注意：你可以替換以下影片的標題、說明和YouTube嵌入連結（embed URL）
+        const videos = [
+            {
+                id: "video-1",
+                title: "ChatGPT 完全指南：從新手到高手",
+                url: "https://www.youtube.com/embed/jgpJVI3tDbY", // 請替換為你的影片連結
+                category: "chatgpt",
+                description: "完整的ChatGPT教學，從基本對話到進階功能全面講解。包含提示詞技巧、檔案上傳功能、客製化指令等實用技巧。",
+                duration: "18:30",
+                thumbnail: "🤖",
+                tags: ["新手入門", "對話技巧", "提示詞"],
+                level: "beginner"
+            },
+            {
+                id: "video-2",
+                title: "Midjourney AI繪圖教學：藝術創作入門",
+                url: "https://www.youtube.com/embed/lUe1gQqkRq4", // 請替換為你的影片連結
+                category: "ai-art",
+                description: "學習如何使用Midjourney創作高品質AI藝術作品。包含風格選擇、參數調整、圖像優化等專業技巧。",
+                duration: "22:15",
+                thumbnail: "🎨",
+                tags: ["AI繪圖", "藝術創作", "Midjourney"],
+                level: "intermediate"
+            },
+            {
+                id: "video-3",
+                title: "AI工作效率工具大集合",
+                url: "https://www.youtube.com/embed/UvGJogLZwgQ", // 請替換為你的影片連結
+                category: "productivity",
+                description: "介紹10款提升工作效率的AI工具，包含自動化流程、文件處理、會議記錄等實用應用。",
+                duration: "25:40",
+                thumbnail: "💼",
+                tags: ["工作效率", "自動化", "工具推薦"],
+                level: "all"
+            },
+            {
+                id: "video-4",
+                title: "ChatGPT進階提示詞技巧",
+                url: "https://www.youtube.com/embed/w6PJjZuhc3E", // 請替換為你的影片連結
+                category: "chatgpt",
+                description: "進階提示詞撰寫技巧，讓ChatGPT產出更高品質的回應。包含角色設定、格式控制、多步驟指令等。",
+                duration: "20:10",
+                thumbnail: "🧠",
+                tags: ["提示詞", "進階技巧", "優化"],
+                level: "advanced"
+            },
+            {
+                id: "video-5",
+                title: "AI影片生成工具入門",
+                url: "https://www.youtube.com/embed/3qL5deJBhOI", // 請替換為你的影片連結
+                category: "ai-art",
+                description: "介紹AI影片生成工具，學習如何用文字描述創造短影片內容，適合社交媒體和行銷應用。",
+                duration: "16:25",
+                thumbnail: "🎬",
+                tags: ["影片生成", "內容創作", "社交媒體"],
+                level: "beginner"
+            },
+            {
+                id: "video-6",
+                title: "AI輔助程式設計教學",
+                url: "https://www.youtube.com/embed/U5p9G3CyOe8", // 請替換為你的影片連結
+                category: "productivity",
+                description: "使用AI工具輔助程式設計，提升編碼效率和品質。包含錯誤除錯、程式碼優化、文件生成等應用。",
+                duration: "28:30",
+                thumbnail: "💻",
+                tags: ["程式設計", "開發工具", "效率提升"],
+                level: "advanced"
+            },
+            {
+                id: "video-7",
+                title: "免費AI工具推薦與教學",
+                url: "https://www.youtube.com/embed/38X6hCvG4yc", // 請替換為你的影片連結
+                category: "beginner",
+                description: "精選10款免費AI工具，包含繪圖、寫作、設計等類別，適合預算有限的新手學習使用。",
+                duration: "19:45",
+                thumbnail: "🆓",
+                tags: ["免費工具", "新手推薦", "入門指南"],
+                level: "beginner"
+            },
+            {
+                id: "video-8",
+                title: "AI商業應用案例分享",
+                url: "https://www.youtube.com/embed/2E8qCQHXZYA", // 請替換為你的影片連結
+                category: "productivity",
+                description: "分享實際的AI商業應用案例，包含行銷、客服、數據分析等領域的成功經驗。",
+                duration: "32:20",
+                thumbnail: "📈",
+                tags: ["商業應用", "案例分析", "實戰經驗"],
+                level: "intermediate"
+            }
+        ];
+
+        // ===== 應用程序狀態變量 =====
+        let currentIndex = 0;        // 當前播放影片的索引
+        let filteredVideos = [];     // 當前篩選後的影片列表
+        let autoplay = false;        // 自動播放狀態
+
+        // ===== 頁面初始化 =====
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化影片列表（顯示全部）
+            filterVideos('all');
+
+            // 初始化瀏覽計數
+            const views = localStorage.getItem('views_video') || '0';
+            document.getElementById('views_video').textContent = views;
+            recordPageView('video');
+        });
+
+        // ===== 核心功能函數 =====
+
+        // 載入並播放指定索引的影片
+        function loadVideo(index) {
+            if (index < 0 || index >= filteredVideos.length) return;
+
+            currentIndex = index;
+            const video = filteredVideos[index];
+
+            // 更新頁面元素
+            document.getElementById("video-title").textContent = video.title;
+            document.getElementById("video-description").textContent = video.description;
+            document.getElementById("video-counter").textContent = `影片 ${index + 1} / ${filteredVideos.length}`;
+            document.getElementById("video-category").textContent = getCategoryName(video.category);
+
+            // 設置影片嵌入連結（根據自動播放狀態）
+            const player = document.getElementById("video-player");
+            const autoplayParam = autoplay ? "?autoplay=1" : "";
+            player.src = video.url + autoplayParam;
+
+            // 更新播放清單和高亮顯示
+            updatePlaylist();
+            updateControls();
+        }
+
+        // 根據分類篩選影片
+        function filterVideos(category) {
+            // 更新分類按鈕狀態
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // 篩選影片
+            if (category === 'all') {
+                filteredVideos = [...videos];
+            } else {
+                filteredVideos = videos.filter(video => video.category === category);
+            }
+
+            // 載入篩選後的第一部影片
+            currentIndex = 0;
+            if (filteredVideos.length > 0) {
+                loadVideo(currentIndex);
+            } else {
+                // 如果沒有影片，顯示提示訊息
+                showNoVideosMessage();
+            }
+        }
+
+        // 更新播放清單的顯示
+        function updatePlaylist() {
+            const playlistGrid = document.getElementById('playlist-grid');
+            playlistGrid.innerHTML = '';
+
+            filteredVideos.forEach((video, index) => {
+                const item = document.createElement('div');
+                item.className = `playlist-item ${index === currentIndex ? 'active' : ''}`;
+                item.onclick = () => loadVideo(index);
+
+                item.innerHTML = `
+                    <div class="playlist-thumbnail">${video.thumbnail}</div>
+                    <div class="playlist-info">
+                        <div class="playlist-video-title">${video.title}</div>
+                        <div class="playlist-video-duration">${video.duration} • ${getCategoryName(video.category)}</div>
+                        <div style="font-size:0.9rem; color:#6b7280; margin-top:8px;">${video.description.substring(0, 70)}...</div>
+                    </div>
+                `;
+
+                playlistGrid.appendChild(item);
+            });
+        }
+
+        // 更新控制按鈕狀態（啟用/禁用）
+        function updateControls() {
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+
+            if (prevBtn && nextBtn) {
+                prevBtn.disabled = currentIndex === 0 || filteredVideos.length === 0;
+                nextBtn.disabled = currentIndex === filteredVideos.length - 1 || filteredVideos.length === 0;
+            }
+        }
+
+        // 取得分類的中文名稱
+        function getCategoryName(category) {
+            const categories = {
+                'all': '全部影片',
+                'chatgpt': 'ChatGPT教學',
+                'ai-art': 'AI繪圖',
+                'productivity': '工作效率',
+                'beginner': '新手入門'
+            };
+            return categories[category] || category;
+        }
+
+        // 播放上一部影片
+        function prevVideo() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                loadVideo(currentIndex);
+            }
+        }
+
+        // 播放下一步影片
+        function nextVideo() {
+            if (currentIndex < filteredVideos.length - 1) {
+                currentIndex++;
+                loadVideo(currentIndex);
+            }
+        }
+
+        // 切換自動播放功能
+        function toggleAutoplay() {
+            autoplay = !autoplay;
+            const btn = document.getElementById('autoplay-btn');
+            btn.innerHTML = `<span>🔄</span> 自動播放：${autoplay ? '開啟' : '關閉'}`;
+
+            // 如果開啟自動播放，重新載入當前影片
+            if (autoplay && filteredVideos[currentIndex]) {
+                document.getElementById("video-player").src = filteredVideos[currentIndex].url + "?autoplay=1";
+            }
+        }
+
+        // 顯示「無影片」訊息
+        function showNoVideosMessage() {
+            document.getElementById("video-title").textContent = "暫無可用影片";
+            document.getElementById("video-player").src = "";
+            document.getElementById("video-description").textContent = "此分類目前沒有可播放的影片，請選擇其他分類。";
+            document.getElementById("video-counter").textContent = `影片 0 / 0`;
+            document.getElementById("video-category").textContent = "無影片";
+            updatePlaylist();
+            updateControls();
+        }
+
+        // 記錄頁面瀏覽次數
+        function recordPageView(page) {
+            const key = `views_${page}`;
+            let count = parseInt(localStorage.getItem(key) || '0');
+            count++;
+            localStorage.setItem(key, count.toString());
+        }
+
+        // ===== 鍵盤快捷鍵支持 =====
+        document.addEventListener('keydown', function(event) {
+            // 左箭頭：上一部影片
+            if (event.key === 'ArrowLeft') prevVideo();
+            // 右箭頭：下一部影片
+            else if (event.key === 'ArrowRight') nextVideo();
+            // 空格鍵：切換自動播放
+            else if (event.key === ' ' || event.key === 'Spacebar') {
+                event.preventDefault();
+                toggleAutoplay();
+            }
+        });
+    </script>
 </body>
 </html>
