@@ -458,24 +458,24 @@
   <main class="video-container">
     <div class="category-filter">
       <button class="category-btn active" onclick="filterVideos('all')">全部影片</button>
-      <button class="category-btn" onclick="filterVideos('embedded')">內嵌教學</button>
-      <button class="category-btn" onclick="filterVideos('channel')">頻道推薦</button>
       <button class="category-btn" onclick="filterVideos('chatgpt')">ChatGPT教學</button>
       <button class="category-btn" onclick="filterVideos('ai-art')">AI繪圖</button>
+      <button class="category-btn" onclick="filterVideos('productivity')">工作效率</button>
+      <button class="category-btn" onclick="filterVideos('beginner')">新手入門</button>
     </div>
     
     <div class="video-stats">
       <div class="stat-card">
-        <div class="stat-number" id="videoCount">4</div>
+        <div class="stat-number">50+</div>
         <div class="stat-label">教學影片</div>
       </div>
       <div class="stat-card">
-        <div class="stat-number">3</div>
-        <div class="stat-label">內嵌影片</div>
+        <div class="stat-number">10+</div>
+        <div class="stat-label">小時內容</div>
       </div>
       <div class="stat-card">
-        <div class="stat-number">1</div>
-        <div class="stat-label">推薦頻道</div>
+        <div class="stat-number">100%</div>
+        <div class="stat-label">實用內容</div>
       </div>
       <div class="stat-card">
         <div class="stat-number">24/7</div>
@@ -484,29 +484,29 @@
     </div>
     
     <section class="video-player-section">
-      <div class="video-title" id="video-title">請選擇影片</div>
+      <div class="video-title" id="video-title">載入中...</div>
       
-      <div class="video-wrapper" id="video-wrapper">
-        <div style="text-align: center; padding: 100px 20px;">
-          <div style="font-size: 4rem; color: #e0e7ff; margin-bottom: 20px;">▶️</div>
-          <p style="color: #6b7280;">請從右側播放清單選擇影片</p>
-        </div>
+      <div class="video-wrapper">
+        <iframe id="video-player" width="560" height="315" src="" 
+                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen title="AI教學影片">
+        </iframe>
       </div>
       
       <div class="video-info">
-        <div class="video-counter" id="video-counter">影片 0 / 4</div>
-        <div class="video-category" id="video-category">未選擇</div>
+        <div class="video-counter" id="video-counter">影片 1 / 8</div>
+        <div class="video-category" id="video-category">AI工具教學</div>
       </div>
       
       <div class="video-description" id="video-description">
-        選擇左側影片清單中的影片開始觀看
+        影片說明載入中...
       </div>
       
       <div class="video-controls">
-        <button onclick="prevVideo()" class="video-btn" id="prev-btn" disabled>
+        <button onclick="prevVideo()" class="video-btn" id="prev-btn">
           <span>⬅️</span> 上一部影片
         </button>
-        <button onclick="nextVideo()" class="video-btn" id="next-btn" disabled>
+        <button onclick="nextVideo()" class="video-btn" id="next-btn">
           下一部影片 <span>➡️</span>
         </button>
         <button onclick="toggleAutoplay()" class="video-btn" id="autoplay-btn">
@@ -533,7 +533,7 @@
           </p>
           <div style="display: flex; gap: 10px; flex-wrap: wrap;">
             <span style="background: #e0e7ff; color: #6366f1; padding: 4px 12px; border-radius: 15px; font-size: 0.8rem;">
-              3部影片
+              8部影片
             </span>
             <span style="background: #f3f4f6; color: #6b7280; padding: 4px 12px; border-radius: 15px; font-size: 0.8rem;">
               新手入門
@@ -548,7 +548,7 @@
           </p>
           <div style="display: flex; gap: 10px; flex-wrap: wrap;">
             <span style="background: #e0e7ff; color: #6366f1; padding: 4px 12px; border-radius: 15px; font-size: 0.8rem;">
-              5部影片
+              12部影片
             </span>
             <span style="background: #f3f4f6; color: #6b7280; padding: 4px 12px; border-radius: 15px; font-size: 0.8rem;">
               創意設計
@@ -563,7 +563,7 @@
           </p>
           <div style="display: flex; gap: 10px; flex-wrap: wrap;">
             <span style="background: #e0e7ff; color: #6366f1; padding: 4px 12px; border-radius: 15px; font-size: 0.8rem;">
-              4部影片
+              10部影片
             </span>
             <span style="background: #f3f4f6; color: #6b7280; padding: 4px 12px; border-radius: 15px; font-size: 0.8rem;">
               職場應用
@@ -655,55 +655,95 @@
   </footer>
   
   <script>
-    // AI教學影片資料庫 - 更新為您的影片
+    // AI教學影片資料庫
     const videos = [
       {
         id: "video-1",
         title: "ChatGPT 完全指南：從新手到高手",
         url: "https://www.youtube.com/embed/aCZPHX13ZnE",
-        category: "embedded",
+        category: "chatgpt",
         description: "完整的ChatGPT教學，從基本對話到進階功能全面講解。包含提示詞技巧、檔案上傳功能、客製化指令等實用技巧。",
         duration: "18:30",
         thumbnail: "🤖",
         tags: ["新手入門", "對話技巧", "提示詞"],
-        level: "beginner",
-        embedded: true
+        level: "beginner"
       },
       {
         id: "video-2",
         title: "Midjourney AI繪圖教學：藝術創作入門",
         url: "https://www.youtube.com/embed/Aql3YLDG2a8",
-        category: "embedded",
+        category: "ai-art",
         description: "學習如何使用Midjourney創作高品質AI藝術作品。包含風格選擇、參數調整、圖像優化等專業技巧。",
         duration: "22:15",
         thumbnail: "🎨",
         tags: ["AI繪圖", "藝術創作", "Midjourney"],
-        level: "intermediate",
-        embedded: true
+        level: "intermediate"
       },
       {
         id: "video-3",
         title: "AI工作效率工具大集合",
         url: "https://www.youtube.com/embed/j_eMTP5-lcA",
-        category: "embedded",
+        category: "productivity",
         description: "介紹10款提升工作效率的AI工具，包含自動化流程、文件處理、會議記錄等實用應用。",
         duration: "25:40",
         thumbnail: "💼",
         tags: ["工作效率", "自動化", "工具推薦"],
-        level: "all",
-        embedded: true
+        level: "all"
       },
       {
         id: "video-4",
-        title: "AI生活分享 YouTube頻道",
-        url: "https://www.youtube.com/@chday7919",
-        category: "channel",
-        description: "本人的YouTube頻道，更多AI教學內容持續更新！包含完整的學習系列和最新AI工具評測。",
-        duration: "多部影片",
-        thumbnail: "📺",
-        tags: ["個人頻道", "持續更新", "完整系列"],
-        level: "all",
-        embedded: false
+        title: "ChatGPT進階提示詞技巧",
+        url: "https://www.youtube.com/embed/example4",
+        category: "chatgpt",
+        description: "進階提示詞撰寫技巧，讓ChatGPT產出更高品質的回應。包含角色設定、格式控制、多步驟指令等。",
+        duration: "20:10",
+        thumbnail: "🧠",
+        tags: ["提示詞", "進階技巧", "優化"],
+        level: "advanced"
+      },
+      {
+        id: "video-5",
+        title: "AI影片生成工具入門",
+        url: "https://www.youtube.com/embed/example5",
+        category: "ai-art",
+        description: "介紹AI影片生成工具，學習如何用文字描述創造短影片內容，適合社交媒體和行銷應用。",
+        duration: "16:25",
+        thumbnail: "🎬",
+        tags: ["影片生成", "內容創作", "社交媒體"],
+        level: "beginner"
+      },
+      {
+        id: "video-6",
+        title: "AI輔助程式設計教學",
+        url: "https://www.youtube.com/embed/example6",
+        category: "productivity",
+        description: "使用AI工具輔助程式設計，提升編碼效率和品質。包含錯誤除錯、程式碼優化、文件生成等應用。",
+        duration: "28:30",
+        thumbnail: "💻",
+        tags: ["程式設計", "開發工具", "效率提升"],
+        level: "advanced"
+      },
+      {
+        id: "video-7",
+        title: "免費AI工具推薦與教學",
+        url: "https://www.youtube.com/embed/example7",
+        category: "beginner",
+        description: "精選10款免費AI工具，包含繪圖、寫作、設計等類別，適合預算有限的新手學習使用。",
+        duration: "19:45",
+        thumbnail: "🆓",
+        tags: ["免費工具", "新手推薦", "入門指南"],
+        level: "beginner"
+      },
+      {
+        id: "video-8",
+        title: "AI商業應用案例分享",
+        url: "https://www.youtube.com/embed/example8",
+        category: "productivity",
+        description: "分享實際的AI商業應用案例，包含行銷、客服、數據分析等領域的成功經驗。",
+        duration: "32:20",
+        thumbnail: "📈",
+        tags: ["商業應用", "案例分析", "實戰經驗"],
+        level: "intermediate"
       }
     ];
     
@@ -730,35 +770,7 @@
       const video = filteredVideos[index];
       
       document.getElementById("video-title").textContent = video.title;
-      
-      const videoWrapper = document.getElementById('video-wrapper');
-      
-      if (video.embedded) {
-        videoWrapper.innerHTML = `
-          <iframe 
-            id="video-player" 
-            width="560" 
-            height="450" 
-            src="${video.url + (autoplay ? '?autoplay=1' : '')}" 
-            frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowfullscreen 
-            title="${video.title}">
-          </iframe>
-        `;
-      } else {
-        videoWrapper.innerHTML = `
-          <div style="text-align: center; padding: 100px 20px;">
-            <div style="font-size: 4rem; color: #6366f1; margin-bottom: 20px;">📺</div>
-            <h3 style="color: #374151; margin-bottom: 15px;">${video.title}</h3>
-            <p style="color: #6b7280; margin-bottom: 25px;">這是一個YouTube頻道連結，請點擊下方按鈕前往觀看</p>
-            <a href="${video.url}" target="_blank" class="btn" style="background: #ff0000; color: white;">
-              🎬 前往YouTube頻道
-            </a>
-          </div>
-        `;
-      }
-      
+      document.getElementById("video-player").src = video.url + (autoplay ? "?autoplay=1" : "");
       document.getElementById("video-description").textContent = video.description;
       document.getElementById("video-counter").textContent = `影片 ${index + 1} / ${filteredVideos.length}`;
       document.getElementById("video-category").textContent = getCategoryName(video.category);
@@ -770,10 +782,10 @@
     function getCategoryName(category) {
       const categories = {
         'all': '全部影片',
-        'embedded': '內嵌教學',
-        'channel': '頻道推薦',
         'chatgpt': 'ChatGPT教學',
-        'ai-art': 'AI繪圖'
+        'ai-art': 'AI繪圖',
+        'productivity': '工作效率',
+        'beginner': '新手入門'
       };
       return categories[category] || category;
     }
@@ -797,20 +809,10 @@
       document.querySelectorAll('.category-btn').forEach(btn => {
         btn.classList.remove('active');
       });
-      
-      if (event && event.target) {
-        event.target.classList.add('active');
-      } else {
-        // 初始加载时激活第一个按钮
-        document.querySelector('.category-btn[onclick="filterVideos(\'all\')"]').classList.add('active');
-      }
+      event.target.classList.add('active');
       
       if (category === 'all') {
         filteredVideos = [...videos];
-      } else if (category === 'chatgpt') {
-        filteredVideos = videos.filter(video => video.title.includes('ChatGPT') || video.tags.includes('ChatGPT'));
-      } else if (category === 'ai-art') {
-        filteredVideos = videos.filter(video => video.title.includes('繪圖') || video.tags.includes('AI繪圖') || video.tags.includes('Midjourney'));
       } else {
         filteredVideos = videos.filter(video => video.category === category);
       }
@@ -825,12 +827,7 @@
     
     function showNoVideosMessage() {
       document.getElementById("video-title").textContent = "暫無可用影片";
-      document.getElementById("video-wrapper").innerHTML = `
-        <div style="text-align: center; padding: 100px 20px;">
-          <div style="font-size: 4rem; color: #e0e7ff; margin-bottom: 20px;">🎥</div>
-          <p style="color: #6b7280;">此分類目前沒有可播放的影片，請選擇其他分類或稍後再來。</p>
-        </div>
-      `;
+      document.getElementById("video-player").src = "";
       document.getElementById("video-description").textContent = "此分類目前沒有可播放的影片，請選擇其他分類或稍後再來。";
       document.getElementById("video-counter").textContent = `影片 0 / 0`;
       document.getElementById("video-category").textContent = "無影片";
@@ -883,12 +880,8 @@
       btn.innerHTML = `<span>🔄</span> 自動播放: ${autoplay ? '開啟' : '關閉'}`;
       
       // 如果開啟自動播放，重新載入影片
-      if (autoplay && filteredVideos[currentIndex] && filteredVideos[currentIndex].embedded) {
-        const iframe = document.getElementById('video-player');
-        if (iframe) {
-          const src = iframe.src.replace(/\?autoplay=1$/, '') + '?autoplay=1';
-          iframe.src = src;
-        }
+      if (autoplay && filteredVideos[currentIndex]) {
+        document.getElementById("video-player").src = filteredVideos[currentIndex].url + "?autoplay=1";
       }
     }
     
@@ -897,9 +890,6 @@
       let count = parseInt(localStorage.getItem(key) || '0');
       count++;
       localStorage.setItem(key, count.toString());
-      
-      // 更新顯示
-      document.getElementById('views_video').textContent = count;
     }
     
     // 鍵盤快捷鍵支持
@@ -916,12 +906,9 @@
         filterVideos('all');
       } else if (event.key === 'c' || event.key === 'C') {
         event.preventDefault();
-        filterVideos('channel');
+        filterVideos('chatgpt');
       }
     });
-    
-    // 初始加載
-    filterVideos('all');
   </script>
 </body>
 </html>

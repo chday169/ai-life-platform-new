@@ -18,6 +18,11 @@
         "name": "提示詞技巧教學影片",
         "url": "https://www.youtube.com/embed/aCZPHX13ZnE",
         "type": "youtube"
+      },
+      {
+        "name": "ChatGPT API文件",
+        "url": "https://platform.openai.com/docs",
+        "type": "webpage"
       }
     ]
   },
@@ -26,7 +31,7 @@
     "title": "Midjourney AI繪圖完全教學",
     "type": "pdf",
     "category": "design",
-    "url": "./data_ai/pdfs/midjourney-tutorial.pdf",
+    "url": "./data_ai/pdfs/midjourney-guide.pdf",
     "description": "AI繪圖工具Midjourney完整教學，從註冊到進階提示詞技巧",
     "views": 980,
     "likes": 76,
@@ -37,6 +42,11 @@
         "type": "webpage"
       },
       {
+        "name": "風格參考圖庫",
+        "url": "https://lexica.art",
+        "type": "webpage"
+      },
+      {
         "name": "Midjourney教學影片",
         "url": "https://www.youtube.com/embed/Aql3YLDG2a8",
         "type": "youtube"
@@ -44,7 +54,7 @@
     ]
   },
   {
-    "id": "ai-productivity",
+    "id": "ai-productivity-tools",
     "title": "AI工作效率工具大全",
     "type": "pdf",
     "category": "productivity",
@@ -62,11 +72,78 @@
         "name": "Canva AI教學影片",
         "url": "https://www.youtube.com/embed/j_eMTP5-lcA",
         "type": "youtube"
+      },
+      {
+        "name": "Grammarly官網",
+        "url": "https://www.grammarly.com",
+        "type": "webpage"
       }
     ]
   },
   {
-    "id": "ai-business",
+    "id": "ai-youtube-tutorials",
+    "title": "AI工具教學影片精選",
+    "type": "folder",
+    "category": "tools",
+    "description": "精選AI工具教學影片，包含ChatGPT、Midjourney等熱門工具",
+    "views": 850,
+    "likes": 45,
+    "items": [
+      {
+        "title": "ChatGPT進階技巧教學",
+        "type": "youtube",
+        "url": "https://www.youtube.com/embed/aCZPHX13ZnE"
+      },
+      {
+        "title": "Midjourney提示詞指南",
+        "type": "youtube",
+        "url": "https://www.youtube.com/embed/Aql3YLDG2a8"
+      },
+      {
+        "title": "AI繪圖工具比較",
+        "type": "youtube",
+        "url": "https://www.youtube.com/embed/j_eMTP5-lcA"
+      },
+      {
+        "title": "免費AI工具推薦",
+        "type": "youtube",
+        "url": "https://www.youtube.com/embed/example4"
+      }
+    ]
+  },
+  {
+    "id": "ai-resource-links",
+    "title": "AI學習資源網站",
+    "type": "folder",
+    "category": "tools",
+    "description": "精選AI學習資源與工具網站",
+    "views": 720,
+    "likes": 38,
+    "items": [
+      {
+        "title": "OpenAI官方網站",
+        "type": "webpage",
+        "url": "https://openai.com"
+      },
+      {
+        "title": "AI工具比較網站",
+        "type": "webpage",
+        "url": "https://theresanaiforthat.com"
+      },
+      {
+        "title": "免費AI繪圖平台",
+        "type": "webpage",
+        "url": "https://leonardo.ai"
+      },
+      {
+        "title": "AI學習社群",
+        "type": "webpage",
+        "url": "https://www.reddit.com/r/artificial"
+      }
+    ]
+  },
+  {
+    "id": "ai-for-business",
     "title": "AI商業應用指南",
     "type": "pdf",
     "category": "advanced",
@@ -79,22 +156,10 @@
         "name": "AI商業案例研究",
         "url": "https://hbr.org/topic/artificial-intelligence",
         "type": "webpage"
-      }
-    ]
-  },
-  {
-    "id": "ai-research-report",
-    "title": "2024 AI研究報告（外部連結）",
-    "type": "external_pdf",
-    "category": "advanced",
-    "url": "https://github.com/CHDAY169/ai-research/releases/download/v1.0/ai-research-2024.pdf",
-    "description": "最新AI研究報告，從GitHub Release下載",
-    "views": 320,
-    "likes": 18,
-    "externalLinks": [
+      },
       {
-        "name": "GitHub下載頁面",
-        "url": "https://github.com/CHDAY169/ai-research/releases",
+        "name": "企業AI實施指南",
+        "url": "https://www.mckinsey.com/capabilities/quantumblack/our-insights",
         "type": "webpage"
       }
     ]

@@ -5,47 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🤖 AI生活分享 | AI Skills for Everyday Life</title>
   <link rel="stylesheet" href="assets/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    /* AI主题样式 */
     .ai-hero {
       background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
       color: white;
-      padding: 4rem 2rem;
+      padding: 3rem 2rem;
       border-radius: 15px;
       margin: 2rem auto;
       text-align: center;
-      max-width: 1200px;
+      max-width: 1000px;
       box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .ai-hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></svg>');
-      background-size: 30px;
-      opacity: 0.3;
-    }
-    
-    .ai-hero h1 {
-      font-size: 3.5rem;
-      margin-bottom: 1rem;
-      position: relative;
-      z-index: 2;
-    }
-    
-    .ai-hero .subtitle {
-      font-size: 1.5rem;
-      margin-bottom: 2rem;
-      opacity: 0.9;
-      position: relative;
-      z-index: 2;
     }
     
     .ai-features {
@@ -53,550 +22,426 @@
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2rem;
       margin: 3rem 0;
-      max-width: 1200px;
-      margin-left: auto;
-      margin-right: auto;
     }
     
-    .feature-card {
+    .ai-card {
       background: white;
       border-radius: 15px;
       padding: 2rem;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-      transition: transform 0.3s, box-shadow 0.3s;
-      border: 1px solid #eee;
-      text-align: center;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      border: 1px solid #e0e7ff;
+      transition: all 0.3s ease;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
     }
     
-    .feature-card:hover {
+    .ai-card:hover {
       transform: translateY(-10px);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+      box-shadow: 0 15px 35px rgba(99, 102, 241, 0.15);
+      border-color: #6366f1;
     }
     
-    .feature-icon {
-      font-size: 3rem;
-      margin-bottom: 1rem;
+    .ai-card h3 {
       color: #6366f1;
-      background: linear-gradient(135deg, #e0e7ff 0%, #ede9fe 100%);
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
+      margin-bottom: 1rem;
       display: flex;
       align-items: center;
-      justify-content: center;
-      margin: 0 auto 1.5rem;
+      gap: 12px;
+      font-size: 1.4rem;
     }
     
-    .feature-card h3 {
-      color: #333;
-      margin-bottom: 1rem;
-    }
-    
-    .feature-card p {
-      color: #666;
-      line-height: 1.6;
-    }
-    
-    .cta-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      margin: 2rem 0;
-      flex-wrap: wrap;
-    }
-    
-    .cta-button {
-      padding: 1rem 2rem;
-      border-radius: 50px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.3s;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .cta-button.primary {
-      background: #6366f1;
-      color: white;
-    }
-    
-    .cta-button.secondary {
-      background: white;
-      color: #6366f1;
-      border: 2px solid #6366f1;
-    }
-    
-    .cta-button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-    }
-    
-    .cta-button.primary:hover {
-      background: #4f46e5;
-    }
-    
-    .cta-button.secondary:hover {
-      background: #f5f3ff;
-    }
-    
-    .stats-container {
-      display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-      margin: 4rem 0;
-      max-width: 1200px;
-      margin-left: auto;
-      margin-right: auto;
-      gap: 2rem;
-    }
-    
-    .stat-item {
-      text-align: center;
-      flex: 1;
-      min-width: 200px;
-    }
-    
-    .stat-number {
-      font-size: 3rem;
-      font-weight: 700;
-      color: #6366f1;
-      margin-bottom: 0.5rem;
-    }
-    
-    .stat-label {
-      color: #666;
-      font-size: 1.1rem;
-    }
-    
-    .recent-content {
-      max-width: 1200px;
-      margin: 4rem auto;
-      padding: 0 2rem;
-    }
-    
-    .content-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-    
-    .content-card {
-      background: white;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-      transition: transform 0.3s;
-    }
-    
-    .content-card:hover {
-      transform: translateY(-5px);
-    }
-    
-    .content-image {
-      height: 200px;
-      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 3rem;
-    }
-    
-    .content-info {
-      padding: 1.5rem;
-    }
-    
-    .content-info h3 {
-      margin-bottom: 0.5rem;
-      color: #333;
-    }
-    
-    .content-info p {
-      color: #666;
-      font-size: 0.9rem;
-      margin-bottom: 1rem;
-    }
-    
-    .content-tag {
+    .ai-category {
       display: inline-block;
       background: #e0e7ff;
       color: #6366f1;
-      padding: 0.25rem 0.75rem;
+      padding: 6px 16px;
       border-radius: 20px;
-      font-size: 0.8rem;
-      margin-right: 0.5rem;
-      margin-bottom: 0.5rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+      align-self: flex-start;
     }
     
-    .section-header {
-      text-align: center;
-      margin-bottom: 3rem;
+    .ai-card ul {
+      margin: 1rem 0;
+      padding-left: 1.5rem;
+      flex-grow: 1;
     }
     
-    .section-header h2 {
-      font-size: 2.5rem;
-      color: #333;
-      margin-bottom: 1rem;
+    .ai-card li {
+      margin-bottom: 8px;
+      color: #4b5563;
+      position: relative;
     }
     
-    .section-header p {
-      color: #666;
-      max-width: 600px;
-      margin: 0 auto;
-      font-size: 1.1rem;
+    .ai-card li:before {
+      content: "▸";
+      color: #6366f1;
+      position: absolute;
+      left: -1rem;
     }
     
-    .ai-news {
-      background: #f8fafc;
-      padding: 4rem 2rem;
-      margin: 4rem 0;
-    }
-    
-    .news-grid {
+    .category-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
     }
     
-    .news-item {
+    .category-card {
+      background: white;
+      border: 2px solid #e0e7ff;
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+      text-decoration: none;
+      color: #6366f1;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .category-card:hover {
+      background: #6366f1;
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(99, 102, 241, 0.2);
+    }
+    
+    .community-stats {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin: 3rem 0;
+      flex-wrap: wrap;
+    }
+    
+    .stat-block {
+      text-align: center;
+      padding: 1.5rem;
+    }
+    
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #6366f1;
+      margin-bottom: 0.5rem;
+      line-height: 1;
+    }
+    
+    .stat-label {
+      color: #6b7280;
+      font-size: 0.95rem;
+    }
+    
+    .ai-tips {
+      background: linear-gradient(135deg, #f0f9ff 0%, #f8f9fa 100%);
+      padding: 2.5rem;
+      border-radius: 15px;
+      margin: 2.5rem 0;
+      border: 1px solid #dbeafe;
+    }
+    
+    .ai-tips h3 {
+      color: #6366f1;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    
+    .tips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    
+    .tip-item {
       background: white;
       padding: 1.5rem;
       border-radius: 10px;
+      border-left: 4px solid #6366f1;
       box-shadow: 0 3px 10px rgba(0,0,0,0.05);
     }
     
-    .news-date {
+    .join-cta {
+      text-align: center;
+      margin: 3rem 0;
+      padding: 3rem;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: white;
+      border-radius: 20px;
+    }
+    
+    .join-cta h3 {
+      color: white;
+      margin-bottom: 1rem;
+    }
+    
+    .join-cta p {
+      opacity: 0.9;
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .social-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+    
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 24px;
+      background: white;
       color: #6366f1;
-      font-size: 0.9rem;
-      margin-bottom: 0.5rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
     }
     
-    .news-item h4 {
-      margin-bottom: 0.5rem;
-      color: #333;
+    .social-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
     }
     
-    .news-item p {
-      color: #666;
-      font-size: 0.9rem;
+    .fb-btn {
+      background: #1877f2;
+      color: white;
     }
     
-    /* 响应式设计 */
     @media (max-width: 768px) {
-      .ai-hero h1 {
-        font-size: 2.5rem;
-      }
-      
-      .ai-hero .subtitle {
-        font-size: 1.2rem;
-      }
-      
-      .content-grid {
-        grid-template-columns: 1fr;
+      .ai-hero {
+        padding: 2rem 1rem;
       }
       
       .ai-features {
         grid-template-columns: 1fr;
       }
       
-      .cta-buttons {
-        flex-direction: column;
-        align-items: center;
+      .community-stats {
+        gap: 2rem;
       }
       
-      .cta-button {
+      .stat-number {
+        font-size: 2rem;
+      }
+      
+      .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .join-cta {
+        padding: 2rem 1rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .category-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .social-buttons {
+        flex-direction: column;
+      }
+      
+      .social-btn {
         width: 100%;
-        max-width: 300px;
-      }
-      
-      .stats-container {
-        flex-direction: column;
-        align-items: center;
+        justify-content: center;
       }
     }
   </style>
 </head>
 <body>
-  <!-- 導航欄 -->
-  <nav class="navbar">
-    <div class="nav-container">
-      <a href="index.html" class="logo">AI生活分享社團</a>
-      <div class="nav-links">
-        <a href="index.html" class="active">首頁</a>
-        <a href="forum.html">討論區</a>
-        <a href="resources.html">AI資源</a>
-        <a href="content-viewer.html">學習內容</a>
-        <a href="video-player.html">影音教學</a>
-        <a href="about.html">關於我們</a>
-      </div>
-      <button class="menu-toggle" id="menuToggle">
-        <i class="fas fa-bars"></i>
-      </button>
-    </div>
-  </nav>
-
-  <!-- 主內容區 -->
   <div class="container">
-    <!-- 英雄區域 -->
-    <section class="ai-hero">
+    <header class="page-header">
       <h1>🤖 AI生活分享社團</h1>
       <p class="subtitle">AI Skills for Everyday Life | 讓AI改善你的日常生活</p>
-      <p>探索AI技術的無限可能，與社群一起學習、分享、成長</p>
-      <div class="cta-buttons">
-        <a href="#features" class="cta-button primary">
-          <i class="fas fa-rocket"></i> 開始探索
-        </a>
-        <a href="forum.html" class="cta-button secondary">
-          <i class="fas fa-users"></i> 加入討論
-        </a>
-      </div>
-    </section>
-
-    <!-- 統計數據 -->
-    <div class="stats-container">
-      <div class="stat-item">
-        <div class="stat-number" id="totalViews">0</div>
-        <div class="stat-label">總訪問次數</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">50+</div>
-        <div class="stat-label">AI工具推薦</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">1000+</div>
-        <div class="stat-label">社群成員</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">24/7</div>
-        <div class="stat-label">持續更新</div>
+    </header>
+    
+    <div class="ai-hero">
+      <h2>🚀 探索AI如何改變生活</h2>
+      <p>從工作效率、學習成長到生活品質，掌握最實用的AI工具與技巧</p>
+      <div style="margin-top: 1.5rem;">
+        <span style="background: rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem;">
+          📈 5000+ 位成員共同學習
+        </span>
       </div>
     </div>
-
-    <!-- 主要功能 -->
-    <section id="features" class="recent-content">
-      <div class="section-header">
-        <h2>AI生活四大優勢</h2>
-        <p>發現AI如何改變工作、學習與生活的方式</p>
+    
+    <nav class="breadcrumb">
+      <a href="index.html">首頁</a>
+    </nav>
+    
+    <main class="main-content">
+      <div class="community-stats">
+        <div class="stat-block">
+          <div class="stat-number" id="totalViews">1,234</div>
+          <div class="stat-label">平台瀏覽次數</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-number">50+</div>
+          <div class="stat-label">AI工具介紹</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-number">12</div>
+          <div class="stat-label">教學分類</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-number">24/7</div>
+          <div class="stat-label">持續更新</div>
+        </div>
       </div>
+      
       <div class="ai-features">
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-bolt"></i>
-          </div>
-          <h3>效率提升</h3>
-          <p>AI工具幫助您自動化重複性任務，節省寶貴時間，專注於創造性工作</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-lightbulb"></i>
-          </div>
-          <h3>創意激發</h3>
-          <p>AI提供無限創意可能，從寫作、設計到藝術創作，激發您的想像力</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-graduation-cap"></i>
-          </div>
-          <h3>學習加速</h3>
-          <p>AI輔助學習平台提供個性化學習路徑，讓您快速掌握新技能</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-hands-helping"></i>
-          </div>
-          <h3>社群支持</h3>
-          <p>加入熱情的AI愛好者社群，分享經驗、解決問題、共同成長</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 近期熱門內容 -->
-    <section class="recent-content">
-      <div class="section-header">
-        <h2>熱門學習內容</h2>
-        <p>探索我們精選的AI學習資源與教學內容</p>
-      </div>
-      <div class="content-grid">
-        <div class="content-card">
-          <div class="content-image">
-            <i class="fas fa-robot"></i>
-          </div>
-          <div class="content-info">
-            <h3>ChatGPT完整指南</h3>
-            <p>從基礎到進階，掌握ChatGPT的所有實用技巧與應用場景</p>
-            <div>
-              <span class="content-tag">AI對話</span>
-              <span class="content-tag">新手友善</span>
-              <span class="content-tag">免費資源</span>
-            </div>
-            <a href="content-viewer.html?doc=chatgpt-guide" class="tool-link" style="margin-top: 1rem; display: inline-block;">
-              <i class="fas fa-book-open"></i> 開始閱讀
-            </a>
-          </div>
+        <div class="ai-card">
+          <span class="ai-category">📚 知識學習</span>
+          <h3>🧠 AI學習資源庫</h3>
+          <p>完整的AI知識庫，包含工具教學、使用技巧、案例分享</p>
+          <ul>
+            <li>ChatGPT 進階技巧</li>
+            <li>Midjourney 提示詞指南</li>
+            <li>AI工具效率優化</li>
+            <li>免費AI資源分享</li>
+            <li>工作流程自動化</li>
+          </ul>
+          <a href="content-viewer.html" class="btn btn-primary" style="margin-top: auto;">開始探索 →</a>
         </div>
         
-        <div class="content-card">
-          <div class="content-image">
-            <i class="fas fa-palette"></i>
-          </div>
-          <div class="content-info">
-            <h3>Midjourney藝術創作</h3>
-            <p>學習使用AI生成令人驚艷的藝術作品，掌握提示詞技巧</p>
-            <div>
-              <span class="content-tag">圖像生成</span>
-              <span class="content-tag">藝術創作</span>
-              <span class="content-tag">視覺設計</span>
-            </div>
-            <a href="content-viewer.html?doc=midjourney-tutorial" class="tool-link" style="margin-top: 1rem; display: inline-block;">
-              <i class="fas fa-book-open"></i> 開始閱讀
-            </a>
-          </div>
+        <div class="ai-card">
+          <span class="ai-category">🎬 影音教學</span>
+          <h3>🎥 AI教學影片</h3>
+          <p>精選AI應用教學影片，視覺化學習各種AI工具的使用方法</p>
+          <ul>
+            <li>AI繪圖實作教學</li>
+            <li>AI寫作工具比較</li>
+            <li>自動化工作流程</li>
+            <li>AI生活應用案例</li>
+            <li>最新AI工具評測</li>
+          </ul>
+          <a href="video-player.html" class="btn btn-primary" style="margin-top: auto;">觀看影片 →</a>
         </div>
         
-        <div class="content-card">
-          <div class="content-image">
-            <i class="fas fa-chart-line"></i>
+        <div class="ai-card">
+          <span class="ai-category">👥 社群互動</span>
+          <h3>💬 Facebook 社團</h3>
+          <p>加入我們的Facebook社團，與其他AI愛好者交流分享經驗</p>
+          <ul>
+            <li>即時問題解答</li>
+            <li>最新工具分享</li>
+            <li>成功案例討論</li>
+            <li>線上交流活動</li>
+            <li>學習小組互動</li>
+          </ul>
+          <a href="https://facebook.com/groups/ai-life-skills" target="_blank" class="btn btn-secondary" style="margin-top: auto;">加入社團 →</a>
+        </div>
+      </div>
+      
+      <section class="ai-tips">
+        <h3>💡 今日AI小技巧</h3>
+        <p>讓AI幫你提升10倍工作效率的實用技巧</p>
+        
+        <div class="tips-grid">
+          <div class="tip-item">
+            <h4>📧 智能郵件撰寫</h4>
+            <p>使用ChatGPT快速生成專業郵件，節省80%寫作時間</p>
           </div>
-          <div class="content-info">
-            <h3>AI提升工作效率</h3>
-            <p>利用AI工具優化工作流程，提升生產力與工作品質</p>
-            <div>
-              <span class="content-tag">生產力</span>
-              <span class="content-tag">職場應用</span>
-              <span class="content-tag">效率優化</span>
-            </div>
-            <a href="content-viewer.html?doc=ai-productivity" class="tool-link" style="margin-top: 1rem; display: inline-block;">
-              <i class="fas fa-book-open"></i> 開始閱讀
-            </a>
+          <div class="tip-item">
+            <h4>🎨 一鍵圖片優化</h4>
+            <p>用AI工具快速修圖、去背、風格轉換</p>
+          </div>
+          <div class="tip-item">
+            <h4>📊 數據分析助手</h4>
+            <p>讓AI幫你分析數據，生成視覺化報表</p>
+          </div>
+          <div class="tip-item">
+            <h4>🗣️ 會議記錄整理</h4>
+            <p>使用AI自動生成會議重點和行動項目</p>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- AI新聞與更新 -->
-    <section class="ai-news">
-      <div class="section-header">
-        <h2>最新AI動態</h2>
-        <p>掌握AI領域的最新發展與趨勢</p>
-      </div>
-      <div class="news-grid">
-        <div class="news-item">
-          <div class="news-date">2023年10月15日</div>
-          <h4>OpenAI發布GPT-4 Turbo</h4>
-          <p>最新版本提供更強大的理解能力與更低的API成本，支援128K上下文長度。</p>
-        </div>
-        <div class="news-item">
-          <div class="news-date">2023年10月10日</div>
-          <h4>Google Bard新增台灣繁體中文支援</h4>
-          <p>Google的AI聊天機器人現在提供更好的台灣繁體中文理解與生成能力。</p>
-        </div>
-        <div class="news-item">
-          <div class="news-date">2023年10月5日</div>
-          <h4>台灣AI學校擴大招生</h4>
-          <p>台灣人工智慧學校宣布擴大招生規模，培育更多AI產業人才。</p>
-        </div>
-        <div class="news-item">
-          <div class="news-date">2023年10月1日</div>
-          <h4>AI圖像生成工具大比拚</h4>
-          <p>DALL-E 3、Midjourney V6、Stable Diffusion XL等工具的比較分析報告出爐。</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 快速資源連結 -->
-    <section class="recent-content">
-      <div class="section-header">
-        <h2>快速資源連結</h2>
-        <p>立即訪問最受歡迎的AI資源與工具</p>
-      </div>
-      <div class="ai-features">
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-tools"></i>
-          </div>
-          <h3>AI工具庫</h3>
-          <p>探索超過50種AI工具的分類推薦與使用指南</p>
-          <a href="resources.html" class="tool-link" style="margin-top: 1rem; display: inline-block;">
-            <i class="fas fa-external-link-alt"></i> 瀏覽工具
+      </section>
+      
+      <section>
+        <h2 style="text-align: center; color: #6366f1; margin-bottom: 1.5rem;">🏷️ 熱門分類</h2>
+        <div class="category-grid">
+          <a href="content-viewer.html?category=工作效率" class="category-card">
+            <span>💼 工作效率</span>
+          </a>
+          <a href="content-viewer.html?category=學習成長" class="category-card">
+            <span>📈 學習成長</span>
+          </a>
+          <a href="content-viewer.html?category=創意設計" class="category-card">
+            <span>🎨 創意設計</span>
+          </a>
+          <a href="content-viewer.html?category=生活應用" class="category-card">
+            <span>🏠 生活應用</span>
+          </a>
+          <a href="content-viewer.html?category=行銷推廣" class="category-card">
+            <span>📢 行銷推廣</span>
+          </a>
+          <a href="content-viewer.html?category=程式開發" class="category-card">
+            <span>💻 程式開發</span>
           </a>
         </div>
+      </section>
+      
+      <div class="join-cta">
+        <h3>🤝 加入AI學習社群</h3>
+        <p>與5000+位AI愛好者一起學習成長，分享你的AI應用經驗，獲得最新AI工具資訊</p>
         
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-video"></i>
-          </div>
-          <h3>影音教學</h3>
-          <p>觀看AI應用實例與操作教學影片</p>
-          <a href="video-player.html" class="tool-link" style="margin-top: 1rem; display: inline-block;">
-            <i class="fas fa-play-circle"></i> 觀看影片
+        <div class="social-buttons">
+          <a href="https://facebook.com/groups/ai-life-skills" target="_blank" class="social-btn fb-btn">
+            <span style="font-size: 1.2rem;">📘</span>
+            加入Facebook社團
           </a>
-        </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-comments"></i>
-          </div>
-          <h3>社群討論</h3>
-          <p>加入AI愛好者的討論，分享經驗與解決問題</p>
-          <a href="forum.html" class="tool-link" style="margin-top: 1rem; display: inline-block;">
-            <i class="fas fa-users"></i> 參與討論
+          <a href="resources.html" class="social-btn" style="background: #10b981; color: white;">
+            <span style="font-size: 1.2rem;">🔗</span>
+            取得免費資源
+          </a>
+          <a href="content-viewer.html" class="social-btn" style="background: #8b5cf6; color: white;">
+            <span style="font-size: 1.2rem;">📚</span>
+            開始學習
           </a>
         </div>
       </div>
-    </section>
-
-    <!-- 行動呼籲 -->
-    <section class="ai-hero" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); margin-top: 4rem;">
-      <h2>準備好開始您的AI旅程了嗎？</h2>
-      <p>立即加入AI生活分享社團，與我們一起探索AI的無限可能</p>
-      <div class="cta-buttons">
-        <a href="resources.html" class="cta-button primary" style="background: white; color: #059669;">
-          <i class="fas fa-star"></i> 探索AI資源
-        </a>
-        <a href="about.html" class="cta-button secondary" style="color: white; border-color: white;">
-          <i class="fas fa-info-circle"></i> 了解更多
-        </a>
+    </main>
+    
+    <footer style="text-align: center; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid #e5e7eb;">
+      <div class="btn-container">
+        <a href="content-viewer.html" class="btn btn-primary">🧠 AI資源庫</a>
+        <a href="video-player.html" class="btn btn-secondary">🎥 教學影片</a>
+        <a href="about.html" class="btn btn-secondary">ℹ️ 關於我們</a>
+        <a href="resources.html" class="btn btn-secondary">🔗 推薦資源</a>
       </div>
-    </section>
+      
+      <p style="margin-top: 2rem;">&copy; 2024 AI生活分享社團 | AI Skills for Everyday Life</p>
+      <p style="font-size: 0.9rem; color: #6b7280; margin-top: 0.5rem;">
+        專注於AI工具應用與生活技巧分享
+      </p>
+      
+      <div style="margin-top: 1.5rem; padding: 1rem; background: #f9fafb; border-radius: 10px;">
+        <p style="font-size: 0.85rem; color: #6b7280;">
+          💡 本平台所有內容均為教學分享，不涉及商業用途
+        </p>
+      </div>
+    </footer>
   </div>
-
-  <!-- 頁腳 -->
-  <footer class="footer">
-    <div class="footer-content">
-      <div class="footer-section">
-        <h3>AI生活分享社團</h3>
-        <p>探索AI技術，分享應用經驗，共同學習成長</p>
-      </div>
-      <div class="footer-section">
-        <h3>快速連結</h3>
-        <a href="index.html">首頁</a>
-        <a href="forum.html">討論區</a>
-        <a href="resources.html">AI資源</a>
-        <a href="about.html">關於我們</a>
-      </div>
-      <div class="footer-section">
-        <h3>聯繫我們</h3>
-        <p>Email: contact@ai-life-club.tw</p>
-        <p>© 2023 AI生活分享社團 版權所有</p>
-      </div>
-    </div>
-  </footer>
-
+  
   <script>
     // 統計功能
     document.addEventListener('DOMContentLoaded', function() {
+      // 更新總瀏覽次數
       updateTotalViews();
-      recordPageView('home');
       
-      // 導航欄漢堡菜單功能
-      document.getElementById('menuToggle').addEventListener('click', function() {
-        const navLinks = document.querySelector('.nav-links');
-        navLinks.classList.toggle('show');
-      });
+      // 記錄首頁訪問
+      recordPageView('home');
     });
     
     function updateTotalViews() {
@@ -619,22 +464,19 @@
       localStorage.setItem(key, count.toString());
     }
     
-    // 平滑滾動
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        const targetId = this.getAttribute('href');
-        if (targetId === '#') return;
-        
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-          window.scrollTo({
-            top: targetElement.offsetTop - 80,
-            behavior: 'smooth'
-          });
-        }
-      });
+    // 鍵盤快捷鍵
+    document.addEventListener('keydown', function(event) {
+      // Ctrl+Shift+A - 跳轉到AI資源庫
+      if (event.ctrlKey && event.shiftKey && event.key === 'A') {
+        event.preventDefault();
+        window.location.href = 'content-viewer.html';
+      }
+      
+      // Ctrl+Shift+V - 跳轉到影片
+      if (event.ctrlKey && event.shiftKey && event.key === 'V') {
+        event.preventDefault();
+        window.location.href = 'video-player.html';
+      }
     });
   </script>
 </body>

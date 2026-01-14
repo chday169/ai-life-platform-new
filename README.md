@@ -1,140 +1,119 @@
-# AI生活分享平台
+# CHDAY169 Scratch 教學平台
 
-一個專注於AI工具應用教學的完整平台，包含PDF教材瀏覽器、YouTube教學影片播放器和豐富的AI資源推薦。
+一個專注於 Scratch 程式設計教學的完整平台，包含 PDF 教材瀏覽器和 YouTube 教學影片播放器。
 
-## 🌟 功能特色
+## 功能特色
 
-### 🧠 AI內容瀏覽器
-- 完整的AI教學PDF教材（內嵌4篇）
-- 支援外部PDF連結（GitHub Release）
-- PDF分頁瀏覽與縮放控制
+### 🎨 Scratch 教材瀏覽器
+- 完整的 Scratch 教學 PDF 教材
+- 線上 PDF 閱讀器（使用 PDF.js）
+- 分級難度學習系統
 - 學習統計與進度追蹤
+- 教材收藏與喜好標記
 
-### 🎥 AI教學影片
-- 內嵌3個精選教學影片
-- 個人YouTube頻道連結
-- 外部推薦頻道
-- 影片分類與播放清單
+### 🎥 YouTube 影片播放器
+- 精選 Scratch 教學影片
+- 影片播放清單
+- 分類篩選功能
+- 自動播放控制
+- 響應式設計
 
-### 🔗 AI資源推薦
-- 精選AI工具網站
-- 學習平台推薦
-- 實用資源連結
-- 分類瀏覽與搜尋
+### 📚 學習資源
+- 外部學習資源推薦
+- 教學平台連結
+- 程式設計工具介紹
+- 完整聯絡資訊
 
-## 📁 文件結構
+## 檔案結構
+## 快速開始
 
-## 🚀 快速開始
+### 1. 部署到 GitHub Pages
+1. 將所有檔案上傳到 GitHub 倉庫
+2. 啟用 GitHub Pages 功能
+3. 選擇 main 分支作為來源
 
-### 1. 準備PDF文件
-將4個PDF文件放入 `data_ai/pdfs/` 文件夾：
-- `chatgpt-guide.pdf`
-- `midjourney-tutorial.pdf`
-- `ai-productivity.pdf`
-- `ai-business.pdf`
+### 2. 本地測試
+1. 安裝 [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) VS Code 擴展
+2. 右鍵點擊 index.html 選擇 "Open with Live Server"
+3. 或使用 Python 簡單伺服器：
+   ```bash
+   python -m http.server 8000
+然後訪問 http://localhost:8000
 
-### 2. 更新影片ID
-在 `video-player.html` 中更新您的YouTube影片ID：
-```javascript
-const embeddedVideos = [
-  "aCZPHX13ZnE",  // 替換為您的影片ID
-  "YOUR_VIDEO_ID_2",
-  "YOUR_VIDEO_ID_3"
-];
-3. 部署到GitHub Pages
-將所有檔案上傳到GitHub倉庫
+技術特點
+前端技術
+純 HTML/CSS/JavaScript 實現
 
-啟用GitHub Pages功能
+使用 PDF.js 進行 PDF 渲染
 
-選擇main分支作為來源
+YouTube IFrame API 嵌入
 
-訪問您的網站：https://username.github.io/repository
+LocalStorage 數據存儲
 
-🔧 自訂設定
-1. 更換PDF教材
-將PDF檔案放入 data_ai/pdfs/ 目錄
-更新 data_ai/manifest.json 中的檔案路徑
+響應式設計，支援手機和平板
 
-2. 更換YouTube影片
+資料管理
+使用 LocalStorage 存儲用戶偏好
+
+學習進度追蹤
+
+瀏覽次數統計
+
+喜好標記功能
+
+自定義設定
+1. 更換 PDF 教材
+將 PDF 檔案放入 data_scr/pdfs/ 目錄
+
+更新 data_scr/manifest.json 中的檔案路徑
+
+確保檔案名稱與路徑正確
+
+2. 更換 YouTube 影片
 修改 video-player.html 中的影片陣列
-使用YouTube嵌入URL格式
+
+更新影片標題、說明和分類
+
+使用 YouTube 嵌入 URL 格式
 
 3. 修改樣式
 編輯 assets/style.css 檔案
+
 調整顏色、字體和佈局
 
-📱 響應式設計
-桌面版：完整功能界面
+每個頁面也有內聯樣式可進行細部調整
 
-平板版：優化布局
+注意事項
+PDF 檔案大小：建議 PDF 檔案大小不超過 10MB 以確保載入速度
 
-手機版：單列顯示
+YouTube 影片：確保影片設定為公開或未列出
 
-📊 統計功能
-頁面訪問計數
+瀏覽器相容性：建議使用 Chrome、Firefox、Edge 最新版本
 
-學習資源瀏覽統計
+本地測試：某些功能（如 PDF 載入）可能需要伺服器環境
 
-LocalStorage數據儲存
+聯絡資訊
+作者：CHDAY169 (清河)
 
-統計數據匯出功能
-
-📞 聯絡資訊
-作者：CHDAY169
 信箱：chday169@gmail.com
+
 YouTube：https://www.youtube.com/@chday7919
 
-📄 授權
+授權
 此專案僅供教育與個人使用，請勿用於商業用途。
 
 text
 
-## 📋 **部署步骤**
+## 測試建議
 
-1. **创建项目文件夹结构**
-mkdir AI-Life-Platform
-cd AI-Life-Platform
-mkdir -p assets data_ai/pdfs
+1. **立即測試 PDF 功能**：使用提供的測試 PDF URL，確認 PDF.js 能正常載入
+2. **測試影片播放**：確認 YouTube 影片能正常播放
+3. **測試響應式設計**：在不同尺寸的視窗中查看效果
+4. **測試 LocalStorage**：關閉瀏覽器再重新開啟，確認統計數據還在
 
-text
+## 後續步驟
 
-2. **创建上述所有文件**
-按照上面的代码创建每个文件
-
-3. **添加PDF文件**
-将您的4个PDF文件放入 `data_ai/pdfs/` 文件夹
-
-4. **上传到GitHub**
-```bash
-git init
-git add .
-git commit -m "初始提交：AI生活分享平台"
-git branch -M main
-git remote add origin https://github.com/yourusername/ai-life-platform.git
-git push -u origin main
-启用GitHub Pages
-
-进入仓库设置
-
-选择Pages选项
-
-选择main分支作为来源
-
-保存设置
-
-🎯 各页面功能
-index.html - 主页面，展示平台特色和统计
-
-about.html - 关于我们页面，介绍使命和团队
-
-content-viewer.html - PDF内容浏览器，支持内嵌和外部PDF
-
-video-player.html - 视频播放器，内嵌影片+频道链接
-
-resources.html - 资源推荐，AI工具和网站
-
-assets/style.css - 统一样式表
-
-data_ai/manifest.json - 内容清单
-
-README.md - 项目说明文档
+1. 將這些檔案上傳到 GitHub 倉庫
+2. 將您的實際 PDF 檔案放入 `data_scr/pdfs/` 目錄
+3. 更新 `manifest.json` 中的實際 PDF 路徑
+4. 測試所有功能是否正常運作
