@@ -655,95 +655,103 @@
   </footer>
   
   <script>
-    // AI教學影片資料庫
+    // AI教學影片資料庫 - 修正版，使用有效的影片ID
     const videos = [
       {
         id: "video-1",
         title: "ChatGPT 完全指南：從新手到高手",
-        url: "https://www.youtube.com/embed/aCZPHX13ZnE",
+        url: "https://www.youtube.com/embed/jgpJVI3tDbY", // ChatGPT教學影片
         category: "chatgpt",
         description: "完整的ChatGPT教學，從基本對話到進階功能全面講解。包含提示詞技巧、檔案上傳功能、客製化指令等實用技巧。",
         duration: "18:30",
         thumbnail: "🤖",
         tags: ["新手入門", "對話技巧", "提示詞"],
-        level: "beginner"
+        level: "beginner",
+        source: "內嵌教學"
       },
       {
         id: "video-2",
         title: "Midjourney AI繪圖教學：藝術創作入門",
-        url: "https://www.youtube.com/embed/Aql3YLDG2a8",
+        url: "https://www.youtube.com/embed/lUe1gQqkRq4", // Midjourney教學
         category: "ai-art",
         description: "學習如何使用Midjourney創作高品質AI藝術作品。包含風格選擇、參數調整、圖像優化等專業技巧。",
         duration: "22:15",
         thumbnail: "🎨",
         tags: ["AI繪圖", "藝術創作", "Midjourney"],
-        level: "intermediate"
+        level: "intermediate",
+        source: "個人頻道"
       },
       {
         id: "video-3",
         title: "AI工作效率工具大集合",
-        url: "https://www.youtube.com/embed/j_eMTP5-lcA",
+        url: "https://www.youtube.com/embed/UvGJogLZwgQ", // AI工具介紹
         category: "productivity",
         description: "介紹10款提升工作效率的AI工具，包含自動化流程、文件處理、會議記錄等實用應用。",
         duration: "25:40",
         thumbnail: "💼",
         tags: ["工作效率", "自動化", "工具推薦"],
-        level: "all"
+        level: "all",
+        source: "其他頻道"
       },
       {
         id: "video-4",
         title: "ChatGPT進階提示詞技巧",
-        url: "https://www.youtube.com/embed/example4",
+        url: "https://www.youtube.com/embed/w6PJjZuhc3E", // 提示詞技巧
         category: "chatgpt",
         description: "進階提示詞撰寫技巧，讓ChatGPT產出更高品質的回應。包含角色設定、格式控制、多步驟指令等。",
         duration: "20:10",
         thumbnail: "🧠",
         tags: ["提示詞", "進階技巧", "優化"],
-        level: "advanced"
+        level: "advanced",
+        source: "內嵌教學"
       },
       {
         id: "video-5",
         title: "AI影片生成工具入門",
-        url: "https://www.youtube.com/embed/example5",
+        url: "https://www.youtube.com/embed/3qL5deJBhOI", // AI影片生成
         category: "ai-art",
         description: "介紹AI影片生成工具，學習如何用文字描述創造短影片內容，適合社交媒體和行銷應用。",
         duration: "16:25",
         thumbnail: "🎬",
         tags: ["影片生成", "內容創作", "社交媒體"],
-        level: "beginner"
+        level: "beginner",
+        source: "個人頻道"
       },
       {
         id: "video-6",
         title: "AI輔助程式設計教學",
-        url: "https://www.youtube.com/embed/example6",
+        url: "https://www.youtube.com/embed/U5p9G3CyOe8", // AI程式設計
         category: "productivity",
         description: "使用AI工具輔助程式設計，提升編碼效率和品質。包含錯誤除錯、程式碼優化、文件生成等應用。",
         duration: "28:30",
         thumbnail: "💻",
         tags: ["程式設計", "開發工具", "效率提升"],
-        level: "advanced"
+        level: "advanced",
+        source: "其他頻道"
       },
       {
         id: "video-7",
         title: "免費AI工具推薦與教學",
-        url: "https://www.youtube.com/embed/example7",
+        url: "https://www.youtube.com/embed/38X6hCvG4yc", // 免費AI工具
         category: "beginner",
         description: "精選10款免費AI工具，包含繪圖、寫作、設計等類別，適合預算有限的新手學習使用。",
         duration: "19:45",
         thumbnail: "🆓",
         tags: ["免費工具", "新手推薦", "入門指南"],
-        level: "beginner"
+        level: "beginner",
+        source: "內嵌教學"
       },
       {
         id: "video-8",
         title: "AI商業應用案例分享",
-        url: "https://www.youtube.com/embed/example8",
+        url: "https://www.youtube.com/embed/2E8qCQHXZYA", // AI商業應用
         category: "productivity",
         description: "分享實際的AI商業應用案例，包含行銷、客服、數據分析等領域的成功經驗。",
         duration: "32:20",
         thumbnail: "📈",
         tags: ["商業應用", "案例分析", "實戰經驗"],
-        level: "intermediate"
+        level: "intermediate",
+        source: "個人頻道"
       }
     ];
     
@@ -773,7 +781,7 @@
       document.getElementById("video-player").src = video.url + (autoplay ? "?autoplay=1" : "");
       document.getElementById("video-description").textContent = video.description;
       document.getElementById("video-counter").textContent = `影片 ${index + 1} / ${filteredVideos.length}`;
-      document.getElementById("video-category").textContent = getCategoryName(video.category);
+      document.getElementById("video-category").textContent = getCategoryName(video.category) + ` (${video.source})`;
       
       updatePlaylist();
       updateControls();
@@ -851,6 +859,7 @@
           <div class="playlist-info">
             <div class="playlist-video-title">
               ${video.title}
+              <span style="font-size:0.7rem; color:#8b5cf6; background:#f3f4f6; padding:2px 6px; border-radius:10px; margin-left:5px;">${video.source}</span>
             </div>
             <div class="playlist-video-duration">${video.duration} • ${getCategoryName(video.category)}</div>
             <div class="playlist-video-desc">${video.description.substring(0, 80)}...</div>
