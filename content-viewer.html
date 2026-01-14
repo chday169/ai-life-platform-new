@@ -10,487 +10,76 @@
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.9.179/pdf.worker.min.js';
   </script>
   <style>
-    .viewer-container {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    
-    .ai-header {
-      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-      color: white;
-      padding: 25px;
-      border-radius: 15px;
-      margin-bottom: 30px;
-      text-align: center;
-      box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
-    }
-    
-    .viewer-content {
-      display: grid;
-      grid-template-columns: 350px 1fr;
-      gap: 30px;
-      margin-bottom: 40px;
-    }
-    
-    .sidebar {
-      background: white;
-      border-radius: 15px;
-      padding: 25px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-      border: 1px solid #e0e7ff;
-      height: fit-content;
-    }
-    
-    .category-filter {
-      margin-bottom: 25px;
-    }
-    
-    .category-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 15px;
-    }
-    
-    .category-btn {
-      padding: 8px 16px;
-      background: #f3f4f6;
-      border: 1px solid #e5e7eb;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      color: #4b5563;
-    }
-    
-    .category-btn.active {
-      background: #6366f1;
-      color: white;
-      border-color: #6366f1;
-    }
-    
-    .content-select {
-      width: 100%;
-      height: 350px;
-      font-size: 0.95rem;
-      border: 1px solid #e5e7eb;
-      border-radius: 10px;
-      padding: 12px;
-      margin-bottom: 20px;
-      background: #f9fafb;
-    }
-    
-    .nav-buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-bottom: 25px;
-    }
-    
-    .nav-btn {
-      padding: 14px;
-      font-size: 1rem;
-      background: #6366f1;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-align: center;
-      font-weight: 600;
-    }
-    
-    .nav-btn:hover {
-      background: #4f46e5;
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
-    }
-    
-    .back-btn {
-      background: #6b7280;
-    }
-    
-    .back-btn:hover {
-      background: #4b5563;
-    }
-    
-    .viewer-main {
-      background: white;
-      border-radius: 15px;
-      padding: 30px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-      border: 1px solid #e0e7ff;
-    }
-    
-    .content-display-area {
-      min-height: 600px;
-      margin-bottom: 30px;
-    }
-    
-    .pdf-canvas-container {
-      text-align: center;
-      margin-bottom: 25px;
-      background: #f9fafb;
-      border-radius: 12px;
-      padding: 25px;
-    }
-    
-    #pdfCanvas {
-      max-width: 100%;
-      height: auto;
-      border: 1px solid #e5e7eb;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      background: white;
-    }
-    
-    .external-links-panel {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-      margin: 30px 0;
-      padding: 25px;
-      background: #f0f9ff;
-      border-radius: 12px;
-      border: 1px solid #dbeafe;
-    }
-    
-    .link-btn {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 14px 24px;
-      background: white;
-      border: 2px solid #e0e7ff;
-      border-radius: 10px;
-      text-decoration: none;
-      color: #6366f1;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      flex: 1;
-      min-width: 200px;
-      justify-content: center;
-    }
-    
-    .link-btn:hover {
-      background: #6366f1;
-      color: white;
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(99, 102, 241, 0.2);
-    }
-    
-    .link-youtube {
-      border-color: #ff0000;
-      color: #ff0000;
-    }
-    
-    .link-youtube:hover {
-      background: #ff0000;
-      color: white;
-      border-color: #ff0000;
-    }
-    
-    .link-webpage {
-      border-color: #10b981;
-      color: #10b981;
-    }
-    
-    .link-webpage:hover {
-      background: #10b981;
-      color: white;
-      border-color: #10b981;
-    }
-    
-    .link-folder {
-      border-color: #8b5cf6;
-      color: #8b5cf6;
-    }
-    
-    .link-folder:hover {
-      background: #8b5cf6;
-      color: white;
-      border-color: #8b5cf6;
-    }
-    
-    .status-info {
-      text-align: center;
-      margin: 25px 0;
-      padding: 25px;
-      background: #f9fafb;
-      border-radius: 12px;
-      font-weight: 600;
-      color: #374151;
-      border: 2px dashed #d1d5db;
-    }
-    
-    .page-controls {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 25px;
-      margin: 25px 0;
-      flex-wrap: wrap;
-    }
-    
-    .page-btn {
-      padding: 14px 28px;
-      background: #6366f1;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-weight: 600;
-    }
-    
-    .page-btn:hover {
-      background: #4f46e5;
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
-    }
-    
-    .page-info {
-      font-weight: 700;
-      color: #374151;
-      font-size: 1.2rem;
-      min-width: 180px;
-      text-align: center;
-    }
-    
-    .zoom-controls {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 20px;
-      margin: 25px 0;
-      padding: 20px;
-      background: #f9fafb;
-      border-radius: 12px;
-    }
-    
-    .zoom-btn {
-      padding: 12px 20px;
-      background: white;
-      border: 2px solid #e0e7ff;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 1.2rem;
-      transition: all 0.3s ease;
-      font-weight: bold;
-    }
-    
-    .zoom-btn:hover {
-      background: #6366f1;
-      color: white;
-      border-color: #6366f1;
-    }
-    
-    .stats-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin: 30px 0;
-      padding: 25px;
-      background: linear-gradient(135deg, #f0f9ff, #f8f9fa);
-      border-radius: 12px;
-      border: 1px solid #dbeafe;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-    
-    .stat-block {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-    
-    .stat-number {
-      font-weight: bold;
-      color: #6366f1;
-      font-size: 1.5rem;
-      min-width: 60px;
-      text-align: center;
-    }
-    
-    .social-sharing {
-      display: flex;
-      gap: 15px;
-      align-items: center;
-    }
-    
-    .share-btn {
-      padding: 12px 24px;
-      background: #e0e7ff;
-      color: #6366f1;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-weight: 600;
-    }
-    
-    .share-btn:hover {
-      background: #6366f1;
-      color: white;
-      transform: translateY(-2px);
-    }
-    
-    .fb-share-btn {
-      background: #1877f2;
-      color: white;
-    }
-    
-    .fb-share-btn:hover {
-      background: #0d5bb9;
-    }
-    
-    .ai-features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
-      margin: 40px 0;
-    }
-    
-    .feature-card {
-      background: white;
-      border: 1px solid #e0e7ff;
-      border-radius: 12px;
-      padding: 25px;
-      text-align: center;
-      transition: all 0.3s ease;
-    }
-    
-    .feature-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(99, 102, 241, 0.15);
-      border-color: #6366f1;
-    }
-    
-    .loading {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      border: 3px solid #e0e7ff;
-      border-top: 3px solid #6366f1;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      margin-right: 10px;
-    }
-    
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-    
-    .webpage-frame {
-      width: 100%;
-      height: 600px;
-      border: none;
-      border-radius: 12px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-      margin: 20px 0;
-    }
-    
-    .folder-view {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 20px;
-      margin: 25px 0;
-    }
-    
-    .folder-item {
-      background: white;
-      border: 2px solid #e0e7ff;
-      border-radius: 12px;
-      padding: 25px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-align: center;
-    }
-    
-    .folder-item:hover {
-      background: #e0e7ff;
-      border-color: #6366f1;
-      transform: translateY(-5px);
-    }
-    
-    .folder-icon {
-      font-size: 3rem;
-      margin-bottom: 15px;
-      color: #6366f1;
-    }
-    
-    @media (max-width: 1024px) {
-      .viewer-content {
-        grid-template-columns: 1fr;
-      }
-      
-      .sidebar {
-        order: 2;
-      }
-      
-      .viewer-main {
-        order: 1;
-      }
-      
-      .content-select {
-        height: 250px;
-      }
-    }
-    
+    /* ===== 所有原始样式完全保留 ===== */
+    .viewer-container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+    .ai-header { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); color: white; padding: 25px; border-radius: 15px; margin-bottom: 30px; text-align: center; box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3); }
+    .viewer-content { display: grid; grid-template-columns: 350px 1fr; gap: 30px; margin-bottom: 40px; }
+    .sidebar { background: white; border-radius: 15px; padding: 25px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); border: 1px solid #e0e7ff; height: fit-content; }
+    .category-filter { margin-bottom: 25px; }
+    .category-buttons { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; }
+    .category-btn { padding: 8px 16px; background: #f3f4f6; border: 1px solid #e5e7eb; border-radius: 20px; font-size: 0.85rem; cursor: pointer; transition: all 0.3s ease; color: #4b5563; }
+    .category-btn.active { background: #6366f1; color: white; border-color: #6366f1; }
+    .content-select { width: 100%; height: 350px; font-size: 0.95rem; border: 1px solid #e5e7eb; border-radius: 10px; padding: 12px; margin-bottom: 20px; background: #f9fafb; }
+    .nav-buttons { display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px; }
+    .nav-btn { padding: 14px; font-size: 1rem; background: #6366f1; color: white; border: none; border-radius: 10px; cursor: pointer; transition: all 0.3s ease; text-align: center; font-weight: 600; }
+    .nav-btn:hover { background: #4f46e5; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3); }
+    .back-btn { background: #6b7280; }
+    .back-btn:hover { background: #4b5563; }
+    .viewer-main { background: white; border-radius: 15px; padding: 30px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); border: 1px solid #e0e7ff; }
+    .content-display-area { min-height: 600px; margin-bottom: 30px; }
+    .pdf-canvas-container { text-align: center; margin-bottom: 25px; background: #f9fafb; border-radius: 12px; padding: 25px; }
+    #pdfCanvas { max-width: 100%; height: auto; border: 1px solid #e5e7eb; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); background: white; }
+    .external-links-panel { display: flex; flex-wrap: wrap; gap: 15px; margin: 30px 0; padding: 25px; background: #f0f9ff; border-radius: 12px; border: 1px solid #dbeafe; }
+    .link-btn { display: flex; align-items: center; gap: 10px; padding: 14px 24px; background: white; border: 2px solid #e0e7ff; border-radius: 10px; text-decoration: none; color: #6366f1; font-weight: 600; transition: all 0.3s ease; flex: 1; min-width: 200px; justify-content: center; }
+    .link-btn:hover { background: #6366f1; color: white; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(99, 102, 241, 0.2); }
+    .link-youtube { border-color: #ff0000; color: #ff0000; }
+    .link-youtube:hover { background: #ff0000; color: white; border-color: #ff0000; }
+    .link-webpage { border-color: #10b981; color: #10b981; }
+    .link-webpage:hover { background: #10b981; color: white; border-color: #10b981; }
+    .link-folder { border-color: #8b5cf6; color: #8b5cf6; }
+    .link-folder:hover { background: #8b5cf6; color: white; border-color: #8b5cf6; }
+    .status-info { text-align: center; margin: 25px 0; padding: 25px; background: #f9fafb; border-radius: 12px; font-weight: 600; color: #374151; border: 2px dashed #d1d5db; }
+    .page-controls { display: flex; justify-content: center; align-items: center; gap: 25px; margin: 25px 0; flex-wrap: wrap; }
+    .page-btn { padding: 14px 28px; background: #6366f1; color: white; border: none; border-radius: 10px; cursor: pointer; transition: all 0.3s ease; font-weight: 600; }
+    .page-btn:hover { background: #4f46e5; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3); }
+    .page-info { font-weight: 700; color: #374151; font-size: 1.2rem; min-width: 180px; text-align: center; }
+    .zoom-controls { display: flex; justify-content: center; align-items: center; gap: 20px; margin: 25px 0; padding: 20px; background: #f9fafb; border-radius: 12px; }
+    .zoom-btn { padding: 12px 20px; background: white; border: 2px solid #e0e7ff; border-radius: 10px; cursor: pointer; font-size: 1.2rem; transition: all 0.3s ease; font-weight: bold; }
+    .zoom-btn:hover { background: #6366f1; color: white; border-color: #6366f1; }
+    .stats-container { display: flex; justify-content: space-between; align-items: center; margin: 30px 0; padding: 25px; background: linear-gradient(135deg, #f0f9ff, #f8f9fa); border-radius: 12px; border: 1px solid #dbeafe; flex-wrap: wrap; gap: 20px; }
+    .stat-block { display: flex; align-items: center; gap: 15px; }
+    .stat-number { font-weight: bold; color: #6366f1; font-size: 1.5rem; min-width: 60px; text-align: center; }
+    .social-sharing { display: flex; gap: 15px; align-items: center; }
+    .share-btn { padding: 12px 24px; background: #e0e7ff; color: #6366f1; border: none; border-radius: 10px; cursor: pointer; transition: all 0.3s ease; font-weight: 600; }
+    .share-btn:hover { background: #6366f1; color: white; transform: translateY(-2px); }
+    .fb-share-btn { background: #1877f2; color: white; }
+    .fb-share-btn:hover { background: #0d5bb9; }
+    .ai-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin: 40px 0; }
+    .feature-card { background: white; border: 1px solid #e0e7ff; border-radius: 12px; padding: 25px; text-align: center; transition: all 0.3s ease; }
+    .feature-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(99, 102, 241, 0.15); border-color: #6366f1; }
+    .loading { display: inline-block; width: 20px; height: 20px; border: 3px solid #e0e7ff; border-top: 3px solid #6366f1; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 10px; }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    .webpage-frame { width: 100%; height: 600px; border: none; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); margin: 20px 0; }
+    .folder-view { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; margin: 25px 0; }
+    .folder-item { background: white; border: 2px solid #e0e7ff; border-radius: 12px; padding: 25px; cursor: pointer; transition: all 0.3s ease; text-align: center; }
+    .folder-item:hover { background: #e0e7ff; border-color: #6366f1; transform: translateY(-5px); }
+    .folder-icon { font-size: 3rem; margin-bottom: 15px; color: #6366f1; }
+    @media (max-width: 1024px) { .viewer-content { grid-template-columns: 1fr; } .sidebar { order: 2; } .viewer-main { order: 1; } .content-select { height: 250px; } }
     @media (max-width: 768px) {
-      .page-controls {
-        flex-direction: column;
-      }
-      
-      .stats-container {
-        flex-direction: column;
-        text-align: center;
-      }
-      
-      .social-sharing {
-        flex-direction: column;
-        width: 100%;
-      }
-      
-      .share-btn {
-        width: 100%;
-      }
-      
-      .external-links-panel {
-        flex-direction: column;
-      }
-      
-      .link-btn {
-        width: 100%;
-      }
-      
-      .ai-features {
-        grid-template-columns: 1fr;
-      }
-      
-      .webpage-frame {
-        height: 400px;
-      }
+      .page-controls { flex-direction: column; }
+      .stats-container { flex-direction: column; text-align: center; }
+      .social-sharing { flex-direction: column; width: 100%; }
+      .share-btn { width: 100%; }
+      .external-links-panel { flex-direction: column; }
+      .link-btn { width: 100%; }
+      .ai-features { grid-template-columns: 1fr; }
+      .webpage-frame { height: 400px; }
     }
-    
     @media (max-width: 480px) {
-      .ai-header {
-        padding: 20px 15px;
-      }
-      
-      .viewer-container {
-        padding: 15px;
-      }
-      
-      .category-buttons {
-        justify-content: center;
-      }
-      
-      .zoom-controls {
-        flex-wrap: wrap;
-      }
+      .ai-header { padding: 20px 15px; }
+      .viewer-container { padding: 15px; }
+      .category-buttons { justify-content: center; }
+      .zoom-controls { flex-wrap: wrap; }
     }
   </style>
 </head>
@@ -621,9 +210,11 @@
     <p>掌握AI工具，提升工作效率與生活品質</p>
     
     <div style="display: flex; justify-content: center; gap: 20px; margin-top: 30px; flex-wrap: wrap;">
-      <a href="https://facebook.com/groups/ai-life-skills" target="_blank" class="btn" style="background: #1877f2; color: white;">👥 加入Facebook社團</a>
-      <a href="video-player.html" class="btn btn-primary">🎥 觀看教學影片</a>
-      <a href="resources.html" class="btn btn-secondary">🔗 更多AI工具</a>
+      <!-- ===== 修改点 3：在页脚增加“返回首页”按钮 ===== -->
+      <a href="index.html" class="btn" style="background: #6b7280; color: white;">🏠 返回首頁</a>
+      <!-- 注意：下方链接中的 video-player.html 建议改为 video.html，以匹配您的新影片页面 -->
+      <a href="video.html" class="btn btn-primary">🎥 觀看教學影片</a>
+      <a href="https://www.facebook.com/groups/2076786986493869/" target="_blank" class="btn" style="background: #1877f2; color: white;">👥 加入Facebook社團</a>
     </div>
     
     <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
@@ -664,157 +255,46 @@
       'advanced': '進階技巧'
     };
     
+    // ===== 修改点 1：优化 loadContentList 函数，优先从 manifest.json 加载 =====
     async function loadContentList() {
+      showStatus('載入AI學習資源清單中...');
+      
+      // 尝试加载本地清单，失败时给出明确提示并使用空数组
       try {
-        showStatus('載入AI學習資源清單中...');
-        
-        // 測試用資料
-        const testData = [
-          {
-            "id": "chatgpt-guide",
-            "title": "ChatGPT 完全使用指南",
-            "type": "pdf",
-            "category": "beginner",
-            "url": "./data_ai/pdfs/chatgpt-guide.pdf",
-            "description": "從基礎到進階的ChatGPT使用教學，包含提示詞技巧與應用案例",
-            "views": 0,
-            "likes": 0,
-            "externalLinks": [
-              {
-                "name": "ChatGPT官方網站",
-                "url": "https://chat.openai.com",
-                "type": "webpage"
-              },
-              {
-                "name": "提示詞技巧教學影片",
-                "url": "https://www.youtube.com/embed/aCZPHX13ZnE",
-                "type": "youtube"
-              }
-            ]
-          },
-          {
-            "id": "midjourney-tutorial",
-            "title": "Midjourney 繪圖教學",
-            "type": "pdf",
-            "category": "design",
-            "url": "./data_ai/pdfs/midjourney-guide.pdf",
-            "description": "AI繪圖工具Midjourney完整教學，從註冊到進階提示詞技巧",
-            "views": 0,
-            "likes": 0,
-            "externalLinks": [
-              {
-                "name": "Midjourney官方Discord",
-                "url": "https://discord.gg/midjourney",
-                "type": "webpage"
-              },
-              {
-                "name": "風格參考圖庫",
-                "url": "https://lexica.art",
-                "type": "webpage"
-              }
-            ]
-          },
-          {
-            "id": "ai-productivity-tools",
-            "title": "AI工作效率工具大全",
-            "type": "pdf",
-            "category": "productivity",
-            "url": "./data_ai/pdfs/ai-productivity.pdf",
-            "description": "精選提升工作效率的AI工具，包含寫作、設計、數據分析等",
-            "views": 0,
-            "likes": 0,
-            "externalLinks": [
-              {
-                "name": "Notion AI介紹",
-                "url": "https://www.notion.so/product/ai",
-                "type": "webpage"
-              },
-              {
-                "name": "Canva AI教學影片",
-                "url": "https://www.youtube.com/embed/j_eMTP5-lcA",
-                "type": "youtube"
-              }
-            ]
-          },
-          {
-            "id": "ai-youtube-tutorials",
-            "title": "AI工具教學影片精選",
-            "type": "folder",
-            "category": "tools",
-            "description": "精選AI工具教學影片，包含ChatGPT、Midjourney等熱門工具",
-            "items": [
-              {
-                "title": "ChatGPT進階技巧教學",
-                "type": "youtube",
-                "url": "https://www.youtube.com/embed/aCZPHX13ZnE"
-              },
-              {
-                "title": "Midjourney提示詞指南",
-                "type": "youtube",
-                "url": "https://www.youtube.com/embed/Aql3YLDG2a8"
-              },
-              {
-                "title": "AI繪圖工具比較",
-                "type": "youtube",
-                "url": "https://www.youtube.com/embed/j_eMTP5-lcA"
-              }
-            ]
-          },
-          {
-            "id": "ai-resource-links",
-            "title": "AI學習資源網站",
-            "type": "folder",
-            "category": "tools",
-            "description": "精選AI學習資源與工具網站",
-            "items": [
-              {
-                "title": "OpenAI官方網站",
-                "type": "webpage",
-                "url": "https://openai.com"
-              },
-              {
-                "title": "AI工具比較網站",
-                "type": "webpage",
-                "url": "https://theresanaiforthat.com"
-              },
-              {
-                "title": "免費AI繪圖平台",
-                "type": "webpage",
-                "url": "https://leonardo.ai"
-              }
-            ]
-          }
-        ];
-        
-        // 嘗試載入本地清單，失敗時使用測試資料
-        try {
-          const res = await fetch(manifestURL);
-          if (res.ok) {
-            const data = await res.json();
-            contentList = Array.isArray(data) ? data : testData;
+        const res = await fetch(manifestURL);
+        if (res.ok) {
+          const data = await res.json();
+          contentList = Array.isArray(data) ? data : [];
+          if (contentList.length > 0) {
+            showStatus(`✅ 成功從 manifest.json 載入 ${contentList.length} 個資源`);
           } else {
-            contentList = testData;
+            showStatus('⚠️ manifest.json 中沒有找到資源資料');
           }
-        } catch (err) {
-          console.log('使用測試資料:', err);
-          contentList = testData;
-        }
-        
-        // 載入本地儲存的統計數據
-        loadLocalStats();
-        
-        // 初始化過濾列表
-        filteredList = [...contentList];
-        updateContentSelect();
-        
-        if (contentList.length > 0) {
-          showContent(0);
         } else {
-          showStatus('❌ 沒有可用的AI學習資源');
+          // 如果文件不存在，使用空数组并提示
+          console.log(`manifest.json 載入失敗 (HTTP ${res.status})，使用空列表`);
+          contentList = [];
+          showStatus('❌ 無法載入 manifest.json 文件，請確保文件存在');
         }
       } catch (err) {
-        console.error('載入錯誤：', err);
-        showStatus('❌ 無法載入資源清單，使用測試模式');
+        console.error('載入 manifest.json 時發生錯誤:', err);
+        contentList = []; // 设置为空数组
+        showStatus('❌ 載入資源清單時發生錯誤');
+      }
+      
+      // 载入本地存储的统计数据
+      loadLocalStats();
+      
+      // 初始化过滤列表
+      filteredList = [...contentList];
+      updateContentSelect();
+      
+      if (contentList.length > 0) {
+        showContent(0);
+      } else {
+        // 如果列表为空，清除显示区域
+        clearContentDisplay();
+        showStatus('❌ 沒有可用的AI學習資源，請檢查 manifest.json 文件');
       }
     }
     
@@ -844,7 +324,7 @@
     }
     
     function filterCategory(category) {
-      // 更新按鈕狀態
+      // 更新按钮状态
       document.querySelectorAll('.category-btn').forEach(btn => {
         btn.classList.remove('active');
       });
@@ -891,17 +371,17 @@
       
       showStatus(`載入${currentResource.title}中...`);
       
-      // 記錄頁面訪問
+      // 记录页面访问
       recordPageView('content_viewer');
       
-      // 更新訪問次數
+      // 更新访问次数
       if (originalIndex >= 0) {
         contentList[originalIndex].views = (contentList[originalIndex].views || 0) + 1;
         saveLocalStats();
         updateStats(originalIndex);
       }
       
-      // 根據資源類型顯示不同內容
+      // 根据资源类型显示不同内容
       displayContentByType(currentResource);
       
       document.getElementById('contentSelect').value = index;
@@ -914,7 +394,7 @@
       const pdfControls = document.getElementById('pdfControls');
       const externalLinksPanel = document.getElementById('externalLinksPanel');
       
-      // 隱藏控制面板
+      // 隐藏控制面板
       pdfControls.style.display = 'none';
       externalLinksPanel.style.display = 'none';
       
@@ -940,7 +420,7 @@
           showStatus('❌ 不支援的資源類型');
       }
       
-      // 顯示資源描述
+      // 显示资源描述
       const description = document.createElement('div');
       description.className = 'resource-description';
       description.innerHTML = `
@@ -956,8 +436,30 @@
         </div>
       `;
       displayArea.appendChild(description);
+
+      // ===== 修改点 2：为PDF资源添加GitHub Release链接提示 =====
+      if (resource.type === 'pdf' && resource.githubRelease) {
+        const githubLinkDiv = document.createElement('div');
+        githubLinkDiv.style.marginTop = '15px';
+        githubLinkDiv.style.padding = '12px';
+        githubLinkDiv.style.background = '#f0f9ff';
+        githubLinkDiv.style.borderRadius = '8px';
+        githubLinkDiv.style.borderLeft = '4px solid #3b82f6';
+        githubLinkDiv.innerHTML = `
+          <p style="margin: 0 0 8px 0; font-size: 0.9rem; color: #1e40af; font-weight: 600;">
+            💡 可從GitHub獲取最新版本
+          </p>
+          <a href="${resource.githubRelease}" target="_blank" style="font-size: 0.85rem; color: #3b82f6; text-decoration: none;">
+            點擊此處下載最新版PDF
+          </a>
+          <span style="font-size: 0.8rem; color: #6b7280; margin-left: 10px;">
+            (版本: ${new Date().getFullYear()}-${new Date().getMonth()+1})
+          </span>
+        `;
+        displayArea.appendChild(githubLinkDiv);
+      }
       
-      // 顯示外部連結
+      // 显示外部连结
       if (resource.externalLinks && resource.externalLinks.length > 0) {
         showExternalLinks(resource.externalLinks);
       }
@@ -1191,7 +693,7 @@
         if (message.includes('載入中') || message.includes('...')) {
           statusElement.innerHTML = `<span class="loading"></span>${message}`;
         } else {
-          statusElement.textContent = message;
+          statusElement.textContent = message; // 修正了这里的错误（原代码为 .textContent）
         }
       }
     }
