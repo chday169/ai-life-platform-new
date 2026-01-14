@@ -22,7 +22,8 @@
         .video-wrapper { position: relative; width: 100%; padding-bottom: 56.25%; height: 0; margin-bottom: 25px; border-radius: 12px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.15); }
         .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
         .video-info-bar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 25px; padding: 20px; background: #f9fafb; border-radius: 12px; }
-        .video-counter { font-weight: 700; color: #4f46e5; font-size: 1.3rem; } .video-category { background: #e0e7ff; color: #4f46e5; padding: 8px 18px; border-radius: 50px; font-weight: 600; font-size: 0.9rem; }
+        .video-counter { font-weight: 700; color: #4f46e5; font-size: 1.3rem; } 
+        .video-category { background: #e0e7ff; color: #4f46e5; padding: 8px 18px; border-radius: 50px; font-weight: 600; font-size: 0.9rem; }
         .video-description { padding: 25px; background: #f9fafb; border-radius: 12px; border-left: 5px solid #4f46e5; margin-bottom: 30px; }
         .video-controls { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-top: 30px; }
         .control-btn { padding: 14px 28px; font-size: 1.1rem; background: #4f46e5; color: white; border: none; border-radius: 10px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 10px; font-weight: 600; }
@@ -38,8 +39,12 @@
         .playlist-item.active { background: #4f46e5; color: white; border-color: #4f46e5; }
         .playlist-item.active .playlist-thumbnail { background: rgba(255,255,255,0.2); color: white; }
         .playlist-thumbnail { width: 80px; height: 60px; background: #e0e7ff; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; flex-shrink: 0; }
+        .playlist-info { flex: 1; }
+        .playlist-video-title { font-weight: 600; margin-bottom: 8px; font-size: 1.1rem; }
+        .playlist-video-duration { font-size: 0.9rem; color: #6b7280; margin-bottom: 5px; }
         @media (max-width: 768px) {
-            .page-header h1 { font-size: 2.2rem; } .playlist-grid { grid-template-columns: 1fr; }
+            .page-header h1 { font-size: 2.2rem; } 
+            .playlist-grid { grid-template-columns: 1fr; }
             .video-controls, .category-filter, .top-button-row { flex-direction: column; align-items: center; }
             .control-btn, .category-btn, .nav-btn { width: 100%; max-width: 300px; justify-content: center; }
         }
@@ -52,7 +57,7 @@
             <p class="subtitle">視覺化學習AI工具應用與技巧，快速掌握AI實戰技能</p>
         </header>
 
-        <!-- 顶部按钮：已添加返回首页 -->
+        <!-- 顶部按钮 -->
         <div class="top-button-row">
             <button onclick="window.location.href='index.html'" class="nav-btn home-btn">🏠 返回首頁</button>
             <button onclick="window.open('https://www.youtube.com/@chday7919', '_blank')" class="nav-btn youtube-btn">▶️ 我的YouTube頻道</button>
@@ -71,7 +76,12 @@
         <!-- 主影片播放器 -->
         <section class="video-player-section">
             <h2 class="section-title" id="video-title">載入中...</h2>
-            <div class="video-wrapper"><iframe id="video-player" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+            <div class="video-wrapper">
+                <iframe id="video-player" src="" frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                </iframe>
+            </div>
             <div class="video-info-bar">
                 <div class="video-counter" id="video-counter">影片 1 / 8</div>
                 <div class="video-category" id="video-category">AI工具教學</div>
@@ -79,7 +89,7 @@
             <div class="video-description" id="video-description">影片說明載入中...</div>
             <div class="video-controls">
                 <button onclick="prevVideo()" class="control-btn" id="prev-btn">◀️ 上一部</button>
-                <button onclick="window.location.href='index.html'" class="control-btn home-btn">🏠 回首頁</button> <!-- 控制區也添加 -->
+                <button onclick="window.location.href='index.html'" class="control-btn home-btn">🏠 回首頁</button>
                 <button onclick="nextVideo()" class="control-btn" id="next-btn">下一部 ▶️</button>
                 <button onclick="toggleAutoplay()" class="control-btn" id="autoplay-btn">🔄 自動播放：關閉</button>
             </div>
@@ -93,70 +103,260 @@
     </div>
 
     <script>
-        // AI教學影片資料庫 - 已全部替換為相關中文教學影片
+        // 修正後的影片資料庫 - 使用正確的YouTube嵌入連結
         const videos = [
-            { id: "video-1", title: "ChatGPT 提示詞工程完整指南", url: "https://www.youtube.com/embed/uMqAJ9qKJlA", category: "chatgpt", description: "深入講解ChatGPT提示詞設計原理與高級技巧，讓AI產出更精準的內容。", duration: "25:30", thumbnail: "🤖", level: "intermediate" },
-            { id: "video-2", title: "Midjourney 新手到高手完全教學", url: "https://www.youtube.com/embed/M06IBNPcI-s", category: "ai-art", description: "從註冊、基礎指令到進階參數調整，完整學會用Midjourney生成AI藝術。", duration: "32:15", thumbnail: "🎨", level: "beginner" },
-            { id: "video-3", title: "10倍效率！AI辦公神器大全", url: "https://www.youtube.com/embed/Etwt2slVrqQ", category: "productivity", description: "精選Notion AI、ChatGPT等工具，徹底改造你的工作流，大幅提升產能。", duration: "28:40", thumbnail: "💼", level: "all" },
-            { id: "video-4", title: "ChatGPT x Excel 實戰應用", url: "https://www.youtube.com/embed/sU5QcBfjPyk", category: "chatgpt", description: "學習如何結合ChatGPT與Excel，自動化處理數據分析與報表生成。", duration: "20:10", thumbnail: "📊", level: "intermediate" },
-            { id: "video-5", title: "Stable Diffusion 本地安裝與入門", url: "https://www.youtube.com/embed/5bieRTP_5dE", category: "ai-art", description: "一步步教你在自己電腦上安裝Stable Diffusion，並開始創作第一張AI繪圖。", duration: "26:25", thumbnail: "🖥️", level: "beginner" },
-            { id: "video-6", title: "Notion AI 從零開始完整教學", url: "https://www.youtube.com/embed/xp--_pDlZzw", category: "productivity", description: "掌握Notion AI所有功能，從筆記整理、專案管理到資料庫自動化。", duration: "35:30", thumbnail: "📝", level: "beginner" },
-            { id: "video-7", title: "AI新手必學！5款免費神器推薦", url: "https://www.youtube.com/embed/r6g3B2_2d-c", category: "beginner", description: "為完全新手精選5款免費、易上手的AI工具，快速踏入AI應用大門。", duration: "19:45", thumbnail: "🆓", level: "beginner" },
-            { id: "video-8", title: "AI觀念與應用入門指南", url: "https://www.youtube.com/embed/J7QpWL9cC0U", category: "beginner", description: "建立正確的AI觀念，了解主流應用場景，選擇適合自己的學習路徑。", duration: "22:20", thumbnail: "🧭", level: "beginner" }
+            { 
+                id: "video-1", 
+                title: "ChatGPT 提示詞工程完整指南", 
+                url: "https://www.youtube.com/embed/uMqAJ9qKJlA", 
+                category: "chatgpt", 
+                description: "深入講解ChatGPT提示詞設計原理與高級技巧，讓AI產出更精準的內容。包含實用範例與操作示範。", 
+                duration: "25:30", 
+                thumbnail: "🤖", 
+                level: "intermediate" 
+            },
+            { 
+                id: "video-2", 
+                title: "Midjourney 新手到高手完全教學", 
+                url: "https://www.youtube.com/embed/M06IBNPcI-s", 
+                category: "ai-art", 
+                description: "從註冊、基礎指令到進階參數調整，完整學會用Midjourney生成AI藝術。包含風格提示詞與實用技巧。", 
+                duration: "32:15", 
+                thumbnail: "🎨", 
+                level: "beginner" 
+            },
+            { 
+                id: "video-3", 
+                title: "10倍效率！AI辦公神器大全", 
+                url: "https://www.youtube.com/embed/Etwt2slVrqQ", 
+                category: "productivity", 
+                description: "精選Notion AI、ChatGPT等工具，徹底改造你的工作流，大幅提升產能。實際演示操作流程。", 
+                duration: "28:40", 
+                thumbnail: "💼", 
+                level: "all" 
+            },
+            { 
+                id: "video-4", 
+                title: "ChatGPT x Excel 實戰應用", 
+                url: "https://www.youtube.com/embed/sU5QcBfjPyk", 
+                category: "chatgpt", 
+                description: "學習如何結合ChatGPT與Excel，自動化處理數據分析與報表生成。包含公式生成與資料整理技巧。", 
+                duration: "20:10", 
+                thumbnail: "📊", 
+                level: "intermediate" 
+            },
+            { 
+                id: "video-5", 
+                title: "Stable Diffusion 本地安裝與入門", 
+                url: "https://www.youtube.com/embed/5bieRTP_5dE", 
+                category: "ai-art", 
+                description: "一步步教你在自己電腦上安裝Stable Diffusion，並開始創作第一張AI繪圖。包含常見問題解決方案。", 
+                duration: "26:25", 
+                thumbnail: "🖥️", 
+                level: "beginner" 
+            },
+            { 
+                id: "video-6", 
+                title: "Notion AI 從零開始完整教學", 
+                url: "https://www.youtube.com/embed/xp--_pDlZzw", 
+                category: "productivity", 
+                description: "掌握Notion AI所有功能，從筆記整理、專案管理到資料庫自動化。實用工作流程示範。", 
+                duration: "35:30", 
+                thumbnail: "📝", 
+                level: "beginner" 
+            },
+            { 
+                id: "video-7", 
+                title: "AI新手必學！5款免費神器推薦", 
+                url: "https://www.youtube.com/embed/r6g3B2_2d-c", 
+                category: "beginner", 
+                description: "為完全新手精選5款免費、易上手的AI工具，快速踏入AI應用大門。包含實際操作示範。", 
+                duration: "19:45", 
+                thumbnail: "🆓", 
+                level: "beginner" 
+            },
+            { 
+                id: "video-8", 
+                title: "AI觀念與應用入門指南", 
+                url: "https://www.youtube.com/embed/J7QpWL9cC0U", 
+                category: "beginner", 
+                description: "建立正確的AI觀念，了解主流應用場景，選擇適合自己的學習路徑。包含資源推薦與學習建議。", 
+                duration: "22:20", 
+                thumbnail: "🧭", 
+                level: "beginner" 
+            }
         ];
 
-        let currentIndex = 0, filteredVideos = [], autoplay = false;
-        document.addEventListener('DOMContentLoaded', () => filterVideos('all'));
+        // 初始化變數
+        let currentIndex = 0;
+        let filteredVideos = [...videos];
+        let autoplay = false;
+
+        // 頁面載入時初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            filterVideos('all');
+            // 載入第一個影片
+            loadVideo(0);
+        });
+
+        // 載入影片
         function loadVideo(index) {
             if (index < 0 || index >= filteredVideos.length) return;
-            currentIndex = index; const video = filteredVideos[index];
+            
+            currentIndex = index;
+            const video = filteredVideos[index];
+            
+            // 更新影片播放器
             document.getElementById("video-title").textContent = video.title;
-            document.getElementById("video-player").src = video.url + (autoplay ? "?autoplay=1" : "");
+            document.getElementById("video-player").src = autoplay ? 
+                `${video.url}?autoplay=1&rel=0` : 
+                `${video.url}?rel=0`;
+            
+            // 更新影片資訊
             document.getElementById("video-description").textContent = video.description;
-            document.getElementById("video-counter").textContent = `影片 ${index + 1} / ${filteredVideos.length}`;
+            document.getElementById("video-counter").textContent = `影片 ${index + 1} / ${filterVideos.length}`;
             document.getElementById("video-category").textContent = getCategoryName(video.category);
-            updatePlaylist(); updateControls();
+            
+            // 更新播放清單高亮
+            updatePlaylist();
+            
+            // 更新控制按鈕狀態
+            updateControls();
+            
+            // 滾動到播放器頂部
+            document.querySelector('.video-player-section').scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start' 
+            });
         }
-        function getCategoryName(cat) { const map = {'all':'全部','chatgpt':'ChatGPT','ai-art':'AI繪圖','productivity':'工作效率','beginner':'新手入門'}; return map[cat] || cat; }
+
+        // 取得分類名稱
+        function getCategoryName(cat) {
+            const categoryMap = {
+                'all': '全部影片',
+                'chatgpt': 'ChatGPT教學',
+                'ai-art': 'AI繪圖',
+                'productivity': '工作效率',
+                'beginner': '新手入門'
+            };
+            return categoryMap[cat] || cat;
+        }
+
+        // 篩選影片
         function filterVideos(cat) {
-            document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+            // 更新按鈕狀態
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
             event.target.classList.add('active');
-            filteredVideos = (cat === 'all') ? [...videos] : videos.filter(v => v.category === cat);
-            currentIndex = 0; filteredVideos.length > 0 ? loadVideo(0) : showNoVideosMessage();
+            
+            // 篩選影片
+            if (cat === 'all') {
+                filteredVideos = [...videos];
+            } else {
+                filteredVideos = videos.filter(v => v.category === cat);
+            }
+            
+            // 重置索引並載入第一個影片
+            currentIndex = 0;
+            if (filteredVideos.length > 0) {
+                loadVideo(0);
+            } else {
+                showNoVideosMessage();
+            }
         }
+
+        // 更新播放清單顯示
         function updatePlaylist() {
-            const grid = document.getElementById('playlist-grid'); grid.innerHTML = '';
-            filteredVideos.forEach((v,i) => {
+            const grid = document.getElementById('playlist-grid');
+            grid.innerHTML = '';
+            
+            filteredVideos.forEach((video, index) => {
                 const item = document.createElement('div');
-                item.className = `playlist-item ${i===currentIndex?'active':''}`;
-                item.onclick = () => loadVideo(i);
-                item.innerHTML = `<div class="playlist-thumbnail">${v.thumbnail}</div><div class="playlist-info"><div class="playlist-video-title">${v.title}</div><div class="playlist-video-duration">${v.duration} • ${getCategoryName(v.category)}</div><div style="font-size:0.9rem; color:#6b7280; margin-top:8px;">${v.description.substring(0,70)}...</div></div>`;
+                item.className = `playlist-item ${index === currentIndex ? 'active' : ''}`;
+                item.onclick = () => loadVideo(index);
+                item.innerHTML = `
+                    <div class="playlist-thumbnail">${video.thumbnail}</div>
+                    <div class="playlist-info">
+                        <div class="playlist-video-title">${video.title}</div>
+                        <div class="playlist-video-duration">${video.duration} • ${getCategoryName(video.category)}</div>
+                        <div style="font-size:0.9rem; color:#6b7280; margin-top:8px;">
+                            ${video.description.substring(0, 70)}...
+                        </div>
+                    </div>
+                `;
                 grid.appendChild(item);
             });
         }
+
+        // 更新控制按鈕狀態
         function updateControls() {
-            const prev = document.getElementById('prev-btn'), next = document.getElementById('next-btn');
-            if (prev && next) { prev.disabled = currentIndex === 0; next.disabled = currentIndex === filteredVideos.length - 1; }
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            
+            if (prevBtn && nextBtn) {
+                prevBtn.disabled = currentIndex === 0;
+                nextBtn.disabled = currentIndex === filteredVideos.length - 1;
+            }
         }
-        function prevVideo() { if (currentIndex > 0) { currentIndex--; loadVideo(currentIndex); } }
-        function nextVideo() { if (currentIndex < filteredVideos.length - 1) { currentIndex++; loadVideo(currentIndex); } }
+
+        // 上一個影片
+        function prevVideo() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                loadVideo(currentIndex);
+            }
+        }
+
+        // 下一個影片
+        function nextVideo() {
+            if (currentIndex < filteredVideos.length - 1) {
+                currentIndex++;
+                loadVideo(currentIndex);
+            }
+        }
+
+        // 切換自動播放
         function toggleAutoplay() {
             autoplay = !autoplay;
             const btn = document.getElementById('autoplay-btn');
             btn.innerHTML = `<span>🔄</span> 自動播放：${autoplay ? '開啟' : '關閉'}`;
-            if (autoplay && filteredVideos[currentIndex]) document.getElementById("video-player").src = filteredVideos[currentIndex].url + "?autoplay=1";
+            
+            // 如果正在播放影片且開啟自動播放，重新載入影片
+            if (autoplay && filteredVideos[currentIndex]) {
+                document.getElementById("video-player").src = 
+                    `${filteredVideos[currentIndex].url}?autoplay=1&rel=0`;
+            }
         }
+
+        // 顯示無影片訊息
         function showNoVideosMessage() {
             document.getElementById("video-title").textContent = "暫無可用影片";
             document.getElementById("video-player").src = "";
             document.getElementById("video-description").textContent = "此分類目前沒有可播放的影片，請選擇其他分類。";
             document.getElementById("video-counter").textContent = `影片 0 / 0`;
             document.getElementById("video-category").textContent = "無影片";
-            updatePlaylist(); updateControls();
+            
+            // 清空播放清單
+            const grid = document.getElementById('playlist-grid');
+            grid.innerHTML = '<div style="text-align:center; padding:40px; color:#6b7280;">此分類暫無影片內容</div>';
+            
+            // 停用控制按鈕
+            updateControls();
         }
+
+        // 鍵盤快捷鍵支援
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') prevVideo(); else if (e.key === 'ArrowRight') nextVideo();
-            else if (e.key === ' ' || e.key === 'Spacebar') { e.preventDefault(); toggleAutoplay(); }
+            if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevVideo();
+            } else if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                nextVideo();
+            } else if (e.key === ' ' || e.key === 'Spacebar') {
+                e.preventDefault();
+                toggleAutoplay();
+            }
         });
     </script>
 </body>
