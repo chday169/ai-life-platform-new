@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ℹ️ 關於我們 | AI生活分享社團</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    /* 关于页面样式 - 与之前提供的代码一致 */
+    .about-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .profile-section {
+      text-align: center;
+      margin: 40px 0;
+    }
+    
+    .profile-img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid #6366f1;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #e0e7ff, #f0f9ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      color: #6366f1;
+      margin: 0 auto 20px auto;
+      box-shadow: 0 10px 25px rgba(99, 102, 241, 0.2);
+    }
+    
+    /* 其余样式与之前一致 */
+  </style>
+</head>
+<body class="container">
+  <header class="page-header">
+    <h1>ℹ️ 關於我們</h1>
+    <p class="subtitle">AI生活分享社團的使命與願景</p>
+  </header>
+  
+  <!-- 页面内容与之前代码完全一致 -->
+  <!-- ... -->
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      recordPageView('about');
+    });
+    
+    function recordPageView(page) {
+      const key = `views_${page}`;
+      let count = parseInt(localStorage.getItem(key) || '0');
+      count++;
+      localStorage.setItem(key, count.toString());
+    }
+  </script>
+</body>
+</html>

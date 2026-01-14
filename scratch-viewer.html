@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎨 Scratch 教材瀏覽器 | CHDAY169</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.9.179/pdf.min.js"></script>
+  <script>
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.9.179/pdf.worker.min.js';
+  </script>
+  <style>
+    .viewer-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .scratch-theme {
+      background: linear-gradient(135deg, #4a6fa5 0%, #6b8cbc 100%);
+      color: white;
+      padding: 25px;
+      border-radius: 15px;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    
+    .viewer-content {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+    
+    .sidebar {
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      height: fit-content;
+    }
+    
+    .level-filter {
+      margin-bottom: 20px;
+    }
+    
+    .level-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+    
+    .level-btn {
+      padding: 6px 12px;
+      background: #f8f9fa;
+      border: 1px solid #dee2e6;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .level-btn.active {
+      background: #4a6fa5;
+      color: white;
+      border-color: #4a6fa5;
+    }
+    
+    .pdf-select {
+      width: 100%;
+      height: 350px;
+      font-size: 0.95rem;
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+      padding: 8px;
+      margin-bottom: 20px;
+      background: #f8f9fa;
+    }
+    
+    .nav-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    
+    .nav-btn {
+      padding: 12px;
+      font-size: 1rem;
+      background: #4a6fa5;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+    
+    .nav-btn:hover {
+      background: #3a5a8c;
+      transform: translateY(-2px);
+    }
+    
+    .back-btn {
+      background: #6c757d;
+    }
+    
+    .back-btn:hover {
+      background: #545b62;
+    }
+    
+    .viewer-main {
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .pdf-canvas-container {
+      text-align: center;
+      margin-bottom: 20px;
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 20px;
+    }
+    
+    #pdfCanvas {
+      max-width: 100%;
+      height: auto;
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      background: white;
+    }
+    
+    .status-info {
+      text-align: center;
+      margin: 20px 0;
+      padding: 20px;
+      background: #f8f9fa;
+      border-radius: 8px;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+    
+    .page-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+    
+    .page-btn {
+      padding: 12px 24px;
+      background: #4a6fa5;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .page-btn:hover {
+      background: #3a5a8c;
+      transform: translateY(-2px);
+    }
+    
+    .page-info {
+      font-weight: 600;
+      color: #2c3e50;
+      font-size: 1.1rem;
+    }
+    
+    .zoom-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      margin: 20px 0;
+    }
+    
+    .zoom-btn {
+      padding: 8px 16px;
+      background: #f8f9fa;
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .zoom-btn:hover {
+      background: #4a6fa5;
+      color: white;
+    }
+    
+    .stats-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      margin: 30px 0;
+      padding: 20px;
+      background: #f8f9fa;
+      border-radius: 8px;
+      flex-wrap: wrap;
+    }
+    
+    .stat-block {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.1rem;
+    }
+    
+    .stat-number {
+      font-weight: bold;
+      color: #4a6fa5;
+      min-width: 60px;
+      text-align: center;
+    }
+    
+    .like-btn {
+      width: 50px;
+      height: 50px;
+      font-size: 1.5rem;
+      border: none;
+      border-radius: 50%;
+      background: #4a6fa5;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .like-btn:hover {
+      background: #3a5a8c;
+      transform: scale(1.1);
+    }
+    
+    .like-btn.liked {
+      background: #dc3545;
+      animation: pulse 0.6s ease;
+    }
+    
+    .scratch-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin: 30px 0;
+    }
+    
+    .feature-card {
+      background: white;
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid #4a6fa5;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-right: 10px;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+    
+    @media (max-width: 968px) {
+      .viewer-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .sidebar {
+        order: 2;
+      }
+      
+      .viewer-main {
+        order: 1;
+      }
+      
+      .pdf-select {
+        height: 200px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .page-controls {
+        flex-direction: column;
+      }
+      
+      .stats-container {
+        flex-direction: column;
+        gap: 20px;
+      }
+      
+      .scratch-features {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body class="container">
+  <header class="page-header">
+    <h1>🎨 Scratch 教材瀏覽器</h1>
+    <p class="subtitle">Scratch 程式設計學習資源與教學教材</p>
+  </header>
+  
+  <div class="scratch-theme">
+    <h2>🚀 Scratch 程式設計學習</h2>
+    <p>從基礎到進階的完整 Scratch 學習路徑，包含動畫設計、遊戲開發與創意程式教學</p>
+  </div>
+  
+  <nav class="breadcrumb">
+    <a href="index.html">首頁</a> &gt; <span>Scratch 教材</span>
+  </nav>
+  
+  <main class="viewer-container">
+    <div class="viewer-content">
+      <aside class="sidebar">
+        <h3>📚 Scratch 教材選單</h3>
+        
+        <div class="level-filter">
+          <h4>🔍 難度等級</h4>
+          <div class="level-buttons">
+            <button class="level-btn active" onclick="filterLevel('all')">全部</button>
+            <button class="level-btn" onclick="filterLevel('beginner')">初階</button>
+            <button class="level-btn" onclick="filterLevel('intermediate')">中階</button>
+            <button class="level-btn" onclick="filterLevel('advanced')">進階</button>
+            <button class="level-btn" onclick="filterLevel('project')">專題實作</button>
+          </div>
+        </div>
+        
+        <select id="pdfSelect" size="8" class="pdf-select"></select>
+        
+        <div class="nav-buttons">
+          <button onclick="prevPDF()" class="nav-btn">⬅️ 上一教材</button>
+          <button onclick="nextPDF()" class="nav-btn">➡️ 下一教材</button>
+          <button onclick="goBack()" class="nav-btn back-btn">🔙 返回主頁</button>
+        </div>
+        
+        <div class="sidebar-info">
+          <h4>💡 學習建議</h4>
+          <ul style="font-size: 0.9rem; color: #495057;">
+            <li>按順序學習效果最佳</li>
+            <li>動手實作每個範例</li>
+            <li>嘗試修改創造變化</li>
+            <li>記錄學習筆記</li>
+          </ul>
+        </div>
+      </aside>
+      
+      <section class="viewer-main">
+        <div class="pdf-canvas-container">
+          <canvas id="pdfCanvas"></canvas>
+        </div>
+        
+        <div class="status-info" id="statusText">
+          <span class="loading"></span>請選擇 Scratch 教材
+        </div>
+        
+        <div class="page-controls">
+          <button onclick="prevPage()" class="page-btn">📄 上一頁</button>
+          <span class="page-info" id="pageInfo">第 0 頁 / 共 0 頁</span>
+          <button onclick="nextPage()" class="page-btn">📄 下一頁</button>
+        </div>
+        
+        <div class="zoom-controls">
+          <button onclick="zoomOut()" class="zoom-btn">🔍-</button>
+          <span>縮放: <span id="zoomLevel">100%</span></span>
+          <button onclick="zoomIn()" class="zoom-btn">🔍+</button>
+          <button onclick="resetZoom()" class="zoom-btn">🔄 重置</button>
+        </div>
+        
+        <div class="stats-container">
+          <div class="stat-block">
+            <span>👁️ 學習次數：</span>
+            <span class="stat-number" id="viewCount">0</span>
+          </div>
+          <div class="stat-block">
+            <span>👍 實用評分：</span>
+            <span class="stat-number" id="likeCount">0</span>
+          </div>
+          <button id="likeBtn" class="like-btn" onclick="likePDF()" title="標記為實用">👍</button>
+        </div>
+        
+        <div class="scratch-features">
+          <div class="feature-card">
+            <h4>🎯 基礎概念</h4>
+            <p>座標、移動、迴圈</p>
+          </div>
+          <div class="feature-card">
+            <h4>🎮 遊戲設計</h4>
+            <p>互動與遊戲邏輯</p>
+          </div>
+          <div class="feature-card">
+            <h4>🎨 動畫製作</h4>
+            <p>角色動畫與特效</p>
+          </div>
+          <div class="feature-card">
+            <h4>🧩 進階技巧</h4>
+            <p>變數、清單、函式</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  
+  <footer style="text-align: center; margin-top: 4rem; padding: 2rem; background: #f8f9fa; border-radius: 15px;">
+    <h3>🚀 Scratch 學習路徑</h3>
+    <p>從基礎程式概念到進階專題開發，建立完整的程式設計思維與創意實現能力</p>
+    
+    <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px; flex-wrap: wrap;">
+      <a href="https://scratch.mit.edu" target="_blank" class="btn">🌐 Scratch 官方網站</a>
+      <a href="resources.html" class="btn btn-secondary">🔗 更多學習資源</a>
+      <a href="video-player.html" class="btn btn-secondary">🎥 教學影片</a>
+    </div>
+  </footer>
+  
+  <script>
+    // Scratch 教材清單
+    const manifestURL = './data_scr/manifest.json';
+    
+    let pdfList = [];
+    let filteredList = [];
+    let currentIndex = -1;
+    let currentPage = 1;
+    let totalPages = 1;
+    let currentPDF = null;
+    let hasLikedCurrentPDF = false;
+    let currentScale = 1.5;
+    
+    // Scratch 難度等級
+    const levels = {
+      'all': '全部教材',
+      'beginner': '初階入門',
+      'intermediate': '中階應用', 
+      'advanced': '進階技巧',
+      'project': '專題實作'
+    };
+    
+    async function loadPDFList() {
+      try {
+        document.getElementById('statusText').innerHTML = '<span class="loading"></span>載入 Scratch 教材清單中...';
+        
+        // 測試用資料 - 實際使用時請替換為真實的 manifest.json
+        const testData = [
+          {
+            "id": "chapter0",
+            "title": "第0章：Scratch創意程式設計入門篇導讀",
+            "level": "beginner",
+            "url": "https://raw.githubusercontent.com/mozilla/pdf.js/gh-pages/web/compressed.tracemonkey-pldi-09.pdf",
+            "views": 0,
+            "likes": 0
+          },
+          {
+            "id": "chapter1",
+            "title": "第1章：Scratch程式語言介紹",
+            "level": "beginner",
+            "url": "https://raw.githubusercontent.com/mozilla/pdf.js/gh-pages/web/compressed.tracemonkey-pldi-09.pdf",
+            "views": 0,
+            "likes": 0
+          },
+          {
+            "id": "chapter2",
+            "title": "第2章：Scratch下載安裝教學",
+            "level": "beginner",
+            "url": "https://raw.githubusercontent.com/mozilla/pdf.js/gh-pages/web/compressed.tracemonkey-pldi-09.pdf",
+            "views": 0,
+            "likes": 0
+          }
+        ];
+        
+        // 嘗試載入本地清單，失敗時使用測試資料
+        try {
+          const res = await fetch(manifestURL);
+          if (res.ok) {
+            const data = await res.json();
+            if (Array.isArray(data)) {
+              pdfList = data;
+            } else {
+              pdfList = testData;
+            }
+          } else {
+            pdfList = testData;
+          }
+        } catch (err) {
+          console.log('使用測試資料:', err);
+          pdfList = testData;
+        }
+        
+        // 載入本地儲存的統計數據
+        loadLocalStats();
+        
+        // 初始化過濾列表
+        filteredList = [...pdfList];
+        updatePDFSelect();
+        
+        if (pdfList.length > 0) {
+          showPDF(0);
+        } else {
+          document.getElementById('statusText').textContent = '❌ 沒有可用的 Scratch 教材';
+        }
+      } catch (err) {
+        console.error('載入錯誤：', err);
+        document.getElementById('statusText').textContent = '❌ 無法載入 Scratch 教材清單，使用測試模式';
+        // 使用測試資料
+        loadTestData();
+      }
+    }
+    
+    function loadTestData() {
+      pdfList = [
+        {
+          "id": "test1",
+          "title": "測試教材 1: Scratch 入門教學",
+          "level": "beginner",
+          "url": "https://raw.githubusercontent.com/mozilla/pdf.js/gh-pages/web/compressed.tracemonkey-pldi-09.pdf",
+          "views": 0,
+          "likes": 0
+        },
+        {
+          "id": "test2", 
+          "title": "測試教材 2: 動畫設計基礎",
+          "level": "intermediate",
+          "url": "https://raw.githubusercontent.com/mozilla/pdf.js/gh-pages/web/compressed.tracemonkey-pldi-09.pdf",
+          "views": 0,
+          "likes": 0
+        }
+      ];
+      
+      loadLocalStats();
+      filteredList = [...pdfList];
+      updatePDFSelect();
+      
+      if (pdfList.length > 0) {
+        showPDF(0);
+      }
+    }
+    
+    function filterLevel(level) {
+      // 更新按鈕狀態
+      document.querySelectorAll('.level-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      event.target.classList.add('active');
+      
+      if (level === 'all') {
+        filteredList = [...pdfList];
+      } else {
+        filteredList = pdfList.filter(item => item.level === level);
+      }
+      
+      updatePDFSelect();
+      
+      if (filteredList.length > 0) {
+        showPDF(0);
+      } else {
+        document.getElementById('statusText').textContent = `❌ 沒有${levels[level]}相關教材`;
+        clearCanvas();
+      }
+    }
+    
+    function updatePDFSelect() {
+      const select = document.getElementById('pdfSelect');
+      select.innerHTML = '';
+      filteredList.forEach((item, index) => {
+        const option = document.createElement('option');
+        option.value = index;
+        option.textContent = `${index + 1}. ${item.title}`;
+        if (item.level) {
+          option.textContent += ` [${levels[item.level]}]`;
+        }
+        select.appendChild(option);
+      });
+    }
+    
+    function loadLocalStats() {
+      const stats = JSON.parse(localStorage.getItem('scr_stats') || '{}');
+      pdfList.forEach((item, index) => {
+        if (stats[item.title]) {
+          item.views = stats[item.title].views || 0;
+          item.likes = stats[item.title].likes || 0;
+        } else {
+          item.views = 0;
+          item.likes = 0;
+        }
+      });
+    }
+    
+    function saveLocalStats() {
+      const stats = {};
+      pdfList.forEach(item => {
+        stats[item.title] = {
+          views: item.views || 0,
+          likes: item.likes || 0,
+          lastViewed: new Date().toISOString()
+        };
+      });
+      localStorage.setItem('scr_stats', JSON.stringify(stats));
+    }
+    
+    function showPDF(index) {
+      if (index < 0 || index >= filteredList.length) return;
+      currentIndex = index;
+      currentPage = 1;
+      hasLikedCurrentPDF = false;
+      
+      const originalIndex = pdfList.findIndex(item => item.title === filteredList[index].title);
+      const fileURL = filteredList[index].url;
+      
+      document.getElementById('statusText').innerHTML = '<span class="loading"></span>載入 Scratch 教材中…';
+      
+      // 記錄頁面訪問
+      recordPageView('scratch_viewer');
+      
+      pdfjsLib.getDocument(fileURL).promise.then(pdf => {
+        currentPDF = pdf;
+        totalPages = pdf.numPages;
+        renderPage(currentPage);
+        
+        // 更新訪問次數
+        if (originalIndex >= 0) {
+          pdfList[originalIndex].views = (pdfList[originalIndex].views || 0) + 1;
+          saveLocalStats();
+          updateStats(originalIndex);
+        }
+        
+        document.getElementById('statusText').textContent =
+          `🎨 當前教材：${filteredList[index].title} (${index + 1}/${filteredList.length})`;
+      }).catch(err => {
+        console.error('PDF 載入失敗：', err.message);
+        document.getElementById('statusText').textContent = '❌ 無法顯示 Scratch 教材：' + err.message;
+      });
+      
+      document.getElementById('pdfSelect').value = index;
+    }
+    
+    function renderPage(pageNum) {
+      if (!currentPDF) return;
+      
+      currentPDF.getPage(pageNum).then(page => {
+        const viewport = page.getViewport({ scale: currentScale });
+        const canvas = document.getElementById('pdfCanvas');
+        const context = canvas.getContext('2d');
+        
+        // 設置 canvas 尺寸
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+        
+        const renderContext = {
+          canvasContext: context,
+          viewport: viewport
+        };
+        
+        page.render(renderContext).promise.then(() => {
+          document.getElementById('pageInfo').textContent = `第 ${pageNum} 頁 / 共 ${totalPages} 頁`;
+          document.getElementById('zoomLevel').textContent = Math.round(currentScale * 100) + '%';
+        });
+      }).catch(err => {
+        console.error('頁面渲染失敗：', err);
+        document.getElementById('statusText').textContent = '❌ 頁面渲染失敗';
+      });
+    }
+    
+    function zoomIn() {
+      currentScale += 0.25;
+      if (currentPDF) renderPage(currentPage);
+    }
+    
+    function zoomOut() {
+      currentScale = Math.max(0.5, currentScale - 0.25);
+      if (currentPDF) renderPage(currentPage);
+    }
+    
+    function resetZoom() {
+      currentScale = 1.5;
+      if (currentPDF) renderPage(currentPage);
+    }
+    
+    function clearCanvas() {
+      const canvas = document.getElementById('pdfCanvas');
+      const context = canvas.getContext('2d');
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      canvas.width = 0;
+      canvas.height = 0;
+    }
+    
+    function prevPage() {
+      if (currentPDF && currentPage > 1) {
+        currentPage--;
+        renderPage(currentPage);
+      }
+    }
+    
+    function nextPage() {
+      if (currentPDF && currentPage < totalPages) {
+        currentPage++;
+        renderPage(currentPage);
+      }
+    }
+    
+    function prevPDF() {
+      if (currentIndex > 0) {
+        showPDF(currentIndex - 1);
+      }
+    }
+    
+    function nextPDF() {
+      if (currentIndex < filteredList.length - 1) {
+        showPDF(currentIndex + 1);
+      }
+    }
+    
+    function likePDF() {
+      const originalIndex = pdfList.findIndex(item => item.title === filteredList[currentIndex].title);
+      if (originalIndex >= 0 && !hasLikedCurrentPDF) {
+        pdfList[originalIndex].likes = (pdfList[originalIndex].likes || 0) + 1;
+        hasLikedCurrentPDF = true;
+        saveLocalStats();
+        updateStats(originalIndex);
+        
+        // 添加動畫效果
+        const likeBtn = document.getElementById('likeBtn');
+        likeBtn.classList.add('liked');
+        likeBtn.textContent = '❤️';
+        
+        setTimeout(() => {
+          likeBtn.classList.remove('liked');
+          likeBtn.textContent = '👍';
+        }, 600);
+      }
+    }
+    
+    function updateStats(index) {
+      const item = pdfList[index];
+      document.getElementById('viewCount').textContent = item.views || 0;
+      document.getElementById('likeCount').textContent = item.likes || 0;
+    }
+    
+    function goBack() {
+      window.location.href = 'index.html';
+    }
+    
+    function recordPageView(page) {
+      const key = `views_${page}`;
+      let count = parseInt(localStorage.getItem(key) || '0');
+      count++;
+      localStorage.setItem(key, count.toString());
+    }
+    
+    // 事件監聽器
+    document.addEventListener('DOMContentLoaded', function() {
+      loadPDFList();
+    });
+    
+    document.getElementById('pdfSelect').addEventListener('change', function () {
+      const index = parseInt(this.value);
+      if (!isNaN(index)) showPDF(index);
+    });
+    
+    // 鍵盤快捷鍵支持
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'ArrowLeft') {
+        prevPage();
+      } else if (event.key === 'ArrowRight') {
+        nextPage();
+      } else if (event.key === 'ArrowUp') {
+        prevPDF();
+      } else if (event.key === 'ArrowDown') {
+        nextPDF();
+      } else if (event.key === '+') {
+        zoomIn();
+      } else if (event.key === '-') {
+        zoomOut();
+      }
+    });
+  </script>
+</body>
+</html>

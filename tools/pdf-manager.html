@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PDF管理工具 - AI生活分享平台</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .tool-container { max-width: 800px; margin: 0 auto; }
+        .drop-zone { 
+            border: 3px dashed #6366f1; 
+            padding: 40px; 
+            text-align: center;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+        .pdf-list { margin: 20px 0; }
+        .pdf-item { 
+            padding: 10px; 
+            border-bottom: 1px solid #ddd;
+            display: flex; justify-content: space-between;
+        }
+        .controls { margin: 20px 0; }
+        button { padding: 10px 20px; background: #6366f1; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="tool-container">
+        <h1>📁 PDF資源管理工具</h1>
+        
+        <!-- 步驟1：選擇PDF資料夾 -->
+        <div class="step">
+            <h2>步驟1：選擇PDF檔案</h2>
+            <input type="file" id="pdfInput" multiple accept=".pdf" webkitdirectory directory>
+            <p>或將PDF檔案拖放到下方區域</p>
+            <div class="drop-zone" id="dropZone">
+                將PDF檔案拖放到這裡
+            </div>
+        </div>
+        
+        <!-- 步驟2：預覽與編輯 -->
+        <div class="step">
+            <h2>步驟2：編輯資源資訊</h2>
+            <div class="pdf-list" id="pdfList"></div>
+        </div>
+        
+        <!-- 步驟3：匯出 -->
+        <div class="step">
+            <h2>步驟3：匯出manifest.json</h2>
+            <div class="controls">
+                <button onclick="generateManifest()">產生manifest.json</button>
+                <button onclick="downloadManifest()">下載檔案</button>
+            </div>
+            <textarea id="output" rows="10" style="width:100%; margin-top:20px;"></textarea>
+        </div>
+    </div>
+    
+    <script>
+        let pdfFiles = [];
+        
+        // 檔案選擇處理
+        document.getElementById('pdfInput').addEventListener('change', function(e) {
+            handleFiles(Array.from(e.target.files));
+        });
+        
+        // 拖放處理
+        const dropZone = document.getElementById('dropZone');
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.style.background = '#e0e7ff';
+        });
+        
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.style.background = '';
+            const files = Array.from(e.dataTransfer.files).filter(f => f.name.endsWith('.pdf'));
+            handleFiles(files);
+        });
+        
+        function handleFiles(files) {
+            pdfFiles = files.map(file => ({
+                name: file.name,
+                path: file.webkitRelativePath || file.name,
+                title: file.name.replace('.pdf', '').replace(/_/g, ' '),
+                category: 'tools',
+                description: ''
+            }));
+            renderPDFList();
+        }
+        
+        function renderPDFList() {
+            const container = document.getElementById('pdfList');
+            container.innerHTML = '';
+            
+            pdfFiles.forEach((pdf, index) => {
+                const div = document.createElement('div');
+                div.className = 'pdf-item';
+                div.innerHTML = `
+                    <div>
+                        <strong>${pdf.title}</strong><br>
+                        <small>${pdf.path}</small>
+                    </div>
+                    <div>
+                        <select onchange="updateCategory(${index}, this.value)">
+                            <option ${pdf.category === 'beginner' ? 'selected' : ''}>beginner</option>
+                            <option ${pdf.category === 'tools' ? 'selected' : ''}>tools</option>
+                            <option ${pdf.category === 'productivity' ? 'selected' : ''}>productivity</option>
+                            <option ${pdf.category === 'design' ? 'selected' : ''}>design</option>
+                            <option ${pdf.category === 'advanced' ? 'selected' : ''}>advanced</option>
+                        </select>
+                        <input type="text" value="${pdf.description}" placeholder="描述" onchange="updateDescription(${index}, this.value)">
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+        
+        function updateCategory(index, category) {
+            pdfFiles[index].category = category;
+        }
+        
+        function updateDescription(index, description) {
+            pdfFiles[index].description = description;
+        }
+        
+        function generateManifest() {
+            const manifest = pdfFiles.map((pdf, index) => ({
+                id: `pdf-${index + 1}`,
+                title: pdf.title,
+                type: "pdf",
+                category: pdf.category,
+                url: `./data_ai/pdfs/${pdf.name}`,
+                description: pdf.description || `${pdf.title}教學文件`,
+                views: 0,
+                likes: 0
+            }));
+            
+            document.getElementById('output').value = JSON.stringify(manifest, null, 2);
+        }
+        
+        function downloadManifest() {
+            const content = document.getElementById('output').value;
+            const blob = new Blob([content], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'manifest.json';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>

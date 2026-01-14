@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "title": "第0章：Scratch創意程式設計入門篇導讀",
+    "level": "beginner",
+    "url": "./data_scr/pdfs/chapter1.pdf"
+  },
+  {
+    "id": 2,
+    "title": "第1章：Scratch程式語言介紹",
+    "level": "beginner",
+    "url": "./data_scr/pdfs/chapter2.pdf"
+  },
+  {
+    "id": 3,
+    "title": "第2章：Scratch下載安裝教學",
+    "level": "beginner",
+    "url": "./data_scr/pdfs/chapter3.pdf"
+  },
+  {
+    "id": 4,
+    "title": "第3章：Scratch主要積木構件介紹",
+    "level": "beginner",
+    "url": "./data_scr/pdfs/chapter4.pdf"
+  },
+  {
+    "id": 5,
+    "title": "第4章：建立Scratch專案",
+    "level": "beginner",
+    "url": "./data_scr/pdfs/chapter5.pdf"
+  },
+  {
+    "id": 6,
+    "title": "第5章：造型及背景修圖工具",
+    "level": "beginner",
+    "url": "./data_scr/pdfs/chapter6.pdf"
+  },
+  {
+    "id": 7,
+    "title": "第6章：畫筆顏色及填充顏色",
+    "level": "beginner",
+    "url": "./data_scr/pdfs/chapter7.pdf"
+  },
+  {
+    "id": 8,
+    "title": "第7章：圖像組合及角色創建",
+    "level": "intermediate",
+    "url": "./data_scr/pdfs/chapter8.pdf"
+  }
+]

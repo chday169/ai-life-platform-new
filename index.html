@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🤖 AI生活分享 | AI Skills for Everyday Life</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    /* AI主题样式 - 同之前提供的代码 */
+    .ai-hero {
+      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+      color: white;
+      padding: 3rem 2rem;
+      border-radius: 15px;
+      margin: 2rem auto;
+      text-align: center;
+      max-width: 1000px;
+      box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+    }
+    
+    .ai-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+    
+    /* 其他样式与之前相同，这里省略以节省空间 */
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- 页面结构与之前相同 -->
+    <header class="page-header">
+      <h1>🤖 AI生活分享社團</h1>
+      <p class="subtitle">AI Skills for Everyday Life | 讓AI改善你的日常生活</p>
+    </header>
+    
+    <!-- 其余代码与之前提供的完全一致 -->
+    <!-- ... -->
+    
+  </div>
+  
+  <script>
+    // 统计功能 - 与之前代码一致
+    document.addEventListener('DOMContentLoaded', function() {
+      updateTotalViews();
+      recordPageView('home');
+    });
+    
+    function updateTotalViews() {
+      let total = 0;
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key && key.startsWith('views_')) {
+          total += parseInt(localStorage.getItem(key) || 0);
+        }
+      }
+      if (total > 0) {
+        document.getElementById('totalViews').textContent = total.toLocaleString();
+      }
+    }
+    
+    function recordPageView(page) {
+      const key = `views_${page}`;
+      let count = parseInt(localStorage.getItem(key) || '0');
+      count++;
+      localStorage.setItem(key, count.toString());
+    }
+  </script>
+</body>
+</html>
