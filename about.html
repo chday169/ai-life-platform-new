@@ -32,6 +32,13 @@
       color: #6366f1;
       margin: 0 auto 20px auto;
       box-shadow: 0 10px 25px rgba(99, 102, 241, 0.2);
+      overflow: hidden;
+    }
+    
+    .profile-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
     
     .bio-section {
@@ -194,6 +201,55 @@
       text-align: center;
     }
     
+    /* 新增：Line AI 專區樣式 */
+    .line-ai-section {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      padding: 30px;
+      border-radius: 15px;
+      margin: 30px 0;
+      border: 1px solid #bae6fd;
+    }
+    
+    .line-ai-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      align-items: center;
+      margin-top: 20px;
+    }
+    
+    .line-ai-image {
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    
+    .line-ai-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    .line-ai-features {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0;
+    }
+    
+    .line-ai-features li {
+      margin-bottom: 10px;
+      padding-left: 30px;
+      position: relative;
+    }
+    
+    .line-ai-features li:before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #059669;
+      font-weight: bold;
+    }
+    
     @media (max-width: 768px) {
       .bio-section {
         padding: 20px;
@@ -212,6 +268,14 @@
       }
       
       .contact-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .line-ai-section {
+        padding: 20px;
+      }
+      
+      .line-ai-content {
         grid-template-columns: 1fr;
       }
     }
@@ -241,7 +305,9 @@
   
   <main class="about-container">
     <section class="profile-section">
-      <div class="profile-img">🤖</div>
+      <div class="profile-img">
+        <img src="assets/images/chday.jpg" alt="版主照片">
+      </div>
       <h2 style="color: #6366f1;">AI生活分享社團</h2>
       <p style="font-size: 1.1rem; color: #6366f1; font-weight: 600; margin-bottom: 10px;">
         AI Skills for Everyday Life
@@ -294,6 +360,34 @@
       </div>
       
       <p>從最初的幾十位AI愛好者，成長為擁有5000+成員的活躍社群。我們見證了無數成員從AI新手成長為能夠熟練運用各種AI工具改善生活和工作的實踐者。</p>
+    </section>
+    
+    <!-- 新增：Line AI 應用專區 -->
+    <section class="line-ai-section">
+      <h2 style="color: #6366f1;">💬 Line AI 應用專區</h2>
+      <p>考慮到老年人多使用Line，我們特別開設了Line AI應用教學專區，讓長輩們也能輕鬆享受AI帶來的便利。</p>
+      
+      <div class="line-ai-content">
+        <div>
+          <h3 style="color: #4b5563; margin-bottom: 1rem;">專為老年人設計的AI教學</h3>
+          <p>我們的Line AI教學專注於實用性和易用性，幫助長輩們解決日常生活中的問題：</p>
+          <ul class="line-ai-features">
+            <li>Line AI客服設定教學</li>
+            <li>智能自動回覆設定</li>
+            <li>Line Bot整合ChatGPT</li>
+            <li>訊息管理與分類技巧</li>
+            <li>語音轉文字應用</li>
+            <li>圖片智慧辨識功能</li>
+          </ul>
+          <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+            <a href="video-player.html?category=line-ai" class="btn btn-primary">👨‍👩‍👧‍👦 學習Line AI應用</a>
+            <a href="index.html" class="btn btn-outline">🏠 返回首頁</a>
+          </div>
+        </div>
+        <div class="line-ai-image">
+          <img src="assets/images/preview_line.jpg" alt="Line AI 應用預覽">
+        </div>
+      </div>
     </section>
     
     <section class="bio-section">
