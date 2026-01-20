@@ -99,6 +99,7 @@
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            background: #000;
         }
         .video-wrapper iframe {
             position: absolute;
@@ -107,6 +108,75 @@
             width: 100%;
             height: 100%;
             border: 0;
+            z-index: 2;
+        }
+
+        /* ===== 影片錯誤訊息樣式 ===== */
+        .video-error {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 12px;
+            z-index: 10;
+        }
+        .error-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+        .error-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .error-message {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            max-width: 600px;
+            line-height: 1.5;
+        }
+        .error-link {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+        .error-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2);
+        }
+
+        /* ===== 影片來源標記 ===== */
+        .video-source-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+        .source-personal {
+            background: #10b981;
+            color: white;
+        }
+        .source-public {
+            background: #f59e0b;
+            color: white;
         }
 
         /* ===== 影片資訊與控制 ===== */
@@ -276,6 +346,21 @@
             font-size: 0.9rem;
         }
 
+        /* ===== 可用性警報 ===== */
+        .availability-alert {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #ff6b6b;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            max-width: 300px;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            display: none;
+        }
+
         /* ===== 響應式設計 ===== */
         @media (max-width: 768px) {
             .page-header h1 { font-size: 2.2rem; }
@@ -284,6 +369,11 @@
             .control-btn, .category-btn { width: 100%; max-width: 300px; justify-content: center; }
             .top-button-row { flex-direction: column; align-items: center; }
             .channel-btn { width: 100%; max-width: 300px; justify-content: center; }
+            .availability-alert {
+                left: 20px;
+                right: 20px;
+                max-width: none;
+            }
         }
     </style>
 </head>
@@ -322,6 +412,7 @@
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen>
                 </iframe>
+                <!-- 錯誤訊息會動態插入到這裡 -->
             </div>
 
             <div class="video-info-bar">
@@ -359,123 +450,159 @@
         <footer class="page-footer">
             <p>© 2024 AI生活分享社團 • 本頁面僅供教學使用</p>
             <p>影片頁面瀏覽次數: <span id="views_video">0</span></p>
+            <p>已成功播放: <span id="successful-plays">0</span> 部影片</p>
         </footer>
     </div>
 
     <script>
-        // ===== AI教學影片資料庫 =====
-        // 注意：你可以替換以下影片的標題、說明和YouTube嵌入連結（embed URL）
+        // ===== AI教學影片資料庫（雙重來源系統）=====
         const videos = [
             {
                 id: "video-1",
                 title: "ChatGPT 完全指南：從新手到高手",
-                url: "https://www.youtube.com/embed/jgpJVI3tDbY", // 請替換為你的影片連結
+                url: "https://www.youtube.com/embed/jgpJVI3tDbY",
+                backupUrl: "https://www.youtube.com/embed/s7nO3WgGVBk", // 公共替代影片
+                personalVideo: false, // 標記是否為個人影片
                 category: "chatgpt",
                 description: "完整的ChatGPT教學，從基本對話到進階功能全面講解。包含提示詞技巧、檔案上傳功能、客製化指令等實用技巧。",
                 duration: "18:30",
                 thumbnail: "🤖",
                 tags: ["新手入門", "對話技巧", "提示詞"],
-                level: "beginner"
+                level: "beginner",
+                youtubeUrl: "https://youtu.be/jgpJVI3tDbY"
             },
             {
                 id: "video-2",
                 title: "Midjourney AI繪圖教學：藝術創作入門",
-                url: "https://www.youtube.com/embed/lUe1gQqkRq4", // 請替換為你的影片連結
+                url: "https://www.youtube.com/embed/lUe1gQqkRq4",
+                backupUrl: "https://www.youtube.com/embed/JvBxl0vYueY",
+                personalVideo: false,
                 category: "ai-art",
                 description: "學習如何使用Midjourney創作高品質AI藝術作品。包含風格選擇、參數調整、圖像優化等專業技巧。",
                 duration: "22:15",
                 thumbnail: "🎨",
                 tags: ["AI繪圖", "藝術創作", "Midjourney"],
-                level: "intermediate"
+                level: "intermediate",
+                youtubeUrl: "https://youtu.be/lUe1gQqkRq4"
             },
             {
                 id: "video-3",
                 title: "AI工作效率工具大集合",
-                url: "https://www.youtube.com/embed/UvGJogLZwgQ", // 請替換為你的影片連結
+                url: "https://www.youtube.com/embed/UvGJogLZwgQ",
+                backupUrl: "https://www.youtube.com/embed/z6tBMJfzLgM",
+                personalVideo: false,
                 category: "productivity",
                 description: "介紹10款提升工作效率的AI工具，包含自動化流程、文件處理、會議記錄等實用應用。",
                 duration: "25:40",
                 thumbnail: "💼",
                 tags: ["工作效率", "自動化", "工具推薦"],
-                level: "all"
+                level: "all",
+                youtubeUrl: "https://youtu.be/UvGJogLZwgQ"
             },
             {
                 id: "video-4",
                 title: "ChatGPT進階提示詞技巧",
-                url: "https://www.youtube.com/embed/w6PJjZuhc3E", // 請替換為你的影片連結
+                url: "https://www.youtube.com/embed/w6PJjZuhc3E",
+                backupUrl: "https://www.youtube.com/embed/m0-onu8jFkE",
+                personalVideo: false,
                 category: "chatgpt",
                 description: "進階提示詞撰寫技巧，讓ChatGPT產出更高品質的回應。包含角色設定、格式控制、多步驟指令等。",
                 duration: "20:10",
                 thumbnail: "🧠",
                 tags: ["提示詞", "進階技巧", "優化"],
-                level: "advanced"
+                level: "advanced",
+                youtubeUrl: "https://youtu.be/w6PJjZuhc3E"
             },
             {
                 id: "video-5",
                 title: "AI影片生成工具入門",
-                url: "https://www.youtube.com/embed/3qL5deJBhOI", // 請替換為你的影片連結
+                url: "https://www.youtube.com/embed/3qL5deJBhOI",
+                backupUrl: "https://www.youtube.com/embed/H4Jw8qkC8V4",
+                personalVideo: false,
                 category: "ai-art",
                 description: "介紹AI影片生成工具，學習如何用文字描述創造短影片內容，適合社交媒體和行銷應用。",
                 duration: "16:25",
                 thumbnail: "🎬",
                 tags: ["影片生成", "內容創作", "社交媒體"],
-                level: "beginner"
+                level: "beginner",
+                youtubeUrl: "https://youtu.be/3qL5deJBhOI"
             },
             {
                 id: "video-6",
                 title: "AI輔助程式設計教學",
-                url: "https://www.youtube.com/embed/U5p9G3CyOe8", // 請替換為你的影片連結
+                url: "https://www.youtube.com/embed/U5p9G3CyOe8",
+                backupUrl: "https://www.youtube.com/embed/YzKsto1qO-8",
+                personalVideo: false,
                 category: "productivity",
                 description: "使用AI工具輔助程式設計，提升編碼效率和品質。包含錯誤除錯、程式碼優化、文件生成等應用。",
                 duration: "28:30",
                 thumbnail: "💻",
                 tags: ["程式設計", "開發工具", "效率提升"],
-                level: "advanced"
+                level: "advanced",
+                youtubeUrl: "https://youtu.be/U5p9G3CyOe8"
             },
             {
                 id: "video-7",
                 title: "免費AI工具推薦與教學",
-                url: "https://www.youtube.com/embed/38X6hCvG4yc", // 請替換為你的影片連結
+                url: "https://www.youtube.com/embed/38X6hCvG4yc",
+                backupUrl: "https://www.youtube.com/embed/tPq6x7Nk2aw",
+                personalVideo: false,
                 category: "beginner",
                 description: "精選10款免費AI工具，包含繪圖、寫作、設計等類別，適合預算有限的新手學習使用。",
                 duration: "19:45",
                 thumbnail: "🆓",
                 tags: ["免費工具", "新手推薦", "入門指南"],
-                level: "beginner"
+                level: "beginner",
+                youtubeUrl: "https://youtu.be/38X6hCvG4yc"
             },
             {
                 id: "video-8",
                 title: "AI商業應用案例分享",
-                url: "https://www.youtube.com/embed/2E8qCQHXZYA", // 請替換為你的影片連結
+                url: "https://www.youtube.com/embed/2E8qCQHXZYA",
+                backupUrl: "https://www.youtube.com/embed/fZ9Wr7M6X_k",
+                personalVideo: false,
                 category: "productivity",
                 description: "分享實際的AI商業應用案例，包含行銷、客服、數據分析等領域的成功經驗。",
                 duration: "32:20",
                 thumbnail: "📈",
                 tags: ["商業應用", "案例分析", "實戰經驗"],
-                level: "intermediate"
+                level: "intermediate",
+                youtubeUrl: "https://youtu.be/2E8qCQHXZYA"
             }
         ];
 
         // ===== 應用程序狀態變量 =====
-        let currentIndex = 0;        // 當前播放影片的索引
-        let filteredVideos = [];     // 當前篩選後的影片列表
-        let autoplay = false;        // 自動播放狀態
+        let currentIndex = 0;
+        let filteredVideos = [];
+        let autoplay = false;
+        let successfulPlays = parseInt(localStorage.getItem('successful_plays') || '0');
 
         // ===== 頁面初始化 =====
         document.addEventListener('DOMContentLoaded', function() {
-            // 初始化影片列表（顯示全部）
+            // 初始化影片列表
             filterVideos('all');
-
-            // 初始化瀏覽計數
+            
+            // 初始化統計數據
             const views = localStorage.getItem('views_video') || '0';
             document.getElementById('views_video').textContent = views;
+            document.getElementById('successful-plays').textContent = successfulPlays;
+            
+            // 記錄頁面瀏覽
             recordPageView('video');
+            
+            // 檢查影片可用性（背景執行）
+            setTimeout(() => {
+                checkAllVideosAvailability();
+            }, 3000);
+            
+            // 顯示使用提示
+            showInitialTips();
         });
 
         // ===== 核心功能函數 =====
 
         // 載入並播放指定索引的影片
-        function loadVideo(index) {
+        async function loadVideo(index) {
             if (index < 0 || index >= filteredVideos.length) return;
 
             currentIndex = index;
@@ -486,15 +613,123 @@
             document.getElementById("video-description").textContent = video.description;
             document.getElementById("video-counter").textContent = `影片 ${index + 1} / ${filteredVideos.length}`;
             document.getElementById("video-category").textContent = getCategoryName(video.category);
-
-            // 設置影片嵌入連結（根據自動播放狀態）
+            
+            // 添加來源標記
+            addSourceTag(video);
+            
+            // 隱藏任何現有錯誤
+            hideVideoError();
+            
+            // 設置影片嵌入連結
             const player = document.getElementById("video-player");
-            const autoplayParam = autoplay ? "?autoplay=1" : "";
-            player.src = video.url + autoplayParam;
-
-            // 更新播放清單和高亮顯示
+            const autoplayParam = autoplay ? "?autoplay=1&mute=1" : "";
+            
+            // 設置主要影片連結
+            const primaryUrl = video.url + autoplayParam;
+            player.src = primaryUrl;
+            
+            // 設置備用影片資料
+            player.dataset.backupUrl = video.backupUrl + autoplayParam;
+            player.dataset.videoId = video.id;
+            player.dataset.isPersonal = video.personalVideo;
+            
+            // 監聽影片錯誤
+            player.onerror = function() {
+                console.log(`主影片載入失敗: ${video.title}`);
+                handleVideoLoadError(video, player);
+            };
+            
+            // 監聽影片成功載入
+            player.onload = function() {
+                console.log(`影片載入成功: ${video.title}`);
+                hideVideoError();
+                recordSuccessfulPlay(video.id);
+            };
+            
+            // 更新播放清單和控制按鈕
             updatePlaylist();
             updateControls();
+            
+            // 記錄影片觀看
+            recordVideoView(video.id, video.title);
+        }
+
+        // 處理影片載入錯誤
+        function handleVideoLoadError(video, player) {
+            // 顯示錯誤訊息
+            showVideoError(video);
+            
+            // 如果是公開影片，3秒後嘗試載入備用影片
+            if (!video.personalVideo) {
+                setTimeout(() => {
+                    console.log(`嘗試載入備用影片: ${video.title}`);
+                    player.src = video.backupUrl + (autoplay ? "?autoplay=1&mute=1" : "");
+                    player.style.display = 'block';
+                }, 3000);
+            } else {
+                // 個人影片不載入備用，只顯示錯誤
+                player.style.display = 'none';
+            }
+        }
+
+        // 顯示影片錯誤訊息
+        function showVideoError(video) {
+            const videoWrapper = document.querySelector('.video-wrapper');
+            
+            // 移除現有的錯誤訊息
+            const existingError = videoWrapper.querySelector('.video-error');
+            if (existingError) {
+                existingError.remove();
+            }
+            
+            // 創建錯誤訊息
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'video-error';
+            errorDiv.innerHTML = `
+                <div class="error-icon">⚠️</div>
+                <div class="error-title">影片暫時無法播放</div>
+                <div class="error-message">
+                    ${video.personalVideo ? 
+                        '您的教學影片可能正在處理中或暫時無法嵌入。<br>您可以直接前往YouTube頻道觀看：' : 
+                        '此公開教學影片可能因版權或隱私設定暫時無法嵌入播放。<br>我們正在嘗試載入備用影片...'}
+                </div>
+                <a href="${video.youtubeUrl}" target="_blank" class="error-link">
+                    ${video.personalVideo ? '前往我的YouTube頻道觀看' : '前往YouTube觀看此影片'}
+                </a>
+                <div style="margin-top: 20px; font-size: 0.9rem; opacity: 0.8;">
+                    <p>📢 溫馨提示：${video.personalVideo ? 
+                        '您的個人影片建議定期檢查嵌入權限設定。' : 
+                        '公開影片偶爾會因版權限制無法嵌入，建議收藏至播放清單。'}
+                    </p>
+                </div>
+            `;
+            
+            videoWrapper.appendChild(errorDiv);
+        }
+
+        // 隱藏影片錯誤訊息
+        function hideVideoError() {
+            const errorDiv = document.querySelector('.video-error');
+            if (errorDiv) {
+                errorDiv.remove();
+            }
+        }
+
+        // 添加影片來源標記
+        function addSourceTag(video) {
+            const titleElement = document.getElementById('video-title');
+            // 移除現有的來源標記
+            const existingTag = titleElement.querySelector('.video-source-tag');
+            if (existingTag) {
+                existingTag.remove();
+            }
+            
+            // 添加新的來源標記
+            const sourceTag = document.createElement('span');
+            sourceTag.className = `video-source-tag ${video.personalVideo ? 'source-personal' : 'source-public'}`;
+            sourceTag.textContent = video.personalVideo ? '您的影片' : '公開教學影片';
+            sourceTag.title = video.personalVideo ? '此為您的個人教學影片' : '此為公開教學影片，若無法播放請至YouTube觀看';
+            titleElement.appendChild(sourceTag);
         }
 
         // 根據分類篩選影片
@@ -517,7 +752,6 @@
             if (filteredVideos.length > 0) {
                 loadVideo(currentIndex);
             } else {
-                // 如果沒有影片，顯示提示訊息
                 showNoVideosMessage();
             }
         }
@@ -528,6 +762,11 @@
             playlistGrid.innerHTML = '';
 
             filteredVideos.forEach((video, index) => {
+                // 添加來源指示器
+                const sourceIndicator = video.personalVideo ? 
+                    '<span style="font-size:0.7rem; background:#10b981; color:white; padding:2px 6px; border-radius:10px; margin-left:5px;">您的影片</span>' : 
+                    '<span style="font-size:0.7rem; background:#f59e0b; color:white; padding:2px 6px; border-radius:10px; margin-left:5px;">公開影片</span>';
+
                 const item = document.createElement('div');
                 item.className = `playlist-item ${index === currentIndex ? 'active' : ''}`;
                 item.onclick = () => loadVideo(index);
@@ -535,7 +774,10 @@
                 item.innerHTML = `
                     <div class="playlist-thumbnail">${video.thumbnail}</div>
                     <div class="playlist-info">
-                        <div class="playlist-video-title">${video.title}</div>
+                        <div class="playlist-video-title">
+                            ${video.title}
+                            ${sourceIndicator}
+                        </div>
                         <div class="playlist-video-duration">${video.duration} • ${getCategoryName(video.category)}</div>
                         <div style="font-size:0.9rem; color:#6b7280; margin-top:8px;">${video.description.substring(0, 70)}...</div>
                     </div>
@@ -545,7 +787,7 @@
             });
         }
 
-        // 更新控制按鈕狀態（啟用/禁用）
+        // 更新控制按鈕狀態
         function updateControls() {
             const prevBtn = document.getElementById('prev-btn');
             const nextBtn = document.getElementById('next-btn');
@@ -589,11 +831,6 @@
             autoplay = !autoplay;
             const btn = document.getElementById('autoplay-btn');
             btn.innerHTML = `<span>🔄</span> 自動播放：${autoplay ? '開啟' : '關閉'}`;
-
-            // 如果開啟自動播放，重新載入當前影片
-            if (autoplay && filteredVideos[currentIndex]) {
-                document.getElementById("video-player").src = filteredVideos[currentIndex].url + "?autoplay=1";
-            }
         }
 
         // 顯示「無影片」訊息
@@ -607,12 +844,128 @@
             updateControls();
         }
 
+        // ===== 統計與記錄功能 =====
+
         // 記錄頁面瀏覽次數
         function recordPageView(page) {
             const key = `views_${page}`;
             let count = parseInt(localStorage.getItem(key) || '0');
             count++;
             localStorage.setItem(key, count.toString());
+        }
+
+        // 記錄影片觀看
+        function recordVideoView(videoId, videoTitle) {
+            const viewKey = `video_view_${videoId}`;
+            const lastView = localStorage.getItem(viewKey);
+            const now = new Date().getTime();
+            
+            // 每小時只記錄一次觀看
+            if (!lastView || (now - parseInt(lastView)) > 3600000) {
+                localStorage.setItem(viewKey, now.toString());
+                
+                // 更新總觀看次數
+                const totalViews = parseInt(localStorage.getItem('total_video_views') || '0') + 1;
+                localStorage.setItem('total_video_views', totalViews.toString());
+                
+                // 更新頁腳顯示
+                document.getElementById('views_video').textContent = totalViews;
+            }
+        }
+
+        // 記錄成功播放
+        function recordSuccessfulPlay(videoId) {
+            successfulPlays++;
+            localStorage.setItem('successful_plays', successfulPlays.toString());
+            document.getElementById('successful-plays').textContent = successfulPlays;
+        }
+
+        // ===== 影片可用性檢查 =====
+
+        // 檢查所有影片可用性
+        async function checkAllVideosAvailability() {
+            const unavailableVideos = [];
+            
+            for (const video of videos) {
+                try {
+                    const videoId = extractVideoId(video.url);
+                    const response = await fetch(
+                        `https://www.youtube.com/oembed?url=https://youtu.be/${videoId}&format=json`
+                    );
+                    
+                    if (!response.ok && !video.personalVideo) {
+                        unavailableVideos.push({
+                            title: video.title,
+                            reason: '公開影片可能已被移除或設為私密',
+                            youtubeUrl: video.youtubeUrl
+                        });
+                    }
+                } catch (error) {
+                    console.log(`檢查影片失敗: ${video.title}`);
+                }
+            }
+            
+            // 如果有無法播放的影片，顯示提醒
+            if (unavailableVideos.length > 0) {
+                console.warn('⚠️ 以下影片可能需要檢查：', unavailableVideos);
+                showUnavailableVideosAlert(unavailableVideos);
+            }
+        }
+
+        // 從URL提取影片ID
+        function extractVideoId(url) {
+            const match = url.match(/embed\/([^?]+)/);
+            return match ? match[1] : '';
+        }
+
+        // 顯示無法播放影片的提醒
+        function showUnavailableVideosAlert(unavailableVideos) {
+            if (unavailableVideos.length === 0) return;
+            
+            const alertDiv = document.createElement('div');
+            alertDiv.className = 'availability-alert';
+            alertDiv.id = 'availability-alert';
+            
+            alertDiv.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <strong>⚠️ ${unavailableVideos.length} 部影片需要檢查</strong>
+                    <button onclick="document.getElementById('availability-alert').style.display='none'" 
+                            style="background:none; border:none; color:white; font-size:1.5rem; cursor:pointer; line-height:1;">
+                        ×
+                    </button>
+                </div>
+                <div id="unavailable-list" style="display:none; margin-top:10px;">
+                    ${unavailableVideos.map(v => 
+                        `<div style="margin:5px 0; padding:5px; background:rgba(255,255,255,0.1); border-radius:5px;">
+                            <strong>${v.title}</strong><br>
+                            <small>${v.reason}</small>
+                        </div>`
+                    ).join('')}
+                </div>
+                <button onclick="document.getElementById('unavailable-list').style.display='block'; this.style.display='none'" 
+                        style="margin-top:10px; background:rgba(255,255,255,0.2); border:none; color:white; padding:5px 10px; border-radius:5px; cursor:pointer; width:100%;">
+                    顯示詳細資訊
+                </button>
+            `;
+            
+            document.body.appendChild(alertDiv);
+            setTimeout(() => {
+                alertDiv.style.display = 'block';
+            }, 5000);
+        }
+
+        // ===== 使用提示功能 =====
+
+        function showInitialTips() {
+            // 第一天使用時顯示提示
+            const firstVisit = localStorage.getItem('first_visit');
+            if (!firstVisit) {
+                localStorage.setItem('first_visit', new Date().toISOString());
+                
+                setTimeout(() => {
+                    alert('💡 新版播放器使用提示：\n\n1. 標記為「您的影片」的影片來自您的頻道\n2. 公開影片有備用來源，確保教學不中斷\n3. 使用鍵盤左右鍵可切換影片\n4. 右下角會顯示影片可用性提醒');
+                }, 1500);
+            }
         }
 
         // ===== 鍵盤快捷鍵支持 =====
@@ -627,6 +980,29 @@
                 toggleAutoplay();
             }
         });
+
+        // ===== 替換為您的影片 =====
+        // 要將公開影片替換為您的個人影片，請將以下屬性修改：
+        // 1. 將 url 改為您的影片嵌入連結
+        // 2. 將 personalVideo 設為 true
+        // 3. 將 youtubeUrl 改為您的影片連結
+        // 4. 更新其他描述資訊
+
+        // 示例：
+        // {
+        //     id: "video-1",
+        //     title: "您的影片標題",
+        //     url: "https://www.youtube.com/embed/您的影片ID",
+        //     backupUrl: "https://www.youtube.com/embed/備用影片ID",
+        //     personalVideo: true, // ← 改為 true
+        //     category: "chatgpt",
+        //     description: "您的影片描述...",
+        //     duration: "15:30",
+        //     thumbnail: "🤖",
+        //     tags: ["您的標籤"],
+        //     level: "beginner",
+        //     youtubeUrl: "https://youtu.be/您的影片ID"
+        // }
     </script>
 </body>
 </html>
