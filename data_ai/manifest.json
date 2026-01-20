@@ -167,5 +167,40 @@
         "url": "https://www.reddit.com/r/artificial"
       }
     ]
+  },
+  {
+    "id": "line-ai-01",
+    "title": "Line AI应用教学：智能助手设定",
+    "type": "pdf",
+    "category": "line-ai",
+    "url": "./data_ai/line_ai_guide.pdf",
+    "description": "Line AI助手完整教学，包含客服设定、自动回复、群组管理等实用功能。",
+    "externalLinks": [
+      {
+        "name": "YouTube教学影片",
+        "url": "https://www.youtube.com/embed/您的Line教学影片ID",
+        "type": "youtube"
+      },
+      {
+        "name": "Line官方文件",
+        "url": "https://developers.line.biz/zh-hant/",
+        "type": "webpage"
+      }
+    ]
+  },
+  {
+    "id": "line-ai-02",
+    "title": "Line Bot整合ChatGPT教学",
+    "type": "webpage",
+    "category": "line-ai",
+    "url": "https://example.com/line-chatgpt-integration",
+    "description": "学习如何将ChatGPT整合到Line Bot中，创建智能对话机器人。",
+    "externalLinks": [
+      {
+        "name": "GitHub范例代码",
+        "url": "https://github.com/example/line-chatgpt-bot",
+        "type": "webpage"
+      }
+    ]
   }
 ]

@@ -10,7 +10,6 @@
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.9.179/pdf.worker.min.js';
   </script>
   <style>
-    /* ===== 所有原始样式完全保留 ===== */
     .viewer-container { max-width: 1400px; margin: 0 auto; padding: 20px; }
     .ai-header { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); color: white; padding: 25px; border-radius: 15px; margin-bottom: 30px; text-align: center; box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3); }
     .viewer-content { display: grid; grid-template-columns: 350px 1fr; gap: 30px; margin-bottom: 40px; }
@@ -112,6 +111,8 @@
             <button class="category-btn" onclick="filterCategory('productivity')">工作效率</button>
             <button class="category-btn" onclick="filterCategory('design')">創意設計</button>
             <button class="category-btn" onclick="filterCategory('advanced')">進階技巧</button>
+            <!-- 新增 Line AI 應用分類 -->
+            <button class="category-btn" onclick="filterCategory('line-ai')">Line AI應用</button>
           </div>
         </div>
         
@@ -210,10 +211,9 @@
     <p>掌握AI工具，提升工作效率與生活品質</p>
     
     <div style="display: flex; justify-content: center; gap: 20px; margin-top: 30px; flex-wrap: wrap;">
-      <!-- ===== 修改点 3：在页脚增加“返回首页”按钮 ===== -->
+      <!-- 修改：使用正確的影片頁面連結 -->
       <a href="index.html" class="btn" style="background: #6b7280; color: white;">🏠 返回首頁</a>
-      <!-- 注意：下方链接中的 video-player.html 建议改为 video.html，以匹配您的新影片页面 -->
-      <a href="video.html" class="btn btn-primary">🎥 觀看教學影片</a>
+      <a href="video-player.html" class="btn btn-primary">🎥 觀看教學影片</a>
       <a href="https://www.facebook.com/groups/2076786986493869/" target="_blank" class="btn" style="background: #1877f2; color: white;">👥 加入Facebook社團</a>
     </div>
     
@@ -245,21 +245,22 @@
       'folder': '📁 資源夾'
     };
     
-    // 分類
+    // 分類 - 新增 line-ai
     const categories = {
       'all': '全部資源',
       'beginner': '入門指南',
       'tools': '工具教學',
       'productivity': '工作效率',
       'design': '創意設計',
-      'advanced': '進階技巧'
+      'advanced': '進階技巧',
+      'line-ai': 'Line AI應用'  // 新增
     };
     
-    // ===== 修改点 1：优化 loadContentList 函数，优先从 manifest.json 加载 =====
+    // ===== 優化 loadContentList 函數 =====
     async function loadContentList() {
       showStatus('載入AI學習資源清單中...');
       
-      // 尝试加载本地清单，失败时给出明确提示并使用空数组
+      // 嘗試加載本地清單，失敗時給出明確提示並使用空數組
       try {
         const res = await fetch(manifestURL);
         if (res.ok) {
@@ -271,28 +272,28 @@
             showStatus('⚠️ manifest.json 中沒有找到資源資料');
           }
         } else {
-          // 如果文件不存在，使用空数组并提示
+          // 如果文件不存在，使用空數組並提示
           console.log(`manifest.json 載入失敗 (HTTP ${res.status})，使用空列表`);
           contentList = [];
           showStatus('❌ 無法載入 manifest.json 文件，請確保文件存在');
         }
       } catch (err) {
         console.error('載入 manifest.json 時發生錯誤:', err);
-        contentList = []; // 设置为空数组
+        contentList = []; // 設置為空數組
         showStatus('❌ 載入資源清單時發生錯誤');
       }
       
-      // 载入本地存储的统计数据
+      // 載入本地存儲的統計數據
       loadLocalStats();
       
-      // 初始化过滤列表
+      // 初始化過濾列表
       filteredList = [...contentList];
       updateContentSelect();
       
       if (contentList.length > 0) {
         showContent(0);
       } else {
-        // 如果列表为空，清除显示区域
+        // 如果列表為空，清除顯示區域
         clearContentDisplay();
         showStatus('❌ 沒有可用的AI學習資源，請檢查 manifest.json 文件');
       }
@@ -324,7 +325,7 @@
     }
     
     function filterCategory(category) {
-      // 更新按钮状态
+      // 更新按鈕狀態
       document.querySelectorAll('.category-btn').forEach(btn => {
         btn.classList.remove('active');
       });
@@ -371,17 +372,17 @@
       
       showStatus(`載入${currentResource.title}中...`);
       
-      // 记录页面访问
+      // 記錄頁面訪問
       recordPageView('content_viewer');
       
-      // 更新访问次数
+      // 更新訪問次數
       if (originalIndex >= 0) {
         contentList[originalIndex].views = (contentList[originalIndex].views || 0) + 1;
         saveLocalStats();
         updateStats(originalIndex);
       }
       
-      // 根据资源类型显示不同内容
+      // 根據資源類型顯示不同內容
       displayContentByType(currentResource);
       
       document.getElementById('contentSelect').value = index;
@@ -394,7 +395,7 @@
       const pdfControls = document.getElementById('pdfControls');
       const externalLinksPanel = document.getElementById('externalLinksPanel');
       
-      // 隐藏控制面板
+      // 隱藏控制面板
       pdfControls.style.display = 'none';
       externalLinksPanel.style.display = 'none';
       
@@ -420,7 +421,7 @@
           showStatus('❌ 不支援的資源類型');
       }
       
-      // 显示资源描述
+      // 顯示資源描述
       const description = document.createElement('div');
       description.className = 'resource-description';
       description.innerHTML = `
@@ -437,7 +438,7 @@
       `;
       displayArea.appendChild(description);
 
-      // ===== 修改点 2：为PDF资源添加GitHub Release链接提示 =====
+      // ===== 為PDF資源添加GitHub Release連結提示 =====
       if (resource.type === 'pdf' && resource.githubRelease) {
         const githubLinkDiv = document.createElement('div');
         githubLinkDiv.style.marginTop = '15px';
@@ -459,7 +460,7 @@
         displayArea.appendChild(githubLinkDiv);
       }
       
-      // 显示外部连结
+      // 顯示外部連結
       if (resource.externalLinks && resource.externalLinks.length > 0) {
         showExternalLinks(resource.externalLinks);
       }
@@ -693,7 +694,7 @@
         if (message.includes('載入中') || message.includes('...')) {
           statusElement.innerHTML = `<span class="loading"></span>${message}`;
         } else {
-          statusElement.textContent = message; // 修正了这里的错误（原代码为 .textContent）
+          statusElement.textContent = message;
         }
       }
     }
@@ -737,7 +738,7 @@
       
       if (category) {
         // 自動選擇對應的分類
-        const categoryBtn = document.querySelector(`.category-btn[onclick*="${category}"]`);
+        const categoryBtn = document.querySelector(`.category-btn[onclick*="filterCategory('${category}')"]`);
         if (categoryBtn) {
           categoryBtn.click();
         }
@@ -774,6 +775,8 @@
       } else if (event.ctrlKey && event.key === 'f') {
         event.preventDefault();
         shareToFacebook();
+      } else if (event.key === 'H' || event.key === 'h') {
+        window.location.href = 'index.html';
       }
     });
   </script>

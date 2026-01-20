@@ -217,7 +217,32 @@
       color: white;
     }
     
-    /* 新增：Line AI 專區樣式 */
+    /* 新增部分：版主介绍和Line专区 */
+    .owner-section {
+      text-align: center;
+      margin: 3rem 0;
+      padding: 2rem;
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      border-radius: 15px;
+      border: 1px solid #bae6fd;
+    }
+    
+    .owner-photo {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 5px solid #6366f1;
+      margin: 0 auto 1.5rem auto;
+      box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+    }
+    
+    .owner-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
     .line-ai-section {
       background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
       padding: 3rem 2rem;
@@ -226,42 +251,42 @@
       border: 1px solid #bae6fd;
     }
     
-    .line-ai-content {
+    .line-content {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2rem;
       align-items: center;
     }
     
-    .line-ai-image {
+    .line-preview {
       border-radius: 10px;
       overflow: hidden;
       box-shadow: 0 10px 25px rgba(0,0,0,0.1);
     }
     
-    .line-ai-image img {
+    .line-preview img {
       width: 100%;
       height: auto;
       display: block;
     }
     
-    .line-ai-features {
+    .line-features ul {
       list-style: none;
       padding: 0;
       margin: 1.5rem 0;
     }
     
-    .line-ai-features li {
+    .line-features li {
       margin-bottom: 10px;
       padding-left: 30px;
       position: relative;
     }
     
-    .line-ai-features li:before {
+    .line-features li:before {
       content: "✓";
+      color: #6366f1;
       position: absolute;
       left: 0;
-      color: #059669;
       font-weight: bold;
     }
     
@@ -290,8 +315,9 @@
         padding: 2rem 1rem;
       }
       
-      .line-ai-section {
-        padding: 2rem 1rem;
+      .owner-photo {
+        width: 150px;
+        height: 150px;
       }
     }
     
@@ -328,9 +354,12 @@
       </div>
     </div>
     
-    <nav class="breadcrumb">
-      <a href="index.html">首頁</a>
-    </nav>
+    <!-- 導航按鈕 -->
+    <div style="display: flex; justify-content: center; gap: 15px; margin: 20px 0; flex-wrap: wrap;">
+      <a href="video-player.html" class="btn btn-primary">🎥 教學影片</a>
+      <a href="content-viewer.html" class="btn btn-secondary">📚 AI資源庫</a>
+      <a href="about.html" class="btn btn-secondary">ℹ️ 關於我們</a>
+    </div>
     
     <main class="main-content">
       <div class="community-stats">
@@ -352,11 +381,11 @@
         </div>
       </div>
       
-      <!-- 新增：版主介紹 -->
-      <section style="text-align: center; margin: 3rem 0;">
+      <!-- 版主介紹區 -->
+      <section class="owner-section">
         <h2 style="color: #6366f1; margin-bottom: 1.5rem;">👨‍🏫 認識版主</h2>
-        <div style="display: inline-block; width: 200px; height: 200px; border-radius: 50%; overflow: hidden; border: 5px solid #6366f1; box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3); margin-bottom: 1.5rem;">
-          <img src="assets/images/chday.jpg" alt="版主照片" style="width: 100%; height: 100%; object-fit: cover;">
+        <div class="owner-photo">
+          <img src="assets/images/chday.jpg" alt="版主照片">
         </div>
         <h3 style="color: #4b5563; margin-bottom: 0.5rem;">David Chen</h3>
         <p style="color: #6b7280; max-width: 600px; margin: 0 auto;">AI應用講師，專注於分享實用的AI工具與生活應用技巧，幫助大家輕鬆上手AI技術。</p>
@@ -402,31 +431,30 @@
             <li>線上交流活動</li>
             <li>學習小組互動</li>
           </ul>
-          <a href="https://facebook.com/groups/ai-life-skills" target="_blank" class="btn btn-secondary" style="margin-top: auto;">加入社團 →</a>
+          <a href="https://www.facebook.com/groups/2076786986493869/" target="_blank" class="btn btn-secondary" style="margin-top: auto;">加入社團 →</a>
         </div>
       </div>
       
-      <!-- 新增：Line AI 應用專區 -->
+      <!-- Line AI 應用專區 -->
       <section class="line-ai-section">
         <h2 style="color: #6366f1; text-align: center; margin-bottom: 2rem;">💬 Line AI 應用專區</h2>
-        <div class="line-ai-content">
-          <div>
+        <div class="line-content">
+          <div class="line-features">
             <h3 style="color: #4b5563; margin-bottom: 1rem;">特別為老年人設計的Line AI教學</h3>
             <p>考慮到老年人多使用Line，我們特別開設了Line AI應用教學專區，讓長輩們也能輕鬆享受AI帶來的便利：</p>
-            <ul class="line-ai-features">
+            <ul>
               <li>Line AI客服設定教學</li>
               <li>智能自動回覆設定</li>
               <li>Line Bot整合ChatGPT</li>
               <li>訊息管理與分類技巧</li>
               <li>語音轉文字應用</li>
-              <li>圖片智慧辨識功能</li>
             </ul>
-            <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+            <div style="display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap;">
               <a href="video-player.html?category=line-ai" class="btn btn-primary">👨‍👩‍👧‍👦 學習Line AI應用</a>
-              <a href="about.html" class="btn btn-outline">ℹ️ 了解更多</a>
+              <a href="about.html" class="btn" style="background: transparent; border: 2px solid #6366f1; color: #6366f1;">ℹ️ 了解更多</a>
             </div>
           </div>
-          <div class="line-ai-image">
+          <div class="line-preview">
             <img src="assets/images/preview_line.jpg" alt="Line AI 應用預覽">
           </div>
         </div>
@@ -485,31 +513,31 @@
         <p>與5000+位AI愛好者一起學習成長，分享你的AI應用經驗，獲得最新AI工具資訊</p>
         
         <div class="social-buttons">
-          <a href="https://facebook.com/groups/ai-life-skills" target="_blank" class="social-btn fb-btn">
+          <a href="https://www.facebook.com/groups/2076786986493869/" target="_blank" class="social-btn fb-btn">
             <span style="font-size: 1.2rem;">📘</span>
             加入Facebook社團
           </a>
-          <a href="resources.html" class="social-btn" style="background: #10b981; color: white;">
+          <a href="content-viewer.html" class="social-btn" style="background: #10b981; color: white;">
             <span style="font-size: 1.2rem;">🔗</span>
             取得免費資源
           </a>
-          <a href="content-viewer.html" class="social-btn" style="background: #8b5cf6; color: white;">
-            <span style="font-size: 1.2rem;">📚</span>
-            開始學習
+          <a href="video-player.html" class="social-btn" style="background: #8b5cf6; color: white;">
+            <span style="font-size: 1.2rem;">🎥</span>
+            觀看教學影片
           </a>
         </div>
       </div>
     </main>
     
     <footer style="text-align: center; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid #e5e7eb;">
-      <div class="btn-container">
-        <a href="content-viewer.html" class="btn btn-primary">🧠 AI資源庫</a>
+      <div style="display: flex; justify-content: center; gap: 15px; margin-bottom: 2rem; flex-wrap: wrap;">
+        <a href="index.html" class="btn" style="background: #6366f1; color: white;">🏠 返回首頁</a>
+        <a href="content-viewer.html" class="btn btn-secondary">🧠 AI資源庫</a>
         <a href="video-player.html" class="btn btn-secondary">🎥 教學影片</a>
         <a href="about.html" class="btn btn-secondary">ℹ️ 關於我們</a>
-        <a href="resources.html" class="btn btn-secondary">🔗 推薦資源</a>
       </div>
       
-      <p style="margin-top: 2rem;">&copy; 2024 AI生活分享社團 | AI Skills for Everyday Life</p>
+      <p>&copy; 2024 AI生活分享社團 | AI Skills for Everyday Life</p>
       <p style="font-size: 0.9rem; color: #6b7280; margin-top: 0.5rem;">
         專注於AI工具應用與生活技巧分享
       </p>
