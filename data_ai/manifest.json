@@ -112,7 +112,7 @@
     "type": "pdf",
     "category": "line-ai",
     "url": "./data_ai/pdfs/LINE_AI.pdf",
-    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/LINE_AI.pdf",
+    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/AI.pdf",
     "description": "LINE 平台 AI 工具与聊天机器人整合开发完全指南，包含官方 API 调用与智能回复设定。",
     "views": 0,
     "likes": 0,
@@ -121,11 +121,6 @@
         "name": "LINE Developers 官方文档",
         "url": "https://developers.line.biz/zh-hant/docs/",
         "type": "webpage"
-      },
-      {
-        "name": "LINE Bot 快速入门影片",
-        "url": "https://www.youtube.com/embed/你的影片ID",
-        "type": "youtube"
       }
     ]
   },
