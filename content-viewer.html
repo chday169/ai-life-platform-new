@@ -5,11 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🧠 AI內容瀏覽器 | AI生活分享社團</title>
   <link rel="stylesheet" href="assets/style.css">
+  
+  <!-- 添加 PDF.js 庫 -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.9.179/pdf.min.js"></script>
   <script>
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.9.179/pdf.worker.min.js';
   </script>
+  
   <style>
+    /* 保持您的原始樣式 */
     .viewer-container { max-width: 1400px; margin: 0 auto; padding: 20px; }
     .ai-header { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); color: white; padding: 25px; border-radius: 15px; margin-bottom: 30px; text-align: center; box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3); }
     .viewer-content { display: grid; grid-template-columns: 350px 1fr; gap: 30px; margin-bottom: 40px; }
@@ -53,16 +57,21 @@
     .share-btn:hover { background: #6366f1; color: white; transform: translateY(-2px); }
     .fb-share-btn { background: #1877f2; color: white; }
     .fb-share-btn:hover { background: #0d5bb9; }
-    .ai-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin: 40px 0; }
-    .feature-card { background: white; border: 1px solid #e0e7ff; border-radius: 12px; padding: 25px; text-align: center; transition: all 0.3s ease; }
-    .feature-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(99, 102, 241, 0.15); border-color: #6366f1; }
-    .loading { display: inline-block; width: 20px; height: 20px; border: 3px solid #e0e7ff; border-top: 3px solid #6366f1; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 10px; }
+    .loading { display: inline-block; width: 20px; height: 20px; border: 3px solid #e0e7ff; border-top: 3px solid #6366f1; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 10px; vertical-align: middle; }
     @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     .webpage-frame { width: 100%; height: 600px; border: none; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); margin: 20px 0; }
     .folder-view { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; margin: 25px 0; }
     .folder-item { background: white; border: 2px solid #e0e7ff; border-radius: 12px; padding: 25px; cursor: pointer; transition: all 0.3s ease; text-align: center; }
     .folder-item:hover { background: #e0e7ff; border-color: #6366f1; transform: translateY(-5px); }
     .folder-icon { font-size: 3rem; margin-bottom: 15px; color: #6366f1; }
+    
+    /* 新增：PDF 加載資訊樣式 */
+    .pdf-loading-info { margin: 20px 0; }
+    .github-tip { background: #f0f9ff; border-left: 4px solid #3b82f6; padding: 15px; border-radius: 8px; margin: 15px 0; }
+    .github-tip h4 { color: #1e40af; margin-bottom: 8px; }
+    .github-tip p { color: #4b5563; margin-bottom: 10px; font-size: 0.9rem; }
+    
+    /* 響應式設計 */
     @media (max-width: 1024px) { .viewer-content { grid-template-columns: 1fr; } .sidebar { order: 2; } .viewer-main { order: 1; } .content-select { height: 250px; } }
     @media (max-width: 768px) {
       .page-controls { flex-direction: column; }
@@ -71,7 +80,6 @@
       .share-btn { width: 100%; }
       .external-links-panel { flex-direction: column; }
       .link-btn { width: 100%; }
-      .ai-features { grid-template-columns: 1fr; }
       .webpage-frame { height: 400px; }
     }
     @media (max-width: 480px) {
@@ -111,7 +119,6 @@
             <button class="category-btn" onclick="filterCategory('productivity')">工作效率</button>
             <button class="category-btn" onclick="filterCategory('design')">創意設計</button>
             <button class="category-btn" onclick="filterCategory('advanced')">進階技巧</button>
-            <!-- 新增 Line AI 應用分類 -->
             <button class="category-btn" onclick="filterCategory('line-ai')">Line AI應用</button>
           </div>
         </div>
@@ -122,6 +129,9 @@
           <button onclick="prevContent()" class="nav-btn">⬅️ 上一個資源</button>
           <button onclick="nextContent()" class="nav-btn">➡️ 下一個資源</button>
           <button onclick="window.location.href='index.html'" class="nav-btn back-btn">🏠 返回首頁</button>
+          <button onclick="showPDFStats()" class="nav-btn" style="background: #8b5cf6; margin-top: 10px;">
+            📊 PDF統計
+          </button>
         </div>
         
         <div class="sidebar-info">
@@ -129,7 +139,7 @@
           <ul style="font-size: 0.9rem; color: #6b7280; padding-left: 20px;">
             <li>選擇左側資源列表瀏覽內容</li>
             <li>外部連結會在新視窗開啟</li>
-            <li>可收藏常用資源</li>
+            <li>PDF優先從GitHub加載最新版本</li>
             <li>支援PDF縮放與分頁瀏覽</li>
           </ul>
         </div>
@@ -145,7 +155,6 @@
         <!-- 外部連結面板 -->
         <div id="externalLinksPanel" class="external-links-panel" style="display: none;">
           <h4 style="color: #6366f1; width: 100%; margin: 0 0 15px 0;">🔗 相關連結</h4>
-          <!-- 連結會動態添加在這裡 -->
         </div>
         
         <!-- PDF控制 -->
@@ -176,32 +185,6 @@
             <button onclick="copyResourceLink()" class="share-btn">🔗 複製連結</button>
           </div>
         </div>
-        
-        <div class="ai-features">
-          <div class="feature-card">
-            <div class="feature-icon" style="font-size: 2rem; color: #6366f1; margin-bottom: 15px;">📄</div>
-            <h4>PDF教材</h4>
-            <p style="font-size: 0.9rem; color: #6b7280;">完整教學文件與指南</p>
-          </div>
-          
-          <div class="feature-card">
-            <div class="feature-icon" style="font-size: 2rem; color: #ff0000; margin-bottom: 15px;">🎬</div>
-            <h4>教學影片</h4>
-            <p style="font-size: 0.9rem; color: #6b7280;">視覺化操作教學</p>
-          </div>
-          
-          <div class="feature-card">
-            <div class="feature-icon" style="font-size: 2rem; color: #10b981; margin-bottom: 15px;">🌐</div>
-            <h4>網站連結</h4>
-            <p style="font-size: 0.9rem; color: #6b7280;">官方資源與工具</p>
-          </div>
-          
-          <div class="feature-card">
-            <div class="feature-icon" style="font-size: 2rem; color: #8b5cf6; margin-bottom: 15px;">📁</div>
-            <h4>資源夾</h4>
-            <p style="font-size: 0.9rem; color: #6b7280;">分類整理學習資源</p>
-          </div>
-        </div>
       </section>
     </div>
   </main>
@@ -211,7 +194,6 @@
     <p>掌握AI工具，提升工作效率與生活品質</p>
     
     <div style="display: flex; justify-content: center; gap: 20px; margin-top: 30px; flex-wrap: wrap;">
-      <!-- 修改：使用正確的影片頁面連結 -->
       <a href="index.html" class="btn" style="background: #6b7280; color: white;">🏠 返回首頁</a>
       <a href="video-player.html" class="btn btn-primary">🎥 觀看教學影片</a>
       <a href="https://www.facebook.com/groups/2076786986493869/" target="_blank" class="btn" style="background: #1877f2; color: white;">👥 加入Facebook社團</a>
@@ -219,15 +201,15 @@
     
     <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
       <p style="font-size: 0.9rem; color: #6b7280;">
-        💡 提示：本瀏覽器支援多種內容格式，包括PDF、YouTube影片、網頁連結和資源夾
+        💡 提示：PDF資源優先從GitHub Release加載最新版本
       </p>
     </div>
   </footer>
-  
+
+  <!-- JavaScript 部分 -->
   <script>
-    // AI學習資源清單
+    // ========== 全局變數 ==========
     const manifestURL = './data_ai/manifest.json';
-    
     let contentList = [];
     let filteredList = [];
     let currentIndex = -1;
@@ -237,66 +219,445 @@
     let currentScale = 1.5;
     let currentResource = null;
     
-    // 資源類型
-    const contentTypes = {
-      'pdf': '📄 PDF文件',
-      'youtube': '🎬 教學影片',
-      'webpage': '🌐 網站連結',
-      'folder': '📁 資源夾'
-    };
+    // ========== 主要函數 ==========
     
-    // 分類 - 新增 line-ai
-    const categories = {
-      'all': '全部資源',
-      'beginner': '入門指南',
-      'tools': '工具教學',
-      'productivity': '工作效率',
-      'design': '創意設計',
-      'advanced': '進階技巧',
-      'line-ai': 'Line AI應用'  // 新增
-    };
-    
-    // ===== 優化 loadContentList 函數 =====
+    // 初始化載入
     async function loadContentList() {
       showStatus('載入AI學習資源清單中...');
       
-      // 嘗試加載本地清單，失敗時給出明確提示並使用空數組
       try {
         const res = await fetch(manifestURL);
         if (res.ok) {
-          const data = await res.json();
-          contentList = Array.isArray(data) ? data : [];
-          if (contentList.length > 0) {
-            showStatus(`✅ 成功從 manifest.json 載入 ${contentList.length} 個資源`);
-          } else {
-            showStatus('⚠️ manifest.json 中沒有找到資源資料');
-          }
+          contentList = await res.json();
+          showStatus(`✅ 成功載入 ${contentList.length} 個資源`);
         } else {
-          // 如果文件不存在，使用空數組並提示
-          console.log(`manifest.json 載入失敗 (HTTP ${res.status})，使用空列表`);
           contentList = [];
-          showStatus('❌ 無法載入 manifest.json 文件，請確保文件存在');
+          showStatus('❌ 無法載入 manifest.json 文件');
         }
       } catch (err) {
         console.error('載入 manifest.json 時發生錯誤:', err);
-        contentList = []; // 設置為空數組
+        contentList = [];
         showStatus('❌ 載入資源清單時發生錯誤');
       }
       
-      // 載入本地存儲的統計數據
       loadLocalStats();
-      
-      // 初始化過濾列表
       filteredList = [...contentList];
       updateContentSelect();
       
       if (contentList.length > 0) {
         showContent(0);
       } else {
-        // 如果列表為空，清除顯示區域
         clearContentDisplay();
-        showStatus('❌ 沒有可用的AI學習資源，請檢查 manifest.json 文件');
+        showStatus('❌ 沒有可用的AI學習資源');
       }
+    }
+    
+    // 顯示內容
+    async function showContent(index) {
+      if (index < 0 || index >= filteredList.length) return;
+      
+      currentIndex = index;
+      currentPage = 1;
+      currentResource = filteredList[index];
+      
+      const originalIndex = contentList.findIndex(item => item.id === currentResource.id);
+      
+      showStatus(`載入${currentResource.title}中...`);
+      
+      recordPageView('content_viewer');
+      
+      if (originalIndex >= 0) {
+        contentList[originalIndex].views = (contentList[originalIndex].views || 0) + 1;
+        saveLocalStats();
+        updateStats(originalIndex);
+      }
+      
+      displayContentByType(currentResource);
+      document.getElementById('contentSelect').value = index;
+    }
+    
+    // 根據類型顯示內容
+    function displayContentByType(resource) {
+      const displayArea = document.getElementById('contentDisplay');
+      displayArea.innerHTML = '';
+      
+      const pdfControls = document.getElementById('pdfControls');
+      const externalLinksPanel = document.getElementById('externalLinksPanel');
+      
+      pdfControls.style.display = 'none';
+      externalLinksPanel.style.display = 'none';
+      
+      // 顯示資源描述
+      const description = document.createElement('div');
+      description.className = 'resource-description';
+      description.innerHTML = `
+        <h3 style="color: #6366f1; margin-bottom: 15px;">${resource.title}</h3>
+        <p style="color: #6b7280; line-height: 1.6; margin-bottom: 20px;">${resource.description || '無描述'}</p>
+        <div style="display: flex; gap: 10px; margin-top: 15px;">
+          <span style="background: #e0e7ff; color: #6366f1; padding: 6px 12px; border-radius: 20px; font-size: 0.85rem;">
+            ${getContentTypeName(resource.type)}
+          </span>
+          <span style="background: #f3f4f6; color: #6b7280; padding: 6px 12px; border-radius: 20px; font-size: 0.85rem;">
+            ${getCategoryName(resource.category)}
+          </span>
+          ${resource.githubRelease ? '<span style="background: #dbeafe; color: #1e40af; padding: 6px 12px; border-radius: 20px; font-size: 0.85rem;">🌐 GitHub版本</span>' : ''}
+        </div>
+      `;
+      displayArea.appendChild(description);
+      
+      // 根據類型顯示
+      switch(resource.type) {
+        case 'pdf':
+          displayPDF(resource);
+          pdfControls.style.display = 'flex';
+          break;
+        case 'youtube':
+          displayYouTube(resource);
+          break;
+        case 'webpage':
+          displayWebPage(resource);
+          break;
+        case 'folder':
+          displayFolder(resource);
+          break;
+        default:
+          showStatus('❌ 不支援的資源類型');
+      }
+      
+      if (resource.externalLinks && resource.externalLinks.length > 0) {
+        showExternalLinks(resource.externalLinks);
+      }
+      
+      showStatus(`✅ 已載入: ${resource.title}`);
+    }
+    
+    // ========== 關鍵修改：PDF 加載函數 ==========
+    async function displayPDF(resource) {
+      const displayArea = document.getElementById('contentDisplay');
+      
+      // 顯示加載信息
+      const loadingDiv = document.createElement('div');
+      loadingDiv.className = 'pdf-loading-info';
+      loadingDiv.innerHTML = `
+        <div style="padding: 15px; background: #f0f9ff; border-radius: 8px; margin: 15px 0;">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+            <span class="loading"></span>
+            <strong style="color: #1e40af;">正在加載PDF...</strong>
+          </div>
+          <div style="font-size: 0.85rem; color: #4b5563;">
+            <div><strong>檔案：</strong>${resource.title}</div>
+            ${resource.githubRelease ? `
+              <div><strong>來源：</strong>GitHub Release（最新版本）</div>
+            ` : `
+              <div><strong>來源：</strong>本地檔案</div>
+            `}
+          </div>
+        </div>
+      `;
+      displayArea.appendChild(loadingDiv);
+      
+      // 創建畫布容器
+      const canvasContainer = document.createElement('div');
+      canvasContainer.className = 'pdf-canvas-container';
+      canvasContainer.innerHTML = '<canvas id="pdfCanvas"></canvas>';
+      displayArea.appendChild(canvasContainer);
+      
+      try {
+        // 優先從 GitHub Release 加載
+        let pdfUrl = resource.githubRelease || resource.url;
+        let sourceType = resource.githubRelease ? 'GitHub Release' : '本地檔案';
+        
+        showStatus(`從 ${sourceType} 加載 PDF...`);
+        
+        // 使用PDF.js加載
+        const loadingTask = pdfjsLib.getDocument({
+          url: pdfUrl,
+          withCredentials: false
+        });
+        
+        const pdf = await loadingTask.promise;
+        
+        // 移除加載信息
+        loadingDiv.remove();
+        
+        currentPDF = pdf;
+        totalPages = pdf.numPages;
+        renderPage(currentPage);
+        
+        showStatus(`✅ PDF載入完成 (${sourceType}): ${resource.title} (共 ${totalPages} 頁)`);
+        
+        // 顯示GitHub下載提示
+        if (resource.githubRelease) {
+          const githubTip = document.createElement('div');
+          githubTip.className = 'github-tip';
+          githubTip.innerHTML = `
+            <h4>💡 正在從 GitHub Release 加載最新版本</h4>
+            <p>如需離線查看或GitHub加載緩慢，可切換到本地版本</p>
+            <button onclick="switchToLocalPDF('${resource.id}')" 
+                    style="padding: 8px 16px; background: #3b82f6; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem;">
+              切換到本地版本
+            </button>
+          `;
+          canvasContainer.parentNode.insertBefore(githubTip, canvasContainer.nextSibling);
+        }
+        
+      } catch (error) {
+        console.error('PDF 加載失敗：', error);
+        
+        // 如果GitHub加載失敗，嘗試本地版本
+        if (resource.githubRelease && resource.url !== resource.githubRelease) {
+          showStatus('GitHub加載失敗，嘗試本地版本...');
+          
+          try {
+            const localLoadingTask = pdfjsLib.getDocument(resource.url);
+            const pdf = await localLoadingTask.promise;
+            
+            loadingDiv.remove();
+            
+            currentPDF = pdf;
+            totalPages = pdf.numPages;
+            renderPage(currentPage);
+            
+            showStatus(`✅ 使用本地版本載入完成: ${resource.title} (共 ${totalPages} 頁)`);
+            
+            // 顯示提示
+            const localTip = document.createElement('div');
+            localTip.className = 'github-tip';
+            localTip.style.borderLeftColor = '#10b981';
+            localTip.innerHTML = `
+              <h4>ℹ️ 使用本地版本</h4>
+              <p>GitHub版本暫時無法加載，已自動切換到本地版本</p>
+              <a href="${resource.githubRelease}" target="_blank" 
+                 style="padding: 8px 16px; background: #6b7280; color: white; border-radius: 6px; text-decoration: none; font-size: 0.9rem; display: inline-block; margin-top: 5px;">
+                直接下載GitHub版本
+              </a>
+            `;
+            canvasContainer.parentNode.insertBefore(localTip, canvasContainer.nextSibling);
+            
+            return;
+          } catch (localError) {
+            console.error('本地版本也加載失敗：', localError);
+          }
+        }
+        
+        // 兩個來源都失敗
+        loadingDiv.innerHTML = `
+          <div style="padding: 15px; background: #fee; border-radius: 8px; margin: 15px 0;">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+              <span style="color: #dc2626; font-size: 1.2rem;">❌</span>
+              <strong style="color: #dc2626;">PDF加載失敗</strong>
+            </div>
+            <div style="font-size: 0.85rem; color: #4b5563; margin-bottom: 15px;">
+              ${error.message}
+            </div>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+              ${resource.githubRelease ? `
+                <a href="${resource.githubRelease}" target="_blank" 
+                   style="padding: 8px 16px; background: #3b82f6; color: white; border-radius: 6px; text-decoration: none; font-size: 0.9rem;">
+                  🔗 下載GitHub版本
+                </a>
+              ` : ''}
+              <button onclick="retryLoadPDF()" 
+                      style="padding: 8px 16px; background: #6b7280; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem;">
+                🔄 重新嘗試
+              </button>
+            </div>
+          </div>
+        `;
+        
+        showStatus(`❌ ${resource.title} 加載失敗`);
+      }
+    }
+    
+    // ========== 輔助函數 ==========
+    
+    // 切換到本地PDF
+    function switchToLocalPDF(resourceId) {
+      const originalResource = contentList.find(item => item.id === resourceId);
+      if (originalResource) {
+        currentResource = { ...originalResource };
+        // 暫時移除githubRelease，強制使用本地
+        delete currentResource.githubRelease;
+        displayContentByType(currentResource);
+        showStatus('🔄 已切換到本地版本');
+      }
+    }
+    
+    // 重新加載PDF
+    function retryLoadPDF() {
+      if (currentResource) {
+        displayContentByType(currentResource);
+      }
+    }
+    
+    // 渲染PDF頁面
+    function renderPage(pageNum) {
+      if (!currentPDF) return;
+      
+      currentPDF.getPage(pageNum).then(page => {
+        const viewport = page.getViewport({ scale: currentScale });
+        const canvas = document.getElementById('pdfCanvas');
+        const context = canvas.getContext('2d');
+        
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+        
+        const renderContext = {
+          canvasContext: context,
+          viewport: viewport
+        };
+        
+        page.render(renderContext).promise.then(() => {
+          document.getElementById('pageInfo').textContent = `第 ${pageNum} 頁 / 共 ${totalPages} 頁`;
+          document.getElementById('zoomLevel').textContent = Math.round(currentScale * 100) + '%';
+        });
+      }).catch(err => {
+        console.error('頁面渲染失敗：', err);
+        showStatus('❌ 頁面渲染失敗');
+      });
+    }
+    
+    // 顯示PDF統計
+    function showPDFStats() {
+      const pdfResources = contentList.filter(item => item.type === 'pdf');
+      const githubPDFs = pdfResources.filter(item => item.githubRelease);
+      
+      const statsDiv = document.createElement('div');
+      statsDiv.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        z-index: 1000;
+        max-width: 500px;
+        width: 90%;
+      `;
+      
+      statsDiv.innerHTML = `
+        <h3 style="color: #6366f1; margin-bottom: 20px; text-align: center;">📊 PDF資源統計</h3>
+        
+        <div style="margin-bottom: 20px;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 10px; padding: 10px; background: #f9fafb; border-radius: 8px;">
+            <span>總PDF數量：</span>
+            <strong style="color: #6366f1;">${pdfResources.length}</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 10px; padding: 10px; background: #f0f9ff; border-radius: 8px;">
+            <span>支援GitHub Release：</span>
+            <strong style="color: #10b981;">${githubPDFs.length}</strong>
+          </div>
+        </div>
+        
+        ${githubPDFs.length > 0 ? `
+          <div style="margin-bottom: 20px;">
+            <h4 style="color: #374151; margin-bottom: 10px;">GitHub Release PDFs：</h4>
+            <div style="max-height: 200px; overflow-y: auto;">
+              ${githubPDFs.map(pdf => `
+                <div style="padding: 8px 10px; background: #f8fafc; border-radius: 6px; margin-bottom: 8px; border-left: 3px solid #3b82f6;">
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 0.9rem;">${pdf.title}</span>
+                    <a href="${pdf.githubRelease}" target="_blank" 
+                       style="color: #3b82f6; text-decoration: none; font-size: 1.2rem;">🔗</a>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        ` : ''}
+        
+        <button onclick="this.parentElement.parentElement.removeChild(this.parentElement)" 
+                style="width: 100%; padding: 12px; background: #6366f1; color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: 600;">
+          關閉
+        </button>
+      `;
+      
+      // 添加遮罩
+      const overlay = document.createElement('div');
+      overlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        z-index: 999;
+      `;
+      overlay.onclick = () => {
+        document.body.removeChild(overlay);
+        document.body.removeChild(statsDiv);
+      };
+      
+      document.body.appendChild(overlay);
+      document.body.appendChild(statsDiv);
+    }
+    
+    // ========== 基本功能函數 ==========
+    
+    function getContentTypeName(type) {
+      const types = {
+        'pdf': '📄 PDF文件',
+        'youtube': '🎬 教學影片',
+        'webpage': '🌐 網站連結',
+        'folder': '📁 資源夾'
+      };
+      return types[type] || type;
+    }
+    
+    function getCategoryName(category) {
+      const categories = {
+        'all': '全部',
+        'beginner': '入門指南',
+        'tools': '工具教學',
+        'productivity': '工作效率',
+        'design': '創意設計',
+        'advanced': '進階技巧',
+        'line-ai': 'Line AI應用'
+      };
+      return categories[category] || category;
+    }
+    
+    function filterCategory(category) {
+      document.querySelectorAll('.category-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      event.target.classList.add('active');
+      
+      if (category === 'all') {
+        filteredList = [...contentList];
+      } else {
+        filteredList = contentList.filter(item => item.category === category);
+      }
+      
+      updateContentSelect();
+      
+      if (filteredList.length > 0) {
+        showContent(0);
+      } else {
+        showStatus(`❌ 沒有${getCategoryName(category)}相關資源`);
+        clearContentDisplay();
+      }
+    }
+    
+    function updateContentSelect() {
+      const select = document.getElementById('contentSelect');
+      select.innerHTML = '';
+      
+      filteredList.forEach((item, index) => {
+        const option = document.createElement('option');
+        option.value = index;
+        
+        // 如果有 GitHub Release，添加標記
+        let title = `${index + 1}. ${item.title}`;
+        if (item.type === 'pdf' && item.githubRelease) {
+          title += ' 🌐';
+        }
+        
+        option.textContent = title;
+        select.appendChild(option);
+      });
     }
     
     function loadLocalStats() {
@@ -324,257 +685,135 @@
       localStorage.setItem('ai_stats', JSON.stringify(stats));
     }
     
-    function filterCategory(category) {
-      // 更新按鈕狀態
-      document.querySelectorAll('.category-btn').forEach(btn => {
-        btn.classList.remove('active');
-      });
-      event.target.classList.add('active');
-      
-      if (category === 'all') {
-        filteredList = [...contentList];
-      } else {
-        filteredList = contentList.filter(item => item.category === category);
-      }
-      
-      updateContentSelect();
-      
-      if (filteredList.length > 0) {
-        showContent(0);
-      } else {
-        showStatus(`❌ 沒有${categories[category]}相關資源`);
-        clearContentDisplay();
+    function updateStats(index) {
+      const item = contentList[index];
+      if (item) {
+        document.getElementById('viewCount').textContent = item.views || 0;
       }
     }
     
-    function updateContentSelect() {
-      const select = document.getElementById('contentSelect');
-      select.innerHTML = '';
-      filteredList.forEach((item, index) => {
-        const option = document.createElement('option');
-        option.value = index;
-        option.textContent = `${index + 1}. ${item.title}`;
-        if (item.type && contentTypes[item.type]) {
-          option.textContent += ` [${contentTypes[item.type]}]`;
+    function showStatus(message) {
+      const statusElement = document.getElementById('statusText');
+      if (statusElement) {
+        if (message.includes('載入中') || message.includes('...')) {
+          statusElement.innerHTML = `<span class="loading"></span>${message}`;
+        } else {
+          statusElement.textContent = message;
         }
-        select.appendChild(option);
-      });
-    }
-    
-    function showContent(index) {
-      if (index < 0 || index >= filteredList.length) return;
-      
-      currentIndex = index;
-      currentPage = 1;
-      currentResource = filteredList[index];
-      
-      const originalIndex = contentList.findIndex(item => item.id === currentResource.id);
-      
-      showStatus(`載入${currentResource.title}中...`);
-      
-      // 記錄頁面訪問
-      recordPageView('content_viewer');
-      
-      // 更新訪問次數
-      if (originalIndex >= 0) {
-        contentList[originalIndex].views = (contentList[originalIndex].views || 0) + 1;
-        saveLocalStats();
-        updateStats(originalIndex);
       }
-      
-      // 根據資源類型顯示不同內容
-      displayContentByType(currentResource);
-      
-      document.getElementById('contentSelect').value = index;
     }
     
-    function displayContentByType(resource) {
+    function clearContentDisplay() {
       const displayArea = document.getElementById('contentDisplay');
       displayArea.innerHTML = '';
-      
-      const pdfControls = document.getElementById('pdfControls');
-      const externalLinksPanel = document.getElementById('externalLinksPanel');
-      
-      // 隱藏控制面板
-      pdfControls.style.display = 'none';
-      externalLinksPanel.style.display = 'none';
-      
-      switch(resource.type) {
-        case 'pdf':
-          displayPDF(resource);
-          pdfControls.style.display = 'flex';
-          break;
-          
-        case 'youtube':
-          displayYouTube(resource);
-          break;
-          
-        case 'webpage':
-          displayWebPage(resource);
-          break;
-          
-        case 'folder':
-          displayFolder(resource);
-          break;
-          
-        default:
-          showStatus('❌ 不支援的資源類型');
-      }
-      
-      // 顯示資源描述
-      const description = document.createElement('div');
-      description.className = 'resource-description';
-      description.innerHTML = `
-        <h3 style="color: #6366f1; margin-bottom: 15px;">${resource.title}</h3>
-        <p style="color: #6b7280; line-height: 1.6; margin-bottom: 20px;">${resource.description || '無描述'}</p>
-        <div style="display: flex; gap: 10px; margin-top: 15px;">
-          <span style="background: #e0e7ff; color: #6366f1; padding: 6px 12px; border-radius: 20px; font-size: 0.85rem;">
-            ${contentTypes[resource.type] || '未知類型'}
-          </span>
-          <span style="background: #f3f4f6; color: #6b7280; padding: 6px 12px; border-radius: 20px; font-size: 0.85rem;">
-            ${categories[resource.category] || '未分類'}
-          </span>
-        </div>
-      `;
-      displayArea.appendChild(description);
-
-      // ===== 為PDF資源添加GitHub Release連結提示 =====
-      if (resource.type === 'pdf' && resource.githubRelease) {
-        const githubLinkDiv = document.createElement('div');
-        githubLinkDiv.style.marginTop = '15px';
-        githubLinkDiv.style.padding = '12px';
-        githubLinkDiv.style.background = '#f0f9ff';
-        githubLinkDiv.style.borderRadius = '8px';
-        githubLinkDiv.style.borderLeft = '4px solid #3b82f6';
-        githubLinkDiv.innerHTML = `
-          <p style="margin: 0 0 8px 0; font-size: 0.9rem; color: #1e40af; font-weight: 600;">
-            💡 可從GitHub獲取最新版本
-          </p>
-          <a href="${resource.githubRelease}" target="_blank" style="font-size: 0.85rem; color: #3b82f6; text-decoration: none;">
-            點擊此處下載最新版PDF
-          </a>
-          <span style="font-size: 0.8rem; color: #6b7280; margin-left: 10px;">
-            (版本: ${new Date().getFullYear()}-${new Date().getMonth()+1})
-          </span>
-        `;
-        displayArea.appendChild(githubLinkDiv);
-      }
-      
-      // 顯示外部連結
-      if (resource.externalLinks && resource.externalLinks.length > 0) {
-        showExternalLinks(resource.externalLinks);
-      }
-      
-      showStatus(`✅ 已載入: ${resource.title}`);
+      document.getElementById('pdfControls').style.display = 'none';
+      document.getElementById('externalLinksPanel').style.display = 'none';
     }
     
-    function displayPDF(resource) {
-      const displayArea = document.getElementById('contentDisplay');
-      
-      const canvasContainer = document.createElement('div');
-      canvasContainer.className = 'pdf-canvas-container';
-      canvasContainer.innerHTML = '<canvas id="pdfCanvas"></canvas>';
-      displayArea.appendChild(canvasContainer);
-      
-      // 載入PDF
-      pdfjsLib.getDocument(resource.url).promise.then(pdf => {
-        currentPDF = pdf;
-        totalPages = pdf.numPages;
+    // ========== 頁面控制函數 ==========
+    
+    function prevContent() {
+      if (currentIndex > 0) {
+        showContent(currentIndex - 1);
+      }
+    }
+    
+    function nextContent() {
+      if (currentIndex < filteredList.length - 1) {
+        showContent(currentIndex + 1);
+      }
+    }
+    
+    function prevPage() {
+      if (currentPDF && currentPage > 1) {
+        currentPage--;
         renderPage(currentPage);
-        
-        showStatus(`✅ PDF載入完成: ${resource.title} (共 ${totalPages} 頁)`);
+      }
+    }
+    
+    function nextPage() {
+      if (currentPDF && currentPage < totalPages) {
+        currentPage++;
+        renderPage(currentPage);
+      }
+    }
+    
+    function zoomIn() {
+      currentScale += 0.25;
+      if (currentPDF) renderPage(currentPage);
+    }
+    
+    function zoomOut() {
+      currentScale = Math.max(0.5, currentScale - 0.25);
+      if (currentPDF) renderPage(currentPage);
+    }
+    
+    function resetZoom() {
+      currentScale = 1.5;
+      if (currentPDF) renderPage(currentPage);
+    }
+    
+    function shareToFacebook() {
+      if (!currentResource) return;
+      
+      const text = encodeURIComponent(`我在AI生活分享社團發現：${currentResource.title}`);
+      const url = encodeURIComponent(window.location.href);
+      window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${text}`, '_blank', 'width=600,height=400');
+    }
+    
+    function copyResourceLink() {
+      if (!currentResource) return;
+      
+      const link = window.location.origin + window.location.pathname + '?resource=' + currentResource.id;
+      navigator.clipboard.writeText(link).then(() => {
+        alert('已複製資源連結到剪貼簿！');
       }).catch(err => {
-        console.error('PDF 載入失敗：', err);
-        showStatus('❌ 無法載入PDF文件：' + err.message);
+        console.error('複製失敗:', err);
       });
     }
+    
+    function recordPageView(page) {
+      const key = `views_${page}`;
+      let count = parseInt(localStorage.getItem(key) || '0');
+      count++;
+      localStorage.setItem(key, count.toString());
+    }
+    
+    // ========== 其他顯示函數 ==========
     
     function displayYouTube(resource) {
       const displayArea = document.getElementById('contentDisplay');
-      
-      const videoContainer = document.createElement('div');
-      videoContainer.innerHTML = `
+      displayArea.innerHTML += `
         <div style="position: relative; width: 100%; padding-bottom: 56.25%; margin: 20px 0;">
-          <iframe 
-            src="${resource.url}" 
-            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: 12px;"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowfullscreen>
-          </iframe>
+          <iframe src="${resource.url}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: 12px;" allowfullscreen></iframe>
         </div>
       `;
-      displayArea.appendChild(videoContainer);
     }
     
     function displayWebPage(resource) {
       const displayArea = document.getElementById('contentDisplay');
-      
-      const webpageContainer = document.createElement('div');
-      webpageContainer.innerHTML = `
-        <div style="text-align: center; margin: 20px 0;">
-          <p style="color: #6b7280; margin-bottom: 15px;">正在載入網頁內容...</p>
-          <p style="color: #6b7280; font-size: 0.9rem;">
-            如果網頁沒有自動載入，請
-            <a href="${resource.url}" target="_blank" style="color: #6366f1; text-decoration: none; font-weight: 600;">
-              點擊這裡在新視窗開啟
-            </a>
-          </p>
-        </div>
-        <iframe 
-          src="${resource.url}" 
-          class="webpage-frame"
-          sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
-          referrerpolicy="no-referrer">
-        </iframe>
+      displayArea.innerHTML += `
+        <iframe src="${resource.url}" class="webpage-frame" sandbox="allow-same-origin allow-scripts allow-forms allow-popups" referrerpolicy="no-referrer"></iframe>
       `;
-      displayArea.appendChild(webpageContainer);
     }
     
     function displayFolder(resource) {
       const displayArea = document.getElementById('contentDisplay');
       
-      const folderView = document.createElement('div');
-      folderView.className = 'folder-view';
-      
       if (resource.items && resource.items.length > 0) {
-        resource.items.forEach((item, index) => {
-          const folderItem = document.createElement('div');
-          folderItem.className = 'folder-item';
-          folderItem.onclick = () => openFolderItem(item);
-          
-          const icon = getContentTypeIcon(item.type);
-          folderItem.innerHTML = `
-            <div class="folder-icon">${icon}</div>
-            <h4 style="margin: 0 0 10px 0; color: #374151;">${item.title}</h4>
-            <p style="margin: 0; color: #6b7280; font-size: 0.9rem;">${contentTypes[item.type] || '未知類型'}</p>
+        let folderHTML = '<div class="folder-view">';
+        resource.items.forEach(item => {
+          folderHTML += `
+            <div class="folder-item" onclick="alert('如需查看此項目，請在主清單中選擇')">
+              <div class="folder-icon">${getContentTypeIcon(item.type)}</div>
+              <h4 style="margin: 0 0 10px 0; color: #374151;">${item.title}</h4>
+              <p style="margin: 0; color: #6b7280; font-size: 0.9rem;">${getContentTypeName(item.type)}</p>
+            </div>
           `;
-          
-          folderView.appendChild(folderItem);
         });
-      } else {
-        folderView.innerHTML = `
-          <div style="text-align: center; padding: 40px; color: #6b7280;">
-            <div style="font-size: 3rem; margin-bottom: 20px;">📁</div>
-            <p>此資料夾目前是空的</p>
-          </div>
-        `;
+        folderHTML += '</div>';
+        displayArea.innerHTML += folderHTML;
       }
-      
-      displayArea.appendChild(folderView);
-    }
-    
-    function openFolderItem(item) {
-      // 臨時創建一個資源對象來顯示
-      const tempResource = {
-        id: 'folder-item-' + Date.now(),
-        title: item.title,
-        type: item.type,
-        url: item.url,
-        description: `來自資料夾的資源`
-      };
-      
-      currentResource = tempResource;
-      displayContentByType(tempResource);
     }
     
     function getContentTypeIcon(type) {
@@ -606,128 +845,8 @@
       });
     }
     
-    function renderPage(pageNum) {
-      if (!currentPDF) return;
-      
-      currentPDF.getPage(pageNum).then(page => {
-        const viewport = page.getViewport({ scale: currentScale });
-        const canvas = document.getElementById('pdfCanvas');
-        const context = canvas.getContext('2d');
-        
-        // 設置 canvas 尺寸
-        canvas.height = viewport.height;
-        canvas.width = viewport.width;
-        
-        const renderContext = {
-          canvasContext: context,
-          viewport: viewport
-        };
-        
-        page.render(renderContext).promise.then(() => {
-          document.getElementById('pageInfo').textContent = `第 ${pageNum} 頁 / 共 ${totalPages} 頁`;
-          document.getElementById('zoomLevel').textContent = Math.round(currentScale * 100) + '%';
-        });
-      }).catch(err => {
-        console.error('頁面渲染失敗：', err);
-        showStatus('❌ 頁面渲染失敗');
-      });
-    }
+    // ========== 事件監聽器 ==========
     
-    function zoomIn() {
-      currentScale += 0.25;
-      if (currentPDF) renderPage(currentPage);
-    }
-    
-    function zoomOut() {
-      currentScale = Math.max(0.5, currentScale - 0.25);
-      if (currentPDF) renderPage(currentPage);
-    }
-    
-    function resetZoom() {
-      currentScale = 1.5;
-      if (currentPDF) renderPage(currentPage);
-    }
-    
-    function clearContentDisplay() {
-      const displayArea = document.getElementById('contentDisplay');
-      displayArea.innerHTML = '';
-      document.getElementById('pdfControls').style.display = 'none';
-      document.getElementById('externalLinksPanel').style.display = 'none';
-    }
-    
-    function prevPage() {
-      if (currentPDF && currentPage > 1) {
-        currentPage--;
-        renderPage(currentPage);
-      }
-    }
-    
-    function nextPage() {
-      if (currentPDF && currentPage < totalPages) {
-        currentPage++;
-        renderPage(currentPage);
-      }
-    }
-    
-    function prevContent() {
-      if (currentIndex > 0) {
-        showContent(currentIndex - 1);
-      }
-    }
-    
-    function nextContent() {
-      if (currentIndex < filteredList.length - 1) {
-        showContent(currentIndex + 1);
-      }
-    }
-    
-    function updateStats(index) {
-      const item = contentList[index];
-      if (item) {
-        document.getElementById('viewCount').textContent = item.views || 0;
-      }
-    }
-    
-    function showStatus(message) {
-      const statusElement = document.getElementById('statusText');
-      if (statusElement) {
-        if (message.includes('載入中') || message.includes('...')) {
-          statusElement.innerHTML = `<span class="loading"></span>${message}`;
-        } else {
-          statusElement.textContent = message;
-        }
-      }
-    }
-    
-    function shareToFacebook() {
-      if (!currentResource) return;
-      
-      const text = encodeURIComponent(`我在AI生活分享社團發現這個資源：${currentResource.title}`);
-      const url = encodeURIComponent(window.location.href);
-      const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${text}`;
-      
-      window.open(facebookShareUrl, '_blank', 'width=600,height=400');
-    }
-    
-    function copyResourceLink() {
-      if (!currentResource) return;
-      
-      const link = window.location.origin + window.location.pathname + '?resource=' + currentResource.id;
-      navigator.clipboard.writeText(link).then(() => {
-        alert('已複製資源連結到剪貼簿！');
-      }).catch(err => {
-        console.error('複製失敗:', err);
-      });
-    }
-    
-    function recordPageView(page) {
-      const key = `views_${page}`;
-      let count = parseInt(localStorage.getItem(key) || '0');
-      count++;
-      localStorage.setItem(key, count.toString());
-    }
-    
-    // 事件監聽器
     document.addEventListener('DOMContentLoaded', function() {
       loadContentList();
       
@@ -740,44 +859,39 @@
         // 自動選擇對應的分類
         const categoryBtn = document.querySelector(`.category-btn[onclick*="filterCategory('${category}')"]`);
         if (categoryBtn) {
-          categoryBtn.click();
+          setTimeout(() => categoryBtn.click(), 500);
         }
       }
-    });
-    
-    document.getElementById('contentSelect').addEventListener('change', function () {
-      const index = parseInt(this.value);
-      if (!isNaN(index)) showContent(index);
-    });
-    
-    // 鍵盤快捷鍵支持
-    document.addEventListener('keydown', function(event) {
-      if (event.key === 'ArrowLeft') {
-        if (currentPDF) {
-          prevPage();
-        } else {
-          prevContent();
+      
+      // 選擇框事件
+      document.getElementById('contentSelect').addEventListener('change', function () {
+        const index = parseInt(this.value);
+        if (!isNaN(index)) showContent(index);
+      });
+      
+      // 鍵盤快捷鍵
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'ArrowLeft') {
+          if (currentPDF) {
+            prevPage();
+          } else {
+            prevContent();
+          }
+        } else if (event.key === 'ArrowRight') {
+          if (currentPDF) {
+            nextPage();
+          } else {
+            nextContent();
+          }
+        } else if (event.key === '+') {
+          zoomIn();
+        } else if (event.key === '-') {
+          zoomOut();
+        } else if (event.ctrlKey && event.key === 'f') {
+          event.preventDefault();
+          shareToFacebook();
         }
-      } else if (event.key === 'ArrowRight') {
-        if (currentPDF) {
-          nextPage();
-        } else {
-          nextContent();
-        }
-      } else if (event.key === 'ArrowUp') {
-        prevContent();
-      } else if (event.key === 'ArrowDown') {
-        nextContent();
-      } else if (event.key === '+') {
-        zoomIn();
-      } else if (event.key === '-') {
-        zoomOut();
-      } else if (event.ctrlKey && event.key === 'f') {
-        event.preventDefault();
-        shareToFacebook();
-      } else if (event.key === 'H' || event.key === 'h') {
-        window.location.href = 'index.html';
-      }
+      });
     });
   </script>
 </body>
