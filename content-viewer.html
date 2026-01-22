@@ -33,14 +33,14 @@
     .pdf-canvas-container { text-align: center; margin-bottom: 25px; background: #f9fafb; border-radius: 12px; padding: 25px; }
     #pdfCanvas { max-width: 100%; height: auto; border: 1px solid #e5e7eb; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); background: white; }
     .external-links-panel { display: flex; flex-wrap: wrap; gap: 15px; margin: 30px 0; padding: 25px; background: #f0f9ff; border-radius: 12px; border: 1px solid #dbeafe; }
-    .link-btn { display: flex; align-items: center; gap: 10px; padding: 14px 24px; background: white; border: 2px solid #e0e7ff; border-radius: 10px; text-decoration: none; color: #6366f1; font-weight: 600; transition: all 0.3s ease; flex: 1; min-width: 200px; justify-content: center; }
-    .link-btn:hover { background: #6366f1; color: white; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(99, 102, 241, 0.2); }
-    .link-youtube { border-color: #ff0000; color: #ff0000; }
-    .link-youtube:hover { background: #ff0000; color: white; border-color: #ff0000; }
-    .link-webpage { border-color: #10b981; color: #10b981; }
-    .link-webpage:hover { background: #10b981; color: white; border-color: #10b981; }
-    .link-folder { border-color: #8b5cf6; color: #8b5cf6; }
-    .link-folder:hover { background: #8b5cf6; color: white; border-color: #8b5cf6; }
+    .link-btn { display: flex; align-items: center; gap: 10px; padding: 12px 20px; background: white; border: 2px solid #e0e7ff; border-radius: 10px; text-decoration: none; color: #6b7280; font-weight: 500; transition: all 0.3s ease; flex: 1; min-width: 200px; justify-content: center; cursor: pointer; font-size: 0.85rem; opacity: 0.95; }
+    .link-btn:hover { background: #f3f4f6; color: #6b7280; transform: translateY(-1px); box-shadow: 0 5px 10px rgba(0,0,0,0.05); }
+    .link-youtube { border-color: #fca5a5; color: #6b7280; }
+    .link-youtube:hover { background: #fef2f2; color: #6b7280; border-color: #fca5a5; }
+    .link-webpage { border-color: #bbf7d0; color: #6b7280; }
+    .link-webpage:hover { background: #f0fdf4; color: #6b7280; border-color: #bbf7d0; }
+    .link-folder { border-color: #ddd6fe; color: #6b7280; }
+    .link-folder:hover { background: #faf5ff; color: #6b7280; border-color: #ddd6fe; }
     .status-info { text-align: center; margin: 25px 0; padding: 25px; background: #f9fafb; border-radius: 12px; font-weight: 600; color: #374151; border: 2px dashed #d1d5db; }
     .page-controls { display: flex; justify-content: center; align-items: center; gap: 25px; margin: 25px 0; flex-wrap: wrap; }
     .page-btn { padding: 14px 28px; background: #6366f1; color: white; border: none; border-radius: 10px; cursor: pointer; transition: all 0.3s ease; font-weight: 600; }
@@ -70,6 +70,13 @@
     .github-tip { background: #f0f9ff; border-left: 4px solid #3b82f6; padding: 15px; border-radius: 8px; margin: 15px 0; }
     .github-tip h4 { color: #1e40af; margin-bottom: 8px; }
     .github-tip p { color: #4b5563; margin-bottom: 10px; font-size: 0.9rem; }
+    
+    /* 新增：右鍵選單和提示樣式 */
+    #linkContextMenu { position: fixed; background: white; border: 1px solid #e5e7eb; border-radius: 10px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); z-index: 1000; min-width: 200px; padding: 8px 0; }
+    #linkContextMenu div { padding: 12px 16px; cursor: pointer; transition: background 0.2s; font-size: 0.9rem; color: #374151; }
+    #linkContextMenu div:hover { background: #f3f4f6; }
+    #quickMessage { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0, 0, 0, 0.85); color: white; padding: 15px 25px; border-radius: 10px; z-index: 1000; font-size: 0.9rem; text-align: center; animation: fadeInOut 2.5s ease; max-width: 300px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); pointer-events: none; }
+    @keyframes fadeInOut { 0% { opacity: 0; transform: translate(-50%, -40%); } 15% { opacity: 1; transform: translate(-50%, -50%); } 85% { opacity: 1; transform: translate(-50%, -50%); } 100% { opacity: 0; transform: translate(-50%, -60%); } }
     
     /* 響應式設計 */
     @media (max-width: 1024px) { .viewer-content { grid-template-columns: 1fr; } .sidebar { order: 2; } .viewer-main { order: 1; } .content-select { height: 250px; } }
@@ -138,7 +145,7 @@
           <h4 style="color: #6366f1; margin-bottom: 15px;">💡 使用說明</h4>
           <ul style="font-size: 0.9rem; color: #6b7280; padding-left: 20px;">
             <li>選擇左側資源列表瀏覽內容</li>
-            <li>外部連結會在新視窗開啟</li>
+            <li>外部連結使用右鍵/長按操作</li>
             <li>PDF優先從GitHub加載最新版本</li>
             <li>支援PDF縮放與分頁瀏覽</li>
           </ul>
@@ -154,7 +161,7 @@
         
         <!-- 外部連結面板 -->
         <div id="externalLinksPanel" class="external-links-panel" style="display: none;">
-          <h4 style="color: #6366f1; width: 100%; margin: 0 0 15px 0;">🔗 相關連結</h4>
+          <h4 style="color: #6366f1; width: 100%; margin: 0 0 15px 0; font-size: 1rem;">🔗 相關連結</h4>
         </div>
         
         <!-- PDF控制 -->
@@ -201,7 +208,7 @@
     
     <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
       <p style="font-size: 0.9rem; color: #6b7280;">
-        💡 提示：PDF資源優先從GitHub Release加載最新版本
+        💡 提示：PDF資源優先從GitHub Release加載最新版本，外部連結請使用右鍵/長按操作
       </p>
     </div>
   </footer>
@@ -331,7 +338,7 @@
       showStatus(`✅ 已載入: ${resource.title}`);
     }
     
-    // ========== 關鍵修改：PDF 加載函數 ==========
+    // ========== PDF 加載函數 ==========
     async function displayPDF(resource) {
       const displayArea = document.getElementById('contentDisplay');
       
@@ -467,6 +474,166 @@
         
         showStatus(`❌ ${resource.title} 加載失敗`);
       }
+    }
+    
+    // ========== 外部連結處理 ==========
+    
+    // 顯示外部連結（修改後的版本）
+    function showExternalLinks(links) {
+      const panel = document.getElementById('externalLinksPanel');
+      panel.style.display = 'flex';
+      panel.innerHTML = '<h4 style="color: #6366f1; width: 100%; margin: 0 0 15px 0; font-size: 1rem;">🔗 相關連結</h4>';
+      
+      links.forEach(link => {
+        const linkBtn = document.createElement('a');
+        linkBtn.href = '#';
+        linkBtn.className = `link-btn link-${link.type}`;
+        
+        // 設置按鈕標題 - 根據連結類型顯示不同標題
+        let buttonTitle = '按滑鼠右鍵選擇鏈接';
+        if (link.name.includes('提示詞教學影片') || link.name.includes('教學影片')) {
+          buttonTitle = '點此搜尋相關教學';
+        } else if (link.name.includes('Line AI') || link.name.includes('LINE')) {
+          buttonTitle = '右鍵查看相關資源';
+        } else if (link.name.includes('PDF') || link.name.includes('文件')) {
+          buttonTitle = '右鍵開啟文件連結';
+        }
+        
+        linkBtn.innerHTML = `
+          <span class="link-icon">${getContentTypeIcon(link.type)}</span>
+          <span class="link-text" style="font-size: 0.85rem; font-weight: 500;">${buttonTitle}</span>
+        `;
+        
+        // 點擊事件 - 顯示操作提示
+        linkBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          showLinkInstructions(link.name);
+        });
+        
+        // 右鍵選單事件
+        linkBtn.addEventListener('contextmenu', function(e) {
+          e.preventDefault();
+          showSimpleLinkMenu(link.url, link.name);
+        });
+        
+        // 手機長按事件
+        let touchTimer;
+        linkBtn.addEventListener('touchstart', function(e) {
+          touchTimer = setTimeout(() => {
+            e.preventDefault();
+            showSimpleLinkMenu(link.url, link.name);
+          }, 600); // 長按600毫秒
+        });
+        
+        linkBtn.addEventListener('touchend', function() {
+          clearTimeout(touchTimer);
+        });
+        
+        linkBtn.addEventListener('touchmove', function() {
+          clearTimeout(touchTimer);
+        });
+        
+        panel.appendChild(linkBtn);
+      });
+    }
+    
+    // 簡化連結選單功能
+    function showSimpleLinkMenu(url, name) {
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      
+      // 建立簡單操作選項
+      const options = [
+        { 
+          text: '複製連結', 
+          action: () => {
+            navigator.clipboard.writeText(url).then(() => {
+              showQuickMessage('✅ 連結已複製');
+            });
+          }
+        },
+        { 
+          text: '外部開啟', 
+          action: () => {
+            window.open(url, '_blank');
+          }
+        }
+      ];
+      
+      // 桌面版使用瀏覽器內建選單
+      if (!isMobile) {
+        if (confirm(`選擇操作：\n\n1. 複製連結\n2. 在新視窗開啟\n\n請選擇「確定」開啟連結，「取消」複製連結`)) {
+          window.open(url, '_blank');
+        } else {
+          navigator.clipboard.writeText(url).then(() => {
+            showQuickMessage('✅ 連結已複製到剪貼簿');
+          });
+        }
+      } 
+      // 手機版顯示操作選項
+      else {
+        let actionText = '請選擇操作：\n\n';
+        options.forEach((option, index) => {
+          actionText += `${index + 1}. ${option.text}\n`;
+        });
+        
+        const userChoice = prompt(actionText + '\n輸入 1 或 2：');
+        
+        if (userChoice === '1') {
+          navigator.clipboard.writeText(url).then(() => {
+            showQuickMessage('✅ 連結已複製');
+          });
+        } else if (userChoice === '2') {
+          window.open(url, '_blank');
+        }
+      }
+    }
+    
+    // 顯示連結操作說明
+    function showLinkInstructions(name) {
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      
+      if (isMobile) {
+        showQuickMessage('📱 請長按按鈕開啟操作選單');
+      } else {
+        showQuickMessage('🖱️ 請使用滑鼠右鍵開啟操作選單');
+      }
+    }
+    
+    // 顯示快速提示訊息
+    function showQuickMessage(message) {
+      // 移除現有提示
+      const existing = document.getElementById('quickMessage');
+      if (existing) existing.remove();
+      
+      const msg = document.createElement('div');
+      msg.id = 'quickMessage';
+      msg.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0, 0, 0, 0.85);
+        color: white;
+        padding: 15px 25px;
+        border-radius: 10px;
+        z-index: 1000;
+        font-size: 0.9rem;
+        text-align: center;
+        animation: fadeInOut 2.5s ease;
+        max-width: 300px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        pointer-events: none;
+      `;
+      msg.textContent = message;
+      
+      document.body.appendChild(msg);
+      
+      // 2.5秒後自動移除
+      setTimeout(() => {
+        if (msg.parentNode) {
+          msg.remove();
+        }
+      }, 2500);
     }
     
     // ========== 輔助函數 ==========
@@ -617,6 +784,16 @@
         'line-ai': 'Line AI應用'
       };
       return categories[category] || category;
+    }
+    
+    function getContentTypeIcon(type) {
+      const icons = {
+        'pdf': '📄',
+        'youtube': '🎬',
+        'webpage': '🌐',
+        'folder': '📁'
+      };
+      return icons[type] || '📄';
     }
     
     function filterCategory(category) {
@@ -814,35 +991,6 @@
         folderHTML += '</div>';
         displayArea.innerHTML += folderHTML;
       }
-    }
-    
-    function getContentTypeIcon(type) {
-      const icons = {
-        'pdf': '📄',
-        'youtube': '🎬',
-        'webpage': '🌐',
-        'folder': '📁'
-      };
-      return icons[type] || '📄';
-    }
-    
-    function showExternalLinks(links) {
-      const panel = document.getElementById('externalLinksPanel');
-      panel.style.display = 'flex';
-      panel.innerHTML = '<h4 style="color: #6366f1; width: 100%; margin: 0 0 15px 0;">🔗 相關連結</h4>';
-      
-      links.forEach(link => {
-        const linkBtn = document.createElement('a');
-        linkBtn.href = link.url;
-        linkBtn.target = '_blank';
-        linkBtn.rel = 'noopener noreferrer';
-        linkBtn.className = `link-btn link-${link.type}`;
-        linkBtn.innerHTML = `
-          <span class="link-icon">${getContentTypeIcon(link.type)}</span>
-          <span class="link-text">${link.name}</span>
-        `;
-        panel.appendChild(linkBtn);
-      });
     }
     
     // ========== 事件監聽器 ==========
