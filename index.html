@@ -6,6 +6,7 @@
   <title>🤖 AI生活分享 | AI Skills for Everyday Life</title>
   <link rel="stylesheet" href="assets/style.css">
   <style>
+    /* 所有CSS樣式保持不變 */
     .ai-hero {
       background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
       color: white;
@@ -290,7 +291,7 @@
       font-weight: bold;
     }
     
-    /* 新增：Scratch推廣樣式 - 保持原大小 */
+    /* 新增：Scratch推廣樣式 */
     .scratch-promo {
       background: linear-gradient(135deg, #FF6B35 0%, #FF8E53 100%);
       color: white;
@@ -513,23 +514,22 @@
       </div>
     </div>
     
-    <!-- 導航按鈕 - 修正Scratch按鈕連結 -->
+    <!-- 導航按鈕 - Scratch按鈕 -->
     <div style="display: flex; justify-content: center; gap: 15px; margin: 20px 0; flex-wrap: wrap;">
       <a href="video-player.html" class="btn btn-primary">🎥 教學影片</a>
       <a href="content-viewer.html" class="btn btn-secondary">📚 AI資源庫</a>
       <a href="about.html" class="btn btn-secondary">ℹ️ 關於我們</a>
-      <!-- 修正Scratch按鈕 - 確保正確的外部連結 -->
+      <!-- Scratch按鈕 -->
       <a href="https://chday169.github.io/scratch-web-0218/" 
          target="_blank" 
          rel="noopener noreferrer nofollow"
          class="btn" 
-         style="background: #FF6B35; color: white; font-weight: bold;"
-         onclick="return validateScratchLink(this)">
+         style="background: #FF6B35; color: white; font-weight: bold;">
         🎮 Scratch教學平台
       </a>
     </div>
     
-    <!-- 修正Scratch教學平台推廣區塊 -->
+    <!-- Scratch教學平台推廣區塊 -->
     <section class="scratch-promo">
       <div class="scratch-promo-content">
         <div class="badge">🔥 熱門推薦</div>
@@ -552,8 +552,8 @@
             <div class="scratch-stat-label">實戰專案</div>
           </div>
           <div class="scratch-stat">
-            <div class="scratch-stat-number">免費</div>
-            <div class="scratch-stat-label">開放資源</div>
+            <div class="scratch-stat-number">適合教學</div>
+            <div class="scratch-stat-label">教學使用</div>
           </div>
         </div>
         
@@ -577,18 +577,17 @@
           <span style="font-weight: bold; margin-top: 0.5rem; display: block;">- 家長 張先生</span>
         </div>
         
-        <!-- 修正Scratch主要按鈕連結 -->
+        <!-- Scratch主要按鈕 -->
         <a href="https://chday169.github.io/scratch-web-0218/" 
            target="_blank" 
            rel="noopener noreferrer nofollow"
-           class="scratch-btn"
-           onclick="return validateScratchLink(this)">
+           class="scratch-btn">
           <span style="font-size: 1.4rem;">🚀</span>
           立即前往Scratch教學平台
         </a>
         
         <p style="margin-top: 1.5rem; opacity: 0.9;">
-          <small>📢 完全免費 | 開放原始碼 | 適合教學使用</small>
+          <small>📢 適合教學使用</small>
         </p>
       </div>
     </section>
@@ -767,13 +766,12 @@
         <a href="content-viewer.html" class="btn btn-secondary">🧠 AI資源庫</a>
         <a href="video-player.html" class="btn btn-secondary">🎥 教學影片</a>
         <a href="about.html" class="btn btn-secondary">ℹ️ 關於我們</a>
-        <!-- 修正頁腳Scratch按鈕連結 -->
+        <!-- 頁腳Scratch按鈕 -->
         <a href="https://chday169.github.io/scratch-web-0218/" 
            target="_blank" 
            rel="noopener noreferrer nofollow"
            class="btn" 
-           style="background: #FF6B35; color: white; font-weight: bold;"
-           onclick="return validateScratchLink(this)">
+           style="background: #FF6B35; color: white; font-weight: bold;">
           🎮 Scratch教學
         </a>
       </div>
@@ -783,24 +781,18 @@
         專注於AI工具應用與生活技巧分享
       </p>
       
-      <!-- 修正Scratch推廣註腳連結 -->
+      <!-- Scratch推廣註腳 -->
       <div style="margin-top: 1.5rem; padding: 1rem; background: #f9fafb; border-radius: 10px; border-left: 4px solid #FF6B35;">
         <p style="font-size: 0.9rem; color: #6b7280; margin-bottom: 0.5rem;">
           💡 <strong>推薦學習：</strong> 想讓孩子學習程式設計？試試我們的 
           <a href="https://chday169.github.io/scratch-web-0218/" 
              target="_blank" 
              rel="noopener noreferrer nofollow"
-             style="color: #FF6B35; font-weight: bold; text-decoration: underline;"
-             onclick="return validateScratchLink(this)">
+             style="color: #FF6B35; font-weight: bold; text-decoration: underline;">
             Scratch教學平台
           </a>
-          ，完全免費！
+          ，適合教學使用！
         </p>
-      </div>
-      
-      <!-- 添加連結測試區域（可選，用於診斷） -->
-      <div id="linkTestResult" style="display: none; margin-top: 1rem; padding: 1rem; background: #f0f0f0; border-radius: 5px; font-size: 0.8rem;">
-        <p>連結測試結果：<span id="testStatus"></span></p>
       </div>
     </footer>
   </div>
@@ -825,81 +817,7 @@
           }
         });
       }
-      
-      // 強制修正所有Scratch連結
-      forceFixScratchLinks();
-      
-      // 定期檢查連結
-      setInterval(forceFixScratchLinks, 3000);
     });
-    
-    // 驗證Scratch連結函數
-    function validateScratchLink(linkElement) {
-      const correctUrl = 'https://chday169.github.io/scratch-web-0218/';
-      
-      // 確保連結是正確的
-      if (linkElement.href !== correctUrl) {
-        linkElement.href = correctUrl;
-      }
-      
-      // 確保在新標籤頁開啟
-      linkElement.target = '_blank';
-      linkElement.rel = 'noopener noreferrer nofollow';
-      
-      // 顯示測試結果（可選）
-      showTestResult('✅ Scratch連結已驗證並修正');
-      
-      return true;
-    }
-    
-    // 強制修正所有Scratch連結
-    function forceFixScratchLinks() {
-      const scratchLinks = document.querySelectorAll('a[href*="scratch"], a.scratch-btn, .btn[style*="FF6B35"]');
-      const correctUrl = 'https://chday169.github.io/scratch-web-0218/';
-      
-      scratchLinks.forEach(link => {
-        // 檢查並修正href
-        if (!link.href.includes(correctUrl)) {
-          link.href = correctUrl;
-          console.log('已修正連結：', link.textContent);
-        }
-        
-        // 確保在新標籤頁開啟
-        link.target = '_blank';
-        
-        // 添加安全屬性
-        if (!link.rel.includes('noopener')) {
-          link.rel = 'noopener noreferrer nofollow';
-        }
-        
-        // 添加點擊事件監聽器
-        link.onclick = function(e) {
-          if (!this.href.includes(correctUrl)) {
-            e.preventDefault();
-            window.open(correctUrl, '_blank', 'noopener,noreferrer');
-            return false;
-          }
-          return true;
-        };
-      });
-    }
-    
-    // 顯示測試結果
-    function showTestResult(message) {
-      const testResultDiv = document.getElementById('linkTestResult');
-      const testStatus = document.getElementById('testStatus');
-      
-      if (testResultDiv && testStatus) {
-        testResultDiv.style.display = 'block';
-        testStatus.textContent = message;
-        testStatus.style.color = message.includes('✅') ? 'green' : 'red';
-        
-        // 5秒後隱藏
-        setTimeout(() => {
-          testResultDiv.style.display = 'none';
-        }, 5000);
-      }
-    }
     
     function updateTotalViews() {
       let total = 0;
@@ -949,23 +867,7 @@
         event.preventDefault();
         window.location.href = 'video-player.html';
       }
-      
-      // Ctrl+Shift+S - 測試Scratch連結
-      if (event.ctrlKey && event.shiftKey && event.key === 'S') {
-        event.preventDefault();
-        const testLink = document.querySelector('.scratch-btn');
-        if (testLink) {
-          testLink.click();
-          showTestResult('✅ 已嘗試開啟Scratch連結');
-        }
-      }
     });
-    
-    // 頁面載入後立即執行一次連結修正
-    window.onload = function() {
-      forceFixScratchLinks();
-      showTestResult('🔗 頁面載入完成，連結檢查已執行');
-    };
   </script>
 </body>
 </html>
