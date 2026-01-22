@@ -1,0 +1,245 @@
+const aiManifest = [
+  // 原有的 5 個內嵌 PDF 項目（保持不變）
+  {
+    "id": "chatgpt-guide",
+    "title": "ChatGPT 完全使用指南",
+    "type": "pdf",
+    "category": "beginner",
+    "url": "./data_ai/pdfs/chatgpt-guide.pdf",
+    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/chatgpt-guide.pdf",
+    "description": "從基礎到進階的ChatGPT使用教學，包含提示詞技巧與應用案例",
+    "views": 1250,
+    "likes": 89,
+    "externalLinks": [
+      {
+        "name": "ChatGPT官方網站",
+        "url": "https://chat.openai.com",
+        "type": "webpage"
+      },
+      {
+        "name": "提示詞技巧教學影片",
+        "url": "https://www.youtube.com/embed/uMqAJ9qKJlA",
+        "type": "youtube"
+      },
+      {
+        "name": "ChatGPT API文件",
+        "url": "https://platform.openai.com/docs",
+        "type": "webpage"
+      }
+    ]
+  },
+  {
+    "id": "midjourney-tutorial",
+    "title": "Midjourney AI繪圖完全教學",
+    "type": "pdf",
+    "category": "design",
+    "url": "./data_ai/pdfs/midjourney-guide.pdf",
+    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/midjourney-guide.pdf",
+    "description": "AI繪圖工具Midjourney完整教學，從註冊到進階提示詞技巧",
+    "views": 980,
+    "likes": 76,
+    "externalLinks": [
+      {
+        "name": "Midjourney官方Discord",
+        "url": "https://discord.gg/midjourney",
+        "type": "webpage"
+      },
+      {
+        "name": "風格參考圖庫",
+        "url": "https://lexica.art",
+        "type": "webpage"
+      },
+      {
+        "name": "Midjourney教學影片",
+        "url": "https://www.youtube.com/embed/M06IBNPcI-s",
+        "type": "youtube"
+      }
+    ]
+  },
+  {
+    "id": "ai-productivity-tools",
+    "title": "AI工作效率工具大全",
+    "type": "pdf",
+    "category": "productivity",
+    "url": "./data_ai/pdfs/ai-productivity.pdf",
+    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/ai-productivity.pdf",
+    "description": "精選提升工作效率的AI工具，包含寫作、設計、數據分析等",
+    "views": 1100,
+    "likes": 92,
+    "externalLinks": [
+      {
+        "name": "Notion AI介紹",
+        "url": "https://www.notion.so/product/ai",
+        "type": "webpage"
+      },
+      {
+        "name": "Canva AI教學影片",
+        "url": "https://www.youtube.com/embed/xp--_pDlZzw",
+        "type": "youtube"
+      },
+      {
+        "name": "Grammarly官網",
+        "url": "https://www.grammarly.com",
+        "type": "webpage"
+      }
+    ]
+  },
+  {
+    "id": "ai-for-business",
+    "title": "AI商業應用指南",
+    "type": "pdf",
+    "category": "advanced",
+    "url": "./data_ai/pdfs/ai-business.pdf",
+    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/ai-business.pdf",
+    "description": "AI在商業環境中的實際應用案例與實施策略",
+    "views": 630,
+    "likes": 52,
+    "externalLinks": [
+      {
+        "name": "AI商業案例研究",
+        "url": "https://hbr.org/topic/artificial-intelligence",
+        "type": "webpage"
+      },
+      {
+        "name": "企業AI實施指南",
+        "url": "https://www.mckinsey.com/capabilities/quantumblack/our-insights",
+        "type": "webpage"
+      }
+    ]
+  },
+  {
+    "id": "line-ai-guide",
+    "title": "LINE AI 应用完全指南",
+    "type": "pdf",
+    "category": "line-ai",
+    "url": "./data_ai/pdfs/LINE_AI.pdf",
+    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/LINE_AI.pdf",
+    "description": "LINE 平台 AI 工具与聊天机器人整合开发完全指南，包含官方 API 调用与智能回复设定。",
+    "views": 0,
+    "likes": 0,
+    "externalLinks": [
+      {
+        "name": "LINE Developers 官方文档",
+        "url": "https://developers.line.biz/zh-hant/docs/",
+        "type": "webpage"
+      }
+    ]
+  },
+  
+  // 新增：對應 GitHub Releases 的三個 PDF 項目
+  {
+    "id": "ai-1",
+    "title": "AI生活應用分享社團",
+    "type": "pdf",
+    "category": "releases",
+    "url": "./data_ai/pdfs/ai-1.pdf", // 內嵌顯示的路徑
+    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/ai-1.pdf",
+    "description": "AI生活應用相關分享與討論，包含實際應用案例與社群互動",
+    "views": 0,
+    "likes": 0,
+    "externalLinks": []
+  },
+  {
+    "id": "ai-2",
+    "title": "F32_節錄版Image_processing",
+    "type": "pdf",
+    "category": "releases",
+    "url": "./data_ai/pdfs/ai-2.pdf", // 內嵌顯示的路徑
+    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/ai-2.pdf",
+    "description": "影像處理技術節錄教學，包含基礎概念與實際應用範例",
+    "views": 0,
+    "likes": 0,
+    "externalLinks": []
+  },
+  {
+    "id": "ai-3",
+    "title": "Northcoast AI 應用",
+    "type": "pdf",
+    "category": "releases",
+    "url": "./data_ai/pdfs/ai-3.pdf", // 內嵌顯示的路徑
+    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/ai-3.pdf",
+    "description": "Northcoast 地區 AI 技術應用案例與實踐分享",
+    "views": 0,
+    "likes": 0,
+    "externalLinks": []
+  },
+  
+  // 原有的其他項目保持不變
+  {
+    "id": "ai-youtube-tutorials",
+    "title": "AI工具教學影片精選",
+    "type": "folder",
+    "category": "tools",
+    "description": "精選AI工具教學影片，包含ChatGPT、Midjourney等熱門工具",
+    "views": 850,
+    "likes": 45,
+    "items": [
+      {
+        "title": "ChatGPT進階技巧教學",
+        "type": "youtube",
+        "url": "https://www.youtube.com/embed/uMqAJ9qKJlA"
+      },
+      {
+        "title": "Midjourney提示詞指南",
+        "type": "youtube",
+        "url": "https://www.youtube.com/embed/M06IBNPcI-s"
+      },
+      {
+        "title": "AI繪圖工具比較",
+        "type": "youtube",
+        "url": "https://www.youtube.com/embed/j_eMTP5-lcA"
+      },
+      {
+        "title": "免費AI工具推薦",
+        "type": "youtube",
+        "url": "https://www.youtube.com/embed/r6g3B2_2d-c"
+      }
+    ]
+  },
+  {
+    "id": "ai-resource-links",
+    "title": "AI學習資源網站",
+    "type": "folder",
+    "category": "tools",
+    "description": "精選AI學習資源與工具網站",
+    "views": 720,
+    "likes": 38,
+    "items": [
+      {
+        "title": "OpenAI官方網站",
+        "type": "webpage",
+        "url": "https://openai.com"
+      },
+      {
+        "title": "AI工具比較網站",
+        "type": "webpage",
+        "url": "https://theresanaiforthat.com"
+      },
+      {
+        "title": "免費AI繪圖平台",
+        "type": "webpage",
+        "url": "https://leonardo.ai"
+      },
+      {
+        "title": "AI學習社群",
+        "type": "webpage",
+        "url": "https://www.reddit.com/r/artificial"
+      }
+    ]
+  },
+  {
+    "id": "line-ai-02",
+    "title": "Line Bot整合ChatGPT教学",
+    "type": "webpage",
+    "category": "line-ai",
+    "url": "https://example.com/line-chatgpt-integration",
+    "description": "学习如何将ChatGPT整合到Line Bot中，创建智能对话机器人。",
+    "externalLinks": [
+      {
+        "name": "GitHub范例代码",
+        "url": "https://github.com/example/line-chatgpt-bot",
+        "type": "webpage"
+      }
+    ]
+  }
+];
