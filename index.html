@@ -6,6 +6,7 @@
   <title>🤖 AI生活分享 | AI Skills for Everyday Life</title>
   <link rel="stylesheet" href="assets/style.css">
   <style>
+    /* 原有CSS保持不變，新增Scratch推廣樣式 */
     .ai-hero {
       background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
       color: white;
@@ -290,6 +291,148 @@
       font-weight: bold;
     }
     
+    /* 新增：Scratch推廣樣式 */
+    .scratch-promo {
+      background: linear-gradient(135deg, #FF6B35 0%, #FF8E53 100%);
+      color: white;
+      padding: 3rem 2rem;
+      border-radius: 15px;
+      margin: 2.5rem auto;
+      text-align: center;
+      max-width: 1000px;
+      box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .scratch-promo:before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+      background-size: 20px 20px;
+      animation: float 20s linear infinite;
+      z-index: 0;
+    }
+    
+    @keyframes float {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      100% { transform: translate(-20px, -20px) rotate(360deg); }
+    }
+    
+    .scratch-promo-content {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .scratch-promo h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+    
+    .scratch-stats {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+    }
+    
+    .scratch-stat {
+      text-align: center;
+    }
+    
+    .scratch-stat-number {
+      font-size: 2.2rem;
+      font-weight: bold;
+      color: #fff;
+      margin-bottom: 0.3rem;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    
+    .scratch-stat-label {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+    
+    .scratch-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin: 2.5rem 0;
+    }
+    
+    .scratch-feature {
+      background: rgba(255,255,255,0.15);
+      padding: 1.5rem;
+      border-radius: 10px;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    
+    .scratch-feature h4 {
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .scratch-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 32px;
+      background: white;
+      color: #FF6B35;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      margin-top: 1rem;
+    }
+    
+    .scratch-btn:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+      background: #fff;
+    }
+    
+    .badge {
+      display: inline-block;
+      background: #FFD700;
+      color: #333;
+      padding: 6px 15px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    
+    .testimonial {
+      font-style: italic;
+      margin: 1.5rem 0;
+      padding: 1.5rem;
+      background: rgba(255,255,255,0.1);
+      border-radius: 10px;
+      border-left: 4px solid #FFD700;
+    }
+    
     @media (max-width: 768px) {
       .ai-hero {
         padding: 2rem 1rem;
@@ -318,6 +461,23 @@
       .owner-photo {
         width: 150px;
         height: 150px;
+      }
+      
+      .scratch-promo h2 {
+        font-size: 2rem;
+      }
+      
+      .scratch-stats {
+        gap: 2rem;
+      }
+      
+      .scratch-stat-number {
+        font-size: 1.8rem;
+      }
+      
+      .scratch-btn {
+        padding: 14px 28px;
+        font-size: 1rem;
       }
     }
     
@@ -354,12 +514,75 @@
       </div>
     </div>
     
-    <!-- 導航按鈕 -->
+    <!-- 導航按鈕 - 新增Scratch按鈕 -->
     <div style="display: flex; justify-content: center; gap: 15px; margin: 20px 0; flex-wrap: wrap;">
       <a href="video-player.html" class="btn btn-primary">🎥 教學影片</a>
       <a href="content-viewer.html" class="btn btn-secondary">📚 AI資源庫</a>
       <a href="about.html" class="btn btn-secondary">ℹ️ 關於我們</a>
+      <!-- 新增Scratch按鈕 -->
+      <a href="https://chday169.guthub,co/scratch-0218" target="_blank" class="btn" style="background: #FF6B35; color: white; font-weight: bold;">
+        🎮 Scratch教學平台
+      </a>
     </div>
+    
+    <!-- 新增Scratch教學平台推廣區塊 -->
+    <section class="scratch-promo">
+      <div class="scratch-promo-content">
+        <div class="badge">🔥 熱門推薦</div>
+        <h2>🎮 Scratch 程式設計教學平台</h2>
+        <p style="font-size: 1.2rem; max-width: 800px; margin: 0 auto 1.5rem;">
+          專為初學者設計的視覺化程式設計學習平台，讓程式設計變得簡單有趣！
+        </p>
+        
+        <div class="scratch-stats">
+          <div class="scratch-stat">
+            <div class="scratch-stat-number">1000+</div>
+            <div class="scratch-stat-label">學習資源</div>
+          </div>
+          <div class="scratch-stat">
+            <div class="scratch-stat-number">50+</div>
+            <div class="scratch-stat-label">完整教程</div>
+          </div>
+          <div class="scratch-stat">
+            <div class="scratch-stat-number">30+</div>
+            <div class="scratch-stat-label">實戰專案</div>
+          </div>
+          <div class="scratch-stat">
+            <div class="scratch-stat-number">免費</div>
+            <div class="scratch-stat-label">開放資源</div>
+          </div>
+        </div>
+        
+        <div class="scratch-features">
+          <div class="scratch-feature">
+            <h4>👨‍🏫 適合對象</h4>
+            <p>初學者、學生、教師、家長<br>8歲以上皆可學習</p>
+          </div>
+          <div class="scratch-feature">
+            <h4>🎯 學習目標</h4>
+            <p>培養邏輯思維<br>學習程式設計基礎<br>創建互動遊戲動畫</p>
+          </div>
+          <div class="scratch-feature">
+            <h4>💡 平台特色</h4>
+            <p>中文教學<br>實作導向<br>社群分享<br>持續更新</p>
+          </div>
+        </div>
+        
+        <div class="testimonial">
+          "從零開始學習程式設計的最佳選擇！清晰的教學步驟和豐富的範例，讓我家孩子也能輕鬆上手。"<br>
+          <span style="font-weight: bold; margin-top: 0.5rem; display: block;">- 家長 張先生</span>
+        </div>
+        
+        <a href="https://github.com/chday169/scratch-0218" target="_blank" class="scratch-btn">
+          <span style="font-size: 1.4rem;">🚀</span>
+          立即前往Scratch教學平台
+        </a>
+        
+        <p style="margin-top: 1.5rem; opacity: 0.9;">
+          <small>📢 完全免費 | 開放原始碼 | 適合教學使用</small>
+        </p>
+      </div>
+    </section>
     
     <main class="main-content">
       <div class="community-stats">
@@ -535,6 +758,10 @@
         <a href="content-viewer.html" class="btn btn-secondary">🧠 AI資源庫</a>
         <a href="video-player.html" class="btn btn-secondary">🎥 教學影片</a>
         <a href="about.html" class="btn btn-secondary">ℹ️ 關於我們</a>
+        <!-- 頁腳也新增Scratch按鈕 -->
+        <a href="https://github.com/chday169/scratch-0218" target="_blank" class="btn" style="background: #FF6B35; color: white; font-weight: bold;">
+          🎮 Scratch教學
+        </a>
       </div>
       
       <p>&copy; 2024 AI生活分享社團(測試版) | AI Skills for Everyday Life</p>
@@ -542,9 +769,14 @@
         專注於AI工具應用與生活技巧分享
       </p>
       
-      <div style="margin-top: 1.5rem; padding: 1rem; background: #f9fafb; border-radius: 10px;">
-        <p style="font-size: 0.85rem; color: #6b7280;">
-          💡 本平台所有內容均為教學分享，不涉及商業用途
+      <!-- 新增Scratch推廣註腳 -->
+      <div style="margin-top: 1.5rem; padding: 1rem; background: #f9fafb; border-radius: 10px; border-left: 4px solid #FF6B35;">
+        <p style="font-size: 0.9rem; color: #6b7280; margin-bottom: 0.5rem;">
+          💡 <strong>推薦學習：</strong> 想讓孩子學習程式設計？試試我們的 
+          <a href="https://github.com/chday169/scratch-0218" target="_blank" style="color: #FF6B35; font-weight: bold; text-decoration: underline;">
+            Scratch教學平台
+          </a>
+          ，完全免費！
         </p>
       </div>
     </footer>
@@ -558,6 +790,18 @@
       
       // 記錄首頁訪問
       recordPageView('home');
+      
+      // 新增Scratch統計數字動畫
+      const scratchStats = document.querySelectorAll('.scratch-stat-number');
+      if (scratchStats.length > 0) {
+        scratchStats.forEach(stat => {
+          const target = stat.textContent;
+          const cleanTarget = target.replace(/[^0-9]/g, '');
+          if (cleanTarget) {
+            animateCounter(stat, parseInt(cleanTarget), 2000);
+          }
+        });
+      }
     });
     
     function updateTotalViews() {
@@ -578,6 +822,21 @@
       let count = parseInt(localStorage.getItem(key) || '0');
       count++;
       localStorage.setItem(key, count.toString());
+    }
+    
+    function animateCounter(element, target, duration) {
+      const start = 0;
+      const increment = target / (duration / 16); // 60fps
+      let current = start;
+      
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          current = target;
+          clearInterval(timer);
+        }
+        element.textContent = Math.floor(current).toLocaleString() + (element.textContent.includes('+') ? '+' : '');
+      }, 16);
     }
     
     // 鍵盤快捷鍵
