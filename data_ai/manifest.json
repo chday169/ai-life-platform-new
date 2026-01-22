@@ -82,12 +82,12 @@
     ]
   },
   {
-    "id": "line-ai-guide",
+	"id": "line-ai-guide",
     "title": "LINE AI 應用完全指南",
     "type": "pdf",
     "category": "line-ai",
-    "url": "./data_ai/pdfs/LINE_AI.pdf",
-    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/LINE-AI.pdf",
+    "url": "./data_ai/pdfs/line-ai.pdf",
+    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/line-ai.pdf",
     "description": "LINE 平台 AI 工具與聊天機器人整合開發完全指南，包含官方 API 調用與智能回復設定",
     "views": 0,
     "likes": 0,
