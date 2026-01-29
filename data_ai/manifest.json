@@ -134,15 +134,15 @@
     "title": "ai網站資源",
     "type": "pdf",
     "category": "design",
-    "url": "./data_ai/pdfs/resouce.pdf",
-    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/resouce.pdf.pdf",
-    "description": "AI繪圖工具Midjourney完整教學，從註冊到進階提示詞技巧",
+    "url": "./data_ai/pdfs/resource.pdf",
+    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/resource.pdf",
+    "description": "AI網站資源參考",
     "views": 980,
     "likes": 76,
     "embedded": true,
     "externalLinks": [
       {
-        "name": "Midjourney官方Discord",
+        "name": "resources官方Discord",
         "url": "https://discord.gg/midjourney",
         "type": "webpage"
       },
