@@ -1,11 +1,11 @@
 [
   {
-    "id": "ai-base-tools",
+    "id": "ai-base-tool",
     "title": "AI商業應用指南",
     "type": "pdf",
     "category": "advanced",
-    "url": "./data_ai/pdfs/ai-base-tools.pdf",
-    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/ai-base-tools.pdf",
+    "url": "./data_ai/pdfs/ai-base-tool.pdf",
+    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/ai-base-tool.pdf",
     "description": "AI在商業環境中的實際應用案例與實施策略",
     "views": 630,
     "likes": 52,
