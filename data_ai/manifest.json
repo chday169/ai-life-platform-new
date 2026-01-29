@@ -1,0 +1,468 @@
+[
+  {
+    "id": "ai-base-tool",
+    "title": "AI商業應用指南",
+    "type": "pdf",
+    "category": "advanced",
+    "url": "./data_ai/pdfs/ai-base-tool.pdf",
+    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/ai-base-tool.pdf",
+    "description": "AI在商業環境中的實際應用案例與實施策略",
+    "views": 850,
+    "likes": 68,
+    "embedded": true,
+    "externalLinks": [
+      {
+        "name": "AI商業案例研究",
+        "url": "https://hbr.org/topic/artificial-intelligence",
+        "type": "webpage"
+      },
+      {
+        "name": "企業AI實施指南",
+        "url": "https://www.mckinsey.com/capabilities/quantumblack/our-insights",
+        "type": "webpage"
+      }
+    ]
+  },
+  {
+    "id": "ai-productivity-tools",
+    "title": "AI工作效率工具大全",
+    "type": "pdf",
+    "category": "productivity",
+    "url": "./data_ai/pdfs/ai-productivity.pdf",
+    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/ai-productivity.pdf",
+    "description": "精選提升工作效率的AI工具，包含寫作、設計、數據分析等",
+    "views": 2100,
+    "likes": 145,
+    "embedded": true,
+    "externalLinks": [
+      {
+        "name": "Notion AI介紹",
+        "url": "https://www.notion.so/product/ai",
+        "type": "webpage"
+      },
+      {
+        "name": "Canva AI教學影片",
+        "url": "https://www.youtube.com/embed/xp--_pDlZzw",
+        "type": "youtube"
+      },
+      {
+        "name": "Grammarly官網",
+        "url": "https://www.grammarly.com",
+        "type": "webpage"
+      }
+    ]
+  },
+  {
+    "id": "chatgpt-guide",
+    "title": "ChatGPT 完全使用指南",
+    "type": "pdf",
+    "category": "beginner",
+    "url": "./data_ai/pdfs/chatgpt-guide.pdf",
+    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/chatgpt-guide.pdf",
+    "description": "從基礎到進階的ChatGPT使用教學，包含提示詞技巧與應用案例",
+    "views": 2850,
+    "likes": 192,
+    "embedded": true,
+    "externalLinks": [
+      {
+        "name": "ChatGPT官方網站",
+        "url": "https://chat.openai.com",
+        "type": "webpage"
+      },
+      {
+        "name": "提示詞技巧教學影片",
+        "url": "https://www.youtube.com/embed/FRIa3T49urg",
+        "type": "youtube"
+      },
+      {
+        "name": "ChatGPT API文件",
+        "url": "https://platform.openai.com/docs",
+        "type": "webpage"
+      }
+    ]
+  },
+  {
+    "id": "line-ai-guide",
+    "title": "LINE AI 應用完全指南",
+    "type": "pdf",
+    "category": "line-ai",
+    "url": "./data_ai/pdfs/line-ai.pdf",
+    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/line-ai.pdf",
+    "description": "LINE 平台 AI 工具與聊天機器人整合開發完全指南，包含官方 API 調用與智能回復設定",
+    "views": 720,
+    "likes": 55,
+    "embedded": true,
+    "externalLinks": [
+      {
+        "name": "LINE Developers 官方文件",
+        "url": "https://developers.line.biz/zh-hant/docs/",
+        "type": "webpage"
+      }
+    ]
+  },
+  {
+    "id": "midjourney-tutorial",
+    "title": "Midjourney AI繪圖完全教學",
+    "type": "pdf",
+    "category": "design",
+    "url": "./data_ai/pdfs/midjourney-guide.pdf",
+    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/midjourney-guide.pdf",
+    "description": "AI繪圖工具Midjourney完整教學，從註冊到進階提示詞技巧",
+    "views": 1650,
+    "likes": 124,
+    "embedded": true,
+    "externalLinks": [
+      {
+        "name": "Midjourney官方Discord",
+        "url": "https://discord.gg/midjourney",
+        "type": "webpage"
+      },
+      {
+        "name": "風格參考圖庫",
+        "url": "https://lexica.art",
+        "type": "webpage"
+      },
+      {
+        "name": "Midjourney教學影片",
+        "url": "https://www.youtube.com/embed/M06IBNPcI-s",
+        "type": "youtube"
+      }
+    ]
+  },
+  {
+    "id": "resources-web",
+    "title": "ai網站資源",
+    "type": "pdf",
+    "category": "design",
+    "url": "./data_ai/pdfs/resouce.pdf",
+    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/resouce.pdf.pdf",
+    "description": "精選AI工具與學習網站資源列表",
+    "views": 580,
+    "likes": 42,
+    "embedded": true,
+    "externalLinks": [
+      {
+        "name": "Midjourney官方Discord",
+        "url": "https://discord.gg/midjourney",
+        "type": "webpage"
+      },
+      {
+        "name": "風格參考圖庫",
+        "url": "https://lexica.art",
+        "type": "webpage"
+      },
+      {
+        "name": "Midjourney教學影片",
+        "url": "https://www.youtube.com/embed/M06IBNPcI-s",
+        "type": "youtube"
+      }
+    ]
+  },
+  {
+    "id": "ai-christchurch-hagley-park-and-avon-river-day-trip",
+    "title": "基督城哈格利公園與雅芳河一日遊 AI 規劃",
+    "type": "pdf",
+    "category": "travel",
+    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/Ai-Christchurch-Hagley-Park-and-Avon-River-Day-Trip.pdf",
+    "description": "使用AI規劃基督城哈格利公園與雅芳河一日遊行程",
+    "views": 180,
+    "likes": 15,
+    "embedded": false,
+    "externalLinks": []
+  },
+  {
+    "id": "ai-complete-plan-for-remote-landslide-dam-disaster",
+    "title": "偏遠地區土石流災害完整應變計畫",
+    "type": "pdf",
+    "category": "safety",
+    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/Ai-Complete-Plan-for-Remote-Landslide-Dam-Disaster.pdf",
+    "description": "AI輔助制定偏遠地區土石流與水壩災害應變計畫",
+    "views": 95,
+    "likes": 8,
+    "embedded": false,
+    "externalLinks": []
+  },
+  {
+    "id": "ai-compliance-lifestyle-guide",
+    "title": "合規生活指南 AI 輔助",
+    "type": "pdf",
+    "category": "lifestyle",
+    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/Ai-Compliance-Lifestyle-Guide.pdf",
+    "description": "AI輔助的合規生活指南，包含法律、健康與環境合規",
+    "views": 220,
+    "likes": 18,
+    "embedded": false,
+    "externalLinks": []
+  },
+  {
+    "id": "ai-contemporary-workplace-transformation-report",
+    "title": "現代職場轉型報告 AI 分析",
+    "type": "pdf",
+    "category": "business",
+    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/Ai-Contemporary-Workplace-Transformation-Report.pdf",
+    "description": "AI分析的現代職場轉型趨勢與策略報告",
+    "views": 410,
+    "likes": 33,
+    "embedded": false,
+    "externalLinks": []
+  },
+  {
+    "id": "ai-deepseek-with-excel-and-python",
+    "title": "DeepSeek 與 Excel 和 Python 整合應用",
+    "type": "pdf",
+    "category": "development",
+    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/Ai-DeepSeek-with-Excel-and-Python.pdf",
+    "description": "DeepSeek AI 與 Excel、Python 的整合應用教學",
+    "views": 520,
+    "likes": 48,
+    "embedded": false,
+    "externalLinks": []
+  },
+  {
+    "id": "ai-east-north-coast-travel",
+    "title": "東北海岸旅遊 AI 規劃",
+    "type": "pdf",
+    "category": "travel",
+    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/Ai-East-North-Coast-Travel.pdf",
+    "description": "使用AI規劃東北海岸旅遊行程與景點推薦",
+    "views": 150,
+    "likes": 12,
+    "embedded": false,
+    "externalLinks": []
+  },
+  {
+    "id": "ai-geometry-intersection-to-feature-vector-journey",
+    "title": "幾何交點到特徵向量之旅",
+    "type": "pdf",
+    "category": "mathematics",
+    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/Ai-Geometry-Intersection-to-Feature-Vector-Journey.pdf",
+    "description": "AI輔助的幾何交點到特徵向量數學學習之旅",
+    "views": 190,
+    "likes": 22,
+    "embedded": false,
+    "externalLinks": []
+  },
+  {
+    "id": "ai-github-free-website-setup",
+    "title": "GitHub 免費網站搭建指南",
+    "type": "pdf",
+    "category": "development",
+    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/Ai-GitHub-Free-Website-Setup.pdf",
+    "description": "使用GitHub Pages免費搭建網站的完整教學",
+    "views": 880,
+    "likes": 77,
+    "embedded": false,
+    "externalLinks": []
+  },
+  {
+    "id": "ai-ignite-creativity-with-python-and-turbowarp",
+    "title": "用 Python 和 TurboWarp 點燃創意",
+    "type": "pdf",
+    "category": "creative",
+    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/Ai-Ignite-Creativity-with-Python-and-TurboWarp.pdf",
+    "description": "使用Python與TurboWarp平台進行創意編程教學",
+    "views": 320,
+    "likes": 36,
+    "embedded": false,
+    "externalLinks": []
+  },
+  {
+    "id": "ai-lawyer",
+    "title": "AI 法律助手指南",
+    "type": "pdf",
+    "category": "professional",
+    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/Ai-Lawyer.pdf",
+    "description": "AI法律助手的使用指南與法律諮詢輔助",
+    "views": 290,
+    "likes": 25,
+    "embedded": false,
+    "externalLinks": []
+  },
+  {
+    "id": "ai-life-application-sharing-community",
+    "title": "AI 生活應用分享社群指南",
+    "type": "pdf",
+    "category": "community",
+    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/Ai-Life-Application-Sharing-Community.pdf",
+    "description": "AI生活應用分享社群的建立與運營指南",
+    "views": 180,
+    "likes": 16,
+    "embedded": false,
+    "externalLinks": []
+  },
+  {
+    "id": "ai-music-playback-with-python",
+    "title": "Python 音樂播放器開發",
+    "type": "pdf",
+    "category": "development",
+    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/Ai-Music-Playback-with-Python.pdf",
+    "description": "使用Python開發音樂播放器的完整教學",
+    "views": 460,
+    "likes": 52,
+    "embedded": false,
+    "externalLinks": []
+  },
+  {
+    "id": "ai-python-coding-assistance",
+    "title": "Python 編碼 AI 助手",
+    "type": "pdf",
+    "category": "development",
+    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/Ai-Python-Coding-Assistance.pdf",
+    "description": "AI輔助Python編碼的工具與技巧教學",
+    "views": 950,
+    "likes": 89,
+    "embedded": false,
+    "externalLinks": []
+  },
+  {
+    "id": "ai-raphael-image-creator",
+    "title": "Raphael 圖像創建器",
+    "type": "pdf",
+    "category": "design",
+    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/Ai-Raphael-Image-Creator.pdf",
+    "description": "使用Raphael庫創建向量圖像的AI輔助工具",
+    "views": 270,
+    "likes": 30,
+    "embedded": false,
+    "externalLinks": []
+  },
+  {
+    "id": "ai-self-learning-chat-pdf",
+    "title": "自主學習聊天 PDF 系統",
+    "type": "pdf",
+    "category": "education",
+    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/Ai-Self-Learning-Chat-PDF.pdf",
+    "description": "自主學習的聊天PDF系統開發與應用",
+    "views": 380,
+    "likes": 41,
+    "embedded": false,
+    "externalLinks": []
+  },
+  {
+    "id": "ai-super-scientific-calculator-design-turbowarp-js",
+    "title": "超級科學計算器設計 - TurboWarp JS",
+    "type": "pdf",
+    "category": "development",
+    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/Ai-Super-Scientific-Calculator-Design-Turbowarp-JS.pdf",
+    "description": "使用TurboWarp JS設計超級科學計算器",
+    "views": 200,
+    "likes": 28,
+    "embedded": false,
+    "externalLinks": []
+  },
+  {
+    "id": "ai-using-ai-or-deepseek",
+    "title": "使用 AI 或 DeepSeek 指南",
+    "type": "pdf",
+    "category": "beginner",
+    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/Ai-Using-AI-or-DeepSeek.pdf",
+    "description": "AI與DeepSeek平台的基礎使用教學",
+    "views": 1100,
+    "likes": 95,
+    "embedded": false,
+    "externalLinks": []
+  },
+  {
+    "id": "ai-web-architecture-design",
+    "title": "網站架構設計 AI 輔助",
+    "type": "pdf",
+    "category": "development",
+    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/Ai-Web-Architecture-Design.pdf",
+    "description": "AI輔助的網站架構設計與規劃",
+    "views": 330,
+    "likes": 35,
+    "embedded": false,
+    "externalLinks": []
+  },
+  {
+    "id": "ai-website-teacher-article-display-platform",
+    "title": "網站教師文章展示平台",
+    "type": "pdf",
+    "category": "education",
+    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/Ai-Website-Teacher-Article-Display-Platform.pdf",
+    "description": "教師文章展示網站的設計與開發平台",
+    "views": 175,
+    "likes": 20,
+    "embedded": false,
+    "externalLinks": []
+  },
+  {
+    "id": "ai-resource-links",
+    "title": "AI學習資源網站",
+    "type": "folder",
+    "category": "tools",
+    "description": "精選AI學習資源與工具網站",
+    "views": 690,
+    "likes": 45,
+    "items": [
+      {
+        "title": "OpenAI官方網站",
+        "type": "webpage",
+        "url": "https://openai.com"
+      },
+      {
+        "title": "AI工具比較網站",
+        "type": "webpage",
+        "url": "https://theresanaiforthat.com"
+      },
+      {
+        "title": "免費AI繪圖平台",
+        "type": "webpage",
+        "url": "https://leonardo.ai"
+      },
+      {
+        "title": "AI學習社群",
+        "type": "webpage",
+        "url": "https://www.reddit.com/r/artificial"
+      }
+    ]
+  },
+  {
+    "id": "ai-youtube-tutorials",
+    "title": "AI工具教學影片精選",
+    "type": "folder",
+    "category": "tools",
+    "description": "精選AI工具教學影片，包含ChatGPT、Midjourney等熱門工具",
+    "views": 820,
+    "likes": 58,
+    "items": [
+      {
+        "title": "ChatGPT進階技巧教學",
+        "type": "youtube",
+        "url": "https://www.youtube.com/embed/uMqAJ9qKJlA"
+      },
+      {
+        "title": "Midjourney提示詞指南",
+        "type": "youtube",
+        "url": "https://www.youtube.com/embed/M06IBNPcI-s"
+      },
+      {
+        "title": "AI繪圖工具比較",
+        "type": "youtube",
+        "url": "https://www.youtube.com/embed/j_eMTP5-lcA"
+      },
+      {
+        "title": "免費AI工具推薦",
+        "type": "youtube",
+        "url": "https://www.youtube.com/embed/r6g3B2_2d-c"
+      }
+    ]
+  },
+  {
+    "id": "line-ai-02",
+    "title": "Line Bot整合ChatGPT教學",
+    "type": "webpage",
+    "category": "line-ai",
+    "url": "https://example.com/line-chatgpt-integration",
+    "description": "學習如何將ChatGPT整合到Line Bot中，創建智能對話機器人",
+    "views": 500,
+    "likes": 40,
+    "externalLinks": [
+      {
+        "name": "GitHub範例代碼",
+        "url": "https://github.com/example/line-chatgpt-bot",
+        "type": "webpage"
+      }
+    ]
+  }
+]
