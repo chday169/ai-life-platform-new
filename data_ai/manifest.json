@@ -1,171 +1,11 @@
 [
   {
-    "id": "ai-base-tools",
-    "title": "AI°Ó·~À³¥Î«ü«n",
-    "type": "pdf",
-    "category": "advanced",
-    "url": "./data_ai/pdfs/ai-base-tools.pdf",
-    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/ai-base-tools.pdf",
-    "description": "AI¦b°Ó·~Àô¹Ò¤¤ªº¹ê»ÚÀ³¥Î®×¨Ò»P¹ê¬Iµ¦²¤",
-    "views": 630,
-    "likes": 52,
-    "embedded": true,
-    "externalLinks": [
-      {
-        "name": "AI°Ó·~®×¨Ò¬ã¨s",
-        "url": "https://hbr.org/topic/artificial-intelligence",
-        "type": "webpage"
-      },
-      {
-        "name": "¥ø·~AI¹ê¬I«ü«n",
-        "url": "https://www.mckinsey.com/capabilities/quantumblack/our-insights",
-        "type": "webpage"
-      }
-    ]
-  },
-  {
-    "id": "ai-productivity-tools",
-    "title": "AI¤u§@®Ä²v¤u¨ã¤j¥ş",
-    "type": "pdf",
-    "category": "productivity",
-    "url": "./data_ai/pdfs/ai-productivity.pdf",
-    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/ai-productivity.pdf",
-    "description": "ºë¿ï´£¤É¤u§@®Ä²vªºAI¤u¨ã¡A¥]§t¼g§@¡B³]­p¡B¼Æ¾Ú¤ÀªRµ¥",
-    "views": 1100,
-    "likes": 92,
-    "embedded": true,
-    "externalLinks": [
-      {
-        "name": "Notion AI¤¶²Ğ",
-        "url": "https://www.notion.so/product/ai",
-        "type": "webpage"
-      },
-      {
-        "name": "Canva AI±Ğ¾Ç¼v¤ù",
-        "url": "https://www.youtube.com/embed/xp--_pDlZzw",
-        "type": "youtube"
-      },
-      {
-        "name": "Grammarly©xºô",
-        "url": "https://www.grammarly.com",
-        "type": "webpage"
-      }
-    ]
-  },
-  {
-    "id": "chatgpt-guide",
-    "title": "ChatGPT §¹¥ş¨Ï¥Î«ü«n",
-    "type": "pdf",
-    "category": "beginner",
-    "url": "./data_ai/pdfs/chatgpt-guide.pdf",
-    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/chatgpt-guide.pdf",
-    "description": "±q°òÂ¦¨ì¶i¶¥ªºChatGPT¨Ï¥Î±Ğ¾Ç¡A¥]§t´£¥Üµü§Ş¥©»PÀ³¥Î®×¨Ò",
-    "views": 1250,
-    "likes": 89,
-    "embedded": true,
-    "externalLinks": [
-      {
-        "name": "ChatGPT©x¤èºô¯¸",
-        "url": "https://chat.openai.com",
-        "type": "webpage"
-      },
-      {
-        "name": "´£¥Üµü§Ş¥©±Ğ¾Ç¼v¤ù",
-        "url": "https://www.youtube.com/embed/FRIa3T49urg",
-        "type": "youtube"
-      },
-      {
-        "name": "ChatGPT API¤å¥ó",
-        "url": "https://platform.openai.com/docs",
-        "type": "webpage"
-      }
-    ]
-  },
-  {
-	"id": "line-ai-guide",
-    "title": "LINE AI À³¥Î§¹¥ş«ü«n",
-    "type": "pdf",
-    "category": "line-ai",
-    "url": "./data_ai/pdfs/line-ai.pdf",
-    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/line-ai.pdf",
-    "description": "LINE ¥­¥x AI ¤u¨ã»P²á¤Ñ¾÷¾¹¤H¾ã¦X¶}µo§¹¥ş«ü«n¡A¥]§t©x¤è API ½Õ¥Î»P´¼¯à¦^´_³]©w",
-    "views": 0,
-    "likes": 0,
-    "embedded": true,
-    "externalLinks": [
-      {
-        "name": "LINE Developers ©x¤è¤å¥ó",
-        "url": "https://developers.line.biz/zh-hant/docs/",
-        "type": "webpage"
-      }
-    ]
-  },
-  {
-    "id": "midjourney-tutorial",
-    "title": "Midjourney AIÃ¸¹Ï§¹¥ş±Ğ¾Ç",
-    "type": "pdf",
-    "category": "design",
-    "url": "./data_ai/pdfs/midjourney-guide.pdf",
-    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/midjourney-guide.pdf",
-    "description": "AIÃ¸¹Ï¤u¨ãMidjourney§¹¾ã±Ğ¾Ç¡A±qµù¥U¨ì¶i¶¥´£¥Üµü§Ş¥©",
-    "views": 980,
-    "likes": 76,
-    "embedded": true,
-    "externalLinks": [
-      {
-        "name": "Midjourney©x¤èDiscord",
-        "url": "https://discord.gg/midjourney",
-        "type": "webpage"
-      },
-      {
-        "name": "­·®æ°Ñ¦Ò¹Ï®w",
-        "url": "https://lexica.art",
-        "type": "webpage"
-      },
-      {
-        "name": "Midjourney±Ğ¾Ç¼v¤ù",
-        "url": "https://www.youtube.com/embed/M06IBNPcI-s",
-        "type": "youtube"
-      }
-    ]
-  },
-  {
-    "id": "resources-web",
-    "title": "aiºô¯¸¸ê·½",
-    "type": "pdf",
-    "category": "design",
-    "url": "./data_ai/pdfs/resource.pdf",
-    "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/resource.pdf",
-    "description": "AIºô¯¸¸ê·½°Ñ¦Ò",
-    "views": 980,
-    "likes": 76,
-    "embedded": true,
-    "externalLinks": [
-      {
-        "name": "resources©x¤èDiscord",
-        "url": "https://discord.gg/midjourney",
-        "type": "webpage"
-      },
-      {
-        "name": "­·®æ°Ñ¦Ò¹Ï®w",
-        "url": "https://lexica.art",
-        "type": "webpage"
-      },
-      {
-        "name": "Midjourney±Ğ¾Ç¼v¤ù",
-        "url": "https://www.youtube.com/embed/M06IBNPcI-s",
-        "type": "youtube"
-      }
-    ]
-  },
-  
-  {
     "id": "ai-christchurch-hagley-park-and-avon-river-day-trip",
-    "title": "°ò·ş«°«¢®æ§Q¤½¶é»P¶®ªÚªe¤@¤é¹C AI ³W¹º",
+    "title": "åŸºç£åŸå“ˆæ ¼åˆ©å…¬åœ’èˆ‡é›…èŠ³æ²³ä¸€æ—¥éŠ AI è¦åŠƒ",
     "type": "pdf",
     "category": "travel",
     "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/Ai-Christchurch-Hagley-Park-and-Avon-River-Day-Trip.pdf",
-    "description": "¨Ï¥ÎAI³W¹º°ò·ş«°«¢®æ§Q¤½¶é»P¶®ªÚªe¤@¤é¹C¦æµ{",
+    "description": "ä½¿ç”¨AIè¦åŠƒåŸºç£åŸå“ˆæ ¼åˆ©å…¬åœ’èˆ‡é›…èŠ³æ²³ä¸€æ—¥éŠè¡Œç¨‹",
     "views": 0,
     "likes": 0,
     "embedded": false,
@@ -173,11 +13,11 @@
   },
   {
     "id": "ai-complete-plan-for-remote-landslide-dam-disaster",
-    "title": "°¾»·¦a°Ï¤g¥Û¬y¨a®`§¹¾ãÀ³ÅÜ­pµe",
+    "title": "åé åœ°å€åœŸçŸ³æµç½å®³å®Œæ•´æ‡‰è®Šè¨ˆç•«",
     "type": "pdf",
     "category": "safety",
     "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/Ai-Complete-Plan-for-Remote-Landslide-Dam-Disaster.pdf",
-    "description": "AI»²§U¨î©w°¾»·¦a°Ï¤g¥Û¬y»P¤ôÅò¨a®`À³ÅÜ­pµe",
+    "description": "AIè¼”åŠ©åˆ¶å®šåé åœ°å€åœŸçŸ³æµèˆ‡æ°´å£©ç½å®³æ‡‰è®Šè¨ˆç•«",
     "views": 0,
     "likes": 0,
     "embedded": false,
@@ -185,11 +25,11 @@
   },
   {
     "id": "ai-compliance-lifestyle-guide",
-    "title": "¦X³W¥Í¬¡«ü«n AI »²§U",
+    "title": "åˆè¦ç”Ÿæ´»æŒ‡å— AI è¼”åŠ©",
     "type": "pdf",
     "category": "lifestyle",
     "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/Ai-Compliance-Lifestyle-Guide.pdf",
-    "description": "AI»²§Uªº¦X³W¥Í¬¡«ü«n¡A¥]§tªk«ß¡B°·±d»PÀô¹Ò¦X³W",
+    "description": "AIè¼”åŠ©çš„åˆè¦ç”Ÿæ´»æŒ‡å—ï¼ŒåŒ…å«æ³•å¾‹ã€å¥åº·èˆ‡ç’°å¢ƒåˆè¦",
     "views": 0,
     "likes": 0,
     "embedded": false,
@@ -197,11 +37,11 @@
   },
   {
     "id": "ai-contemporary-workplace-transformation-report",
-    "title": "²{¥NÂ¾³õÂà«¬³ø§i AI ¤ÀªR",
+    "title": "ç¾ä»£è·å ´è½‰å‹å ±å‘Š AI åˆ†æ",
     "type": "pdf",
     "category": "business",
     "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/Ai-Contemporary-Workplace-Transformation-Report.pdf",
-    "description": "AI¤ÀªRªº²{¥NÂ¾³õÂà«¬ÁÍ¶Õ»Pµ¦²¤³ø§i",
+    "description": "AIåˆ†æçš„ç¾ä»£è·å ´è½‰å‹è¶¨å‹¢èˆ‡ç­–ç•¥å ±å‘Š",
     "views": 0,
     "likes": 0,
     "embedded": false,
@@ -209,11 +49,11 @@
   },
   {
     "id": "ai-deepseek-with-excel-and-python",
-    "title": "DeepSeek »P Excel ©M Python ¾ã¦XÀ³¥Î",
+    "title": "DeepSeek èˆ‡ Excel å’Œ Python æ•´åˆæ‡‰ç”¨",
     "type": "pdf",
     "category": "development",
     "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/Ai-DeepSeek-with-Excel-and-Python.pdf",
-    "description": "DeepSeek AI »P Excel¡BPython ªº¾ã¦XÀ³¥Î±Ğ¾Ç",
+    "description": "DeepSeek AI èˆ‡ Excelã€Python çš„æ•´åˆæ‡‰ç”¨æ•™å­¸",
     "views": 0,
     "likes": 0,
     "embedded": false,
@@ -221,11 +61,11 @@
   },
   {
     "id": "ai-east-north-coast-travel",
-    "title": "ªF¥_®ü©¤®È¹C AI ³W¹º",
+    "title": "æ±åŒ—æµ·å²¸æ—…éŠ AI è¦åŠƒ",
     "type": "pdf",
     "category": "travel",
     "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/Ai-East-North-Coast-Travel.pdf",
-    "description": "¨Ï¥ÎAI³W¹ºªF¥_®ü©¤®È¹C¦æµ{»P´ºÂI±ÀÂË",
+    "description": "ä½¿ç”¨AIè¦åŠƒæ±åŒ—æµ·å²¸æ—…éŠè¡Œç¨‹èˆ‡æ™¯é»æ¨è–¦",
     "views": 0,
     "likes": 0,
     "embedded": false,
@@ -233,11 +73,11 @@
   },
   {
     "id": "ai-geometry-intersection-to-feature-vector-journey",
-    "title": "´X¦ó¥æÂI¨ì¯S¼x¦V¶q¤§®È",
+    "title": "å¹¾ä½•äº¤é»åˆ°ç‰¹å¾µå‘é‡ä¹‹æ—…",
     "type": "pdf",
     "category": "mathematics",
     "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/Ai-Geometry-Intersection-to-Feature-Vector-Journey.pdf",
-    "description": "AI»²§Uªº´X¦ó¥æÂI¨ì¯S¼x¦V¶q¼Æ¾Ç¾Ç²ß¤§®È",
+    "description": "AIè¼”åŠ©çš„å¹¾ä½•äº¤é»åˆ°ç‰¹å¾µå‘é‡æ•¸å­¸å­¸ç¿’ä¹‹æ—…",
     "views": 0,
     "likes": 0,
     "embedded": false,
@@ -245,11 +85,11 @@
   },
   {
     "id": "ai-github-free-website-setup",
-    "title": "GitHub §K¶Oºô¯¸·f«Ø«ü«n",
+    "title": "GitHub å…è²»ç¶²ç«™æ­å»ºæŒ‡å—",
     "type": "pdf",
     "category": "development",
     "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/Ai-GitHub-Free-Website-Setup.pdf",
-    "description": "¨Ï¥ÎGitHub Pages§K¶O·f«Øºô¯¸ªº§¹¾ã±Ğ¾Ç",
+    "description": "ä½¿ç”¨GitHub Pageså…è²»æ­å»ºç¶²ç«™çš„å®Œæ•´æ•™å­¸",
     "views": 0,
     "likes": 0,
     "embedded": false,
@@ -257,11 +97,11 @@
   },
   {
     "id": "ai-ignite-creativity-with-python-and-turbowarp",
-    "title": "¥Î Python ©M TurboWarp ÂI¿U³Ğ·N",
+    "title": "ç”¨ Python å’Œ TurboWarp é»ç‡ƒå‰µæ„",
     "type": "pdf",
     "category": "creative",
     "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/Ai-Ignite-Creativity-with-Python-and-TurboWarp.pdf",
-    "description": "¨Ï¥ÎPython»PTurboWarp¥­¥x¶i¦æ³Ğ·N½sµ{±Ğ¾Ç",
+    "description": "ä½¿ç”¨Pythonèˆ‡TurboWarpå¹³å°é€²è¡Œå‰µæ„ç·¨ç¨‹æ•™å­¸",
     "views": 0,
     "likes": 0,
     "embedded": false,
@@ -269,11 +109,11 @@
   },
   {
     "id": "ai-lawyer",
-    "title": "AI ªk«ß§U¤â«ü«n",
+    "title": "AI æ³•å¾‹åŠ©æ‰‹æŒ‡å—",
     "type": "pdf",
     "category": "professional",
     "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/Ai-Lawyer.pdf",
-    "description": "AIªk«ß§U¤âªº¨Ï¥Î«ü«n»Pªk«ß¿Ô¸ß»²§U",
+    "description": "AIæ³•å¾‹åŠ©æ‰‹çš„ä½¿ç”¨æŒ‡å—èˆ‡æ³•å¾‹è«®è©¢è¼”åŠ©",
     "views": 0,
     "likes": 0,
     "embedded": false,
@@ -281,11 +121,11 @@
   },
   {
     "id": "ai-life-application-sharing-community",
-    "title": "AI ¥Í¬¡À³¥Î¤À¨ÉªÀ¸s«ü«n",
+    "title": "AI ç”Ÿæ´»æ‡‰ç”¨åˆ†äº«ç¤¾ç¾¤æŒ‡å—",
     "type": "pdf",
     "category": "community",
     "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/Ai-Life-Application-Sharing-Community.pdf",
-    "description": "AI¥Í¬¡À³¥Î¤À¨ÉªÀ¸sªº«Ø¥ß»P¹BÀç«ü«n",
+    "description": "AIç”Ÿæ´»æ‡‰ç”¨åˆ†äº«ç¤¾ç¾¤çš„å»ºç«‹èˆ‡é‹ç‡ŸæŒ‡å—",
     "views": 0,
     "likes": 0,
     "embedded": false,
@@ -293,11 +133,11 @@
   },
   {
     "id": "ai-music-playback-with-python",
-    "title": "Python ­µ¼Ö¼½©ñ¾¹¶}µo",
+    "title": "Python éŸ³æ¨‚æ’­æ”¾å™¨é–‹ç™¼",
     "type": "pdf",
     "category": "development",
     "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/Ai-Music-Playback-with-Python.pdf",
-    "description": "¨Ï¥ÎPython¶}µo­µ¼Ö¼½©ñ¾¹ªº§¹¾ã±Ğ¾Ç",
+    "description": "ä½¿ç”¨Pythoné–‹ç™¼éŸ³æ¨‚æ’­æ”¾å™¨çš„å®Œæ•´æ•™å­¸",
     "views": 0,
     "likes": 0,
     "embedded": false,
@@ -305,11 +145,11 @@
   },
   {
     "id": "ai-python-coding-assistance",
-    "title": "Python ½s½X AI §U¤â",
+    "title": "Python ç·¨ç¢¼ AI åŠ©æ‰‹",
     "type": "pdf",
     "category": "development",
     "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/Ai-Python-Coding-Assistance.pdf",
-    "description": "AI»²§UPython½s½Xªº¤u¨ã»P§Ş¥©±Ğ¾Ç",
+    "description": "AIè¼”åŠ©Pythonç·¨ç¢¼çš„å·¥å…·èˆ‡æŠ€å·§æ•™å­¸",
     "views": 0,
     "likes": 0,
     "embedded": false,
@@ -317,11 +157,11 @@
   },
   {
     "id": "ai-raphael-image-creator",
-    "title": "Raphael ¹Ï¹³³Ğ«Ø¾¹",
+    "title": "Raphael åœ–åƒå‰µå»ºå™¨",
     "type": "pdf",
     "category": "design",
     "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/Ai-Raphael-Image-Creator.pdf",
-    "description": "¨Ï¥ÎRaphael®w³Ğ«Ø¦V¶q¹Ï¹³ªºAI»²§U¤u¨ã",
+    "description": "ä½¿ç”¨Raphaelåº«å‰µå»ºå‘é‡åœ–åƒçš„AIè¼”åŠ©å·¥å…·",
     "views": 0,
     "likes": 0,
     "embedded": false,
@@ -329,11 +169,11 @@
   },
   {
     "id": "ai-self-learning-chat-pdf",
-    "title": "¦Û¥D¾Ç²ß²á¤Ñ PDF ¨t²Î",
+    "title": "è‡ªä¸»å­¸ç¿’èŠå¤© PDF ç³»çµ±",
     "type": "pdf",
     "category": "education",
     "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/Ai-Self-Learning-Chat-PDF.pdf",
-    "description": "¦Û¥D¾Ç²ßªº²á¤ÑPDF¨t²Î¶}µo»PÀ³¥Î",
+    "description": "è‡ªä¸»å­¸ç¿’çš„èŠå¤©PDFç³»çµ±é–‹ç™¼èˆ‡æ‡‰ç”¨",
     "views": 0,
     "likes": 0,
     "embedded": false,
@@ -341,11 +181,11 @@
   },
   {
     "id": "ai-super-scientific-calculator-design-turbowarp-js",
-    "title": "¶W¯Å¬ì¾Ç­pºâ¾¹³]­p - TurboWarp JS",
+    "title": "è¶…ç´šç§‘å­¸è¨ˆç®—å™¨è¨­è¨ˆ - TurboWarp JS",
     "type": "pdf",
     "category": "development",
     "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/Ai-Super-Scientific-Calculator-Design-Turbowarp-JS.pdf",
-    "description": "¨Ï¥ÎTurboWarp JS³]­p¶W¯Å¬ì¾Ç­pºâ¾¹",
+    "description": "ä½¿ç”¨TurboWarp JSè¨­è¨ˆè¶…ç´šç§‘å­¸è¨ˆç®—å™¨",
     "views": 0,
     "likes": 0,
     "embedded": false,
@@ -353,11 +193,11 @@
   },
   {
     "id": "ai-using-ai-or-deepseek",
-    "title": "¨Ï¥Î AI ©Î DeepSeek «ü«n",
+    "title": "ä½¿ç”¨ AI æˆ– DeepSeek æŒ‡å—",
     "type": "pdf",
     "category": "beginner",
     "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/Ai-Using-AI-or-DeepSeek.pdf",
-    "description": "AI»PDeepSeek¥­¥xªº°òÂ¦¨Ï¥Î±Ğ¾Ç",
+    "description": "AIèˆ‡DeepSeekå¹³å°çš„åŸºç¤ä½¿ç”¨æ•™å­¸",
     "views": 0,
     "likes": 0,
     "embedded": false,
@@ -365,11 +205,11 @@
   },
   {
     "id": "ai-web-architecture-design",
-    "title": "ºô¯¸¬[ºc³]­p AI »²§U",
+    "title": "ç¶²ç«™æ¶æ§‹è¨­è¨ˆ AI è¼”åŠ©",
     "type": "pdf",
     "category": "development",
     "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/Ai-Web-Architecture-Design.pdf",
-    "description": "AI»²§Uªººô¯¸¬[ºc³]­p»P³W¹º",
+    "description": "AIè¼”åŠ©çš„ç¶²ç«™æ¶æ§‹è¨­è¨ˆèˆ‡è¦åŠƒ",
     "views": 0,
     "likes": 0,
     "embedded": false,
@@ -377,11 +217,11 @@
   },
   {
     "id": "ai-website-teacher-article-display-platform",
-    "title": "ºô¯¸±Ğ®v¤å³¹®i¥Ü¥­¥x",
+    "title": "ç¶²ç«™æ•™å¸«æ–‡ç« å±•ç¤ºå¹³å°",
     "type": "pdf",
     "category": "education",
     "githubRelease": "https://github.com/chday169/ai-life-platform-new/releases/latest/download/Ai-Website-Teacher-Article-Display-Platform.pdf",
-    "description": "±Ğ®v¤å³¹®i¥Üºô¯¸ªº³]­p»P¶}µo¥­¥x",
+    "description": "æ•™å¸«æ–‡ç« å±•ç¤ºç¶²ç«™çš„è¨­è¨ˆèˆ‡é–‹ç™¼å¹³å°",
     "views": 0,
     "likes": 0,
     "embedded": false,
@@ -389,30 +229,30 @@
   },
   {
     "id": "ai-resource-links",
-    "title": "AI¾Ç²ß¸ê·½ºô¯¸",
+    "title": "AIå­¸ç¿’è³‡æºç¶²ç«™",
     "type": "folder",
     "category": "tools",
-    "description": "ºë¿ïAI¾Ç²ß¸ê·½»P¤u¨ãºô¯¸",
+    "description": "ç²¾é¸AIå­¸ç¿’è³‡æºèˆ‡å·¥å…·ç¶²ç«™",
     "views": 720,
     "likes": 38,
     "items": [
       {
-        "title": "OpenAI©x¤èºô¯¸",
+        "title": "OpenAIå®˜æ–¹ç¶²ç«™",
         "type": "webpage",
         "url": "https://openai.com"
       },
       {
-        "title": "AI¤u¨ã¤ñ¸ûºô¯¸",
+        "title": "AIå·¥å…·æ¯”è¼ƒç¶²ç«™",
         "type": "webpage",
         "url": "https://theresanaiforthat.com"
       },
       {
-        "title": "§K¶OAIÃ¸¹Ï¥­¥x",
+        "title": "å…è²»AIç¹ªåœ–å¹³å°",
         "type": "webpage",
         "url": "https://leonardo.ai"
       },
       {
-        "title": "AI¾Ç²ßªÀ¸s",
+        "title": "AIå­¸ç¿’ç¤¾ç¾¤",
         "type": "webpage",
         "url": "https://www.reddit.com/r/artificial"
       }
@@ -420,30 +260,30 @@
   },
   {
     "id": "ai-youtube-tutorials",
-    "title": "AI¤u¨ã±Ğ¾Ç¼v¤ùºë¿ï",
+    "title": "AIå·¥å…·æ•™å­¸å½±ç‰‡ç²¾é¸",
     "type": "folder",
     "category": "tools",
-    "description": "ºë¿ïAI¤u¨ã±Ğ¾Ç¼v¤ù¡A¥]§tChatGPT¡BMidjourneyµ¥¼öªù¤u¨ã",
+    "description": "ç²¾é¸AIå·¥å…·æ•™å­¸å½±ç‰‡ï¼ŒåŒ…å«ChatGPTã€Midjourneyç­‰ç†±é–€å·¥å…·",
     "views": 850,
     "likes": 45,
     "items": [
       {
-        "title": "ChatGPT¶i¶¥§Ş¥©±Ğ¾Ç",
+        "title": "ChatGPTé€²éšæŠ€å·§æ•™å­¸",
         "type": "youtube",
         "url": "https://www.youtube.com/embed/uMqAJ9qKJlA"
       },
       {
-        "title": "Midjourney´£¥Üµü«ü«n",
+        "title": "Midjourneyæç¤ºè©æŒ‡å—",
         "type": "youtube",
         "url": "https://www.youtube.com/embed/M06IBNPcI-s"
       },
       {
-        "title": "AIÃ¸¹Ï¤u¨ã¤ñ¸û",
+        "title": "AIç¹ªåœ–å·¥å…·æ¯”è¼ƒ",
         "type": "youtube",
         "url": "https://www.youtube.com/embed/j_eMTP5-lcA"
       },
       {
-        "title": "§K¶OAI¤u¨ã±ÀÂË",
+        "title": "å…è²»AIå·¥å…·æ¨è–¦",
         "type": "youtube",
         "url": "https://www.youtube.com/embed/r6g3B2_2d-c"
       }
@@ -451,14 +291,14 @@
   },
   {
     "id": "line-ai-02",
-    "title": "Line Bot¾ã¦XChatGPT±Ğ¾Ç",
+    "title": "Line Botæ•´åˆChatGPTæ•™å­¸",
     "type": "webpage",
     "category": "line-ai",
     "url": "https://example.com/line-chatgpt-integration",
-    "description": "¾Ç²ß¦p¦ó±NChatGPT¾ã¦X¨ìLine Bot¤¤¡A³Ğ«Ø´¼¯à¹ï¸Ü¾÷¾¹¤H",
+    "description": "å­¸ç¿’å¦‚ä½•å°‡ChatGPTæ•´åˆåˆ°Line Botä¸­ï¼Œå‰µå»ºæ™ºèƒ½å°è©±æ©Ÿå™¨äºº",
     "externalLinks": [
       {
-        "name": "GitHub½d¨Ò¥N½X",
+        "name": "GitHubç¯„ä¾‹ä»£ç¢¼",
         "url": "https://github.com/example/line-chatgpt-bot",
         "type": "webpage"
       }
